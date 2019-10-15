@@ -25,9 +25,14 @@ const babelizing = {
 
 const rules = [babelizing];
 
+const resolve = {
+  extensions: [`.js`, `.jsx`],
+};
+
 module.exports = {
   entry,
   output,
+  resolve,
   devServer,
   module: {rules},
   devtool: `source-map`,
