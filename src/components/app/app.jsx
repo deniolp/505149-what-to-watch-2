@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const App = (props) => {
-  const {films} = props;
+  const {films, onTitleClick} = props;
 
   return <React.Fragment>
     <div className="visually-hidden">
@@ -237,7 +237,8 @@ const App = (props) => {
                   height="175"
                 />
               </div>
-              <h3 className="small-movie-card__title">
+              <h3 className="small-movie-card__title"
+                onClick={onTitleClick}>
                 <a
                   className="small-movie-card__link"
                   href="movie-page.html"
@@ -275,6 +276,7 @@ const App = (props) => {
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default App;
