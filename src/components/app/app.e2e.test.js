@@ -16,7 +16,7 @@ describe(`In App`, () => {
       onTitleClick={clickHandler}
     />);
 
-    const titleButtons = app.find(`.small-movie-card__link`);
+    const titleButtons = app.find(`.small-movie-card__title`);
     titleButtons.forEach((button) => button.simulate(`click`));
 
     expect(clickHandler).toHaveBeenCalledTimes(filmsListMock.length);

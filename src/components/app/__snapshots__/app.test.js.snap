@@ -380,11 +380,11 @@ Array [
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[MockFunction]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[MockFunction]}
             >
               Aviator
             </a>
@@ -405,11 +405,11 @@ Array [
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[MockFunction]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[MockFunction]}
             >
               Shutter Island
             </a>
@@ -430,11 +430,11 @@ Array [
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[MockFunction]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[MockFunction]}
             >
               Macbeth
             </a>
@@ -455,11 +455,11 @@ Array [
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[MockFunction]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[MockFunction]}
             >
               Revenant
             </a>
