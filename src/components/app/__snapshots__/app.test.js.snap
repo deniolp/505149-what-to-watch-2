@@ -384,6 +384,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[MockFunction]}
             >
               Aviator
             </a>
@@ -408,6 +409,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[MockFunction]}
             >
               Shutter Island
             </a>
@@ -432,6 +434,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[MockFunction]}
             >
               Macbeth
             </a>
@@ -456,6 +459,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[MockFunction]}
             >
               Revenant
             </a>

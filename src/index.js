@@ -7,7 +7,10 @@ const filmsListMock = [`Aviator`, `Shutter Island`, `Macbeth`, `Revenant`];
 
 const init = () => {
   ReactDom.render(
-      <App films={filmsListMock}/>,
+      <App
+        films={filmsListMock}
+        onTitleClick={() => {}}
+      />,
       document.querySelector(`#root`)
   );
 };
