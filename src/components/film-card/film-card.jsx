@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FilmCard = (props) => {
-  const {film, onCardHover} = props;
+  const {film, onCardMouseEnter} = props;
 
   return <article
     className="small-movie-card catalog__movies-card"
-    onMouseEnter={() => onCardHover(film)}
+    onMouseEnter={() => onCardMouseEnter(film)}
   >
     <div className="small-movie-card__image">
       <img
@@ -33,7 +33,7 @@ FilmCard.propTypes = {
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   }).isRequired,
-  onCardHover: PropTypes.func.isRequired,
+  onCardMouseEnter: PropTypes.func.isRequired,
 };
 
 export default FilmCard;

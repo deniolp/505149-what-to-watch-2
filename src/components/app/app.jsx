@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FilmsList from '../films-list/films-list';
 
 const App = (props) => {
-  const {films, onCardHover} = props;
+  const {films} = props;
 
   return <React.Fragment>
     <div className="visually-hidden">
@@ -228,7 +228,6 @@ const App = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={films}
-            onCardHover={onCardHover}
           />
         </div>
 
@@ -257,8 +256,10 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  films: PropTypes.array.isRequired,
-  onCardHover: PropTypes.func.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+  })),
 };
 
 export default App;

@@ -8,7 +8,6 @@ const init = () => {
   ReactDom.render(
       <App
         films={filmsListMock}
-        onCardHover={() => {}}
       />,
       document.querySelector(`#root`)
   );
