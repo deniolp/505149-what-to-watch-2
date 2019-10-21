@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FilmCard from '../film-card/film-card';
+
 const App = (props) => {
-  const {films, onTitleClick} = props;
+  const {films, onCardHover} = props;
 
   return <React.Fragment>
     <div className="visually-hidden">
@@ -224,29 +226,12 @@ const App = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          {films.map((filmName) => {
-            return <article
-              className="small-movie-card catalog__movies-card"
-              key={filmName}
-            >
-              <div className="small-movie-card__image">
-                <img
-                  src="img/shutter-island.jpg"
-                  alt="Shutter Island"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title"
-                onClick={onTitleClick}>
-                <a
-                  className="small-movie-card__link"
-                  href="movie-page.html"
-                >
-                  {filmName}
-                </a>
-              </h3>
-            </article>;
+          {films.map((film) => {
+            return <FilmCard
+              key={film.name}
+              film={film}
+              onCardHover={onCardHover}
+            />;
           })}
         </div>
 
@@ -276,7 +261,7 @@ const App = (props) => {
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  onCardHover: PropTypes.func.isRequired,
 };
 
 export default App;
