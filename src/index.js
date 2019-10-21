@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDom from 'react-dom';
 
 import App from './components/app/app';
-
-const filmsListMock = [`Aviator`, `Shutter Island`, `Macbeth`, `Revenant`];
+import filmsListMock from './mocks/films';
 
 const init = () => {
   ReactDom.render(
       <App
         films={filmsListMock}
-        onTitleClick={() => {}}
       />,
       document.querySelector(`#root`)
   );

@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilmsList renders correctly 1`] = `
+Array [
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Aviator"
+        height="175"
+        src="img/aviator.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Aviator
+      </a>
+    </h3>
+  </article>,
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Shutter Island"
+        height="175"
+        src="img/shutter-island.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Shutter Island
+      </a>
+    </h3>
+  </article>,
+]
+`;
