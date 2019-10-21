@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import App from './app';
+import FilmsList from './films-list';
 
-describe(`App`, () => {
+describe(`FilmsList`, () => {
   const filmsListMock = [
     {
       name: `Aviator`,
@@ -17,7 +17,7 @@ describe(`App`, () => {
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
-        <App
+        <FilmsList
           films={filmsListMock}
         />).toJSON();
 

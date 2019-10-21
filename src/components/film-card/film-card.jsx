@@ -11,7 +11,7 @@ const FilmCard = (props) => {
     <div className="small-movie-card__image">
       <img
         src={film.src}
-        alt="Shutter Island"
+        alt={film.name}
         width="280"
         height="175"
       />
