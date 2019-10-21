@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FilmCard from '../film-card/film-card';
+import FilmsList from '../films-list/films-list';
 
 const App = (props) => {
   const {films, onCardHover} = props;
@@ -226,13 +226,10 @@ const App = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          {films.map((film) => {
-            return <FilmCard
-              key={film.name}
-              film={film}
-              onCardHover={onCardHover}
-            />;
-          })}
+          <FilmsList
+            films={films}
+            onCardHover={onCardHover}
+          />
         </div>
 
         <div className="catalog__more">
