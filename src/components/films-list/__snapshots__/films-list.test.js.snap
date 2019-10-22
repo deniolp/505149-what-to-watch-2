@@ -21,7 +21,8 @@ Array [
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/details"
+        onClick={[Function]}
       >
         Aviator
       </a>
@@ -46,7 +47,8 @@ Array [
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/details"
+        onClick={[Function]}
       >
         Shutter Island
       </a>

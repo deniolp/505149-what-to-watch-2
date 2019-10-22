@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
 
 import FilmsList from './films-list';
 
@@ -19,9 +20,10 @@ describe(`FilmsList`, () => {
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
-        <FilmsList
+        <BrowserRouter><FilmsList
           films={filmsListMock}
-        />).toJSON();
+          onFilmTitleClick={jest.fn()}
+        /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

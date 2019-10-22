@@ -18,6 +18,7 @@ describe(`In FilmCard`, () => {
     const filmCard = shallow(<FilmCard
       film={FilmCardMock}
       onCardMouseEnter={mouseEnterHandler}
+      onFilmTitleClick={jest.fn()}
     />);
 
     const articleElement = filmCard.find(`.small-movie-card`);

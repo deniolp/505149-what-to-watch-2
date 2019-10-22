@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
 
 import FilmCard from './film-card';
 
@@ -12,10 +13,11 @@ describe(`FilmCard`, () => {
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
-        <FilmCard
+        <BrowserRouter><FilmCard
           film={FilmCardMock}
           onCardMouseEnter={jest.fn()}
-        />).toJSON();
+          onFilmTitleClick={jest.fn()}
+        /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
