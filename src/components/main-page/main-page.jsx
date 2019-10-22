@@ -6,7 +6,7 @@ import SvgLogo from '../svg-logo/svg-logo';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films} = props;
+  const {films, onFilmTitleClick} = props;
 
   return <React.Fragment>
     <SvgLogo></SvgLogo>
@@ -144,6 +144,7 @@ const MainPage = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={films}
+            onFilmTitleClick={onFilmTitleClick}
           />
         </div>
 
@@ -164,6 +165,7 @@ MainPage.propTypes = {
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   })),
+  onFilmTitleClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const FilmCard = (props) => {
-  const {film, onCardMouseEnter} = props;
+  const {film, onCardMouseEnter, onFilmTitleClick} = props;
 
   return <article
     className="small-movie-card catalog__movies-card"
@@ -18,12 +19,13 @@ const FilmCard = (props) => {
     </div>
     <h3 className="small-movie-card__title"
     >
-      <a
+      <Link
+        to="/details"
         className="small-movie-card__link"
-        href="movie-page.html"
+        onClick={() => onFilmTitleClick(film.id)}
       >
         {film.name}
-      </a>
+      </Link>
     </h3>
   </article>;
 };
@@ -35,6 +37,7 @@ FilmCard.propTypes = {
     src: PropTypes.string.isRequired,
   }).isRequired,
   onCardMouseEnter: PropTypes.func.isRequired,
+  onFilmTitleClick: PropTypes.func.isRequired,
 };
 
 export default FilmCard;

@@ -15,13 +15,14 @@ class FilmsList extends React.PureComponent {
   }
 
   render() {
-    const {films} = this.props;
+    const {films, onFilmTitleClick} = this.props;
 
     return films.map((film) => {
       return <FilmCard
         key={film.id}
         film={film}
         onCardMouseEnter={this._handleCardMouseEnter}
+        onFilmTitleClick={onFilmTitleClick}
       />;
     });
   }
@@ -39,6 +40,7 @@ FilmsList.propTypes = {
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   })),
+  onFilmTitleClick: PropTypes.func.isRequired,
 };
 
 export default FilmsList;

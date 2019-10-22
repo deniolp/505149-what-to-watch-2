@@ -1,25 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Switch, Route, Redirect} from 'react-router-dom';
 
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 
-const App = (props) => {
-  const getPageScreen = ({films}) => {
-    switch (location.pathname) {
-      case `/`:
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      id: 0,
+    };
+
+    this._handleFilmTitleClick = this._handleFilmTitleClick.bind(this);
+  }
+
+  render() {
+    const {films} = this.props;
+    return <Switch>
+      <Route path="/" exact render={() => {
         return <MainPage
           films={films}
+          onFilmTitleClick={this._handleFilmTitleClick}
         />;
-      case `/details`:
+      }}
+      />
+      <Route path="/details" exact render={() => {
         return <FilmDetails
-          film={films[0]}
+          film={films[this.state.id]}
         />;
-    }
-    return null;
-  };
-  return <React.Fragment>{getPageScreen(props)}</React.Fragment>;
-};
+      }}
+      />
+      <Redirect from='*' to='/' />
+    </Switch>;
+  }
+
+  _handleFilmTitleClick(id) {
+    this.setState({
+      id: id - 1,
+    });
+  }
+}
 
 App.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
