@@ -19,7 +19,7 @@ class FilmsList extends React.PureComponent {
 
     return films.map((film) => {
       return <FilmCard
-        key={film.name}
+        key={film.id}
         film={film}
         onCardMouseEnter={this._handleCardMouseEnter}
       />;
@@ -35,6 +35,7 @@ class FilmsList extends React.PureComponent {
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   })),

@@ -30,6 +30,7 @@ const FilmCard = (props) => {
 
 FilmCard.propTypes = {
   film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   }).isRequired,

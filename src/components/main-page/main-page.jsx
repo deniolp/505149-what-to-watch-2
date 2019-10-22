@@ -257,6 +257,7 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   })),
