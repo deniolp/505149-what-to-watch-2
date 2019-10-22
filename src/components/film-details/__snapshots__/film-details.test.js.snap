@@ -137,7 +137,7 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
           >
             <span
               className="logo__letter logo__letter--1"
@@ -193,7 +193,7 @@ Array [
             <span
               className="movie-card__year"
             >
-              2014
+              2008
             </span>
           </p>
           <div
@@ -301,108 +301,55 @@ Array [
             </ul>
           </nav>
           <div
-            className="movie-card__text movie-card__row"
+            className="movie-rating"
           >
             <div
-              className="movie-card__text-col"
+              className="movie-rating__score"
             >
-              <p
-                className="movie-card__details-item"
-              >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Director
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  Wes Andreson
-                </span>
-              </p>
-              <p
-                className="movie-card__details-item"
-              >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Starring
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  Bill Murray, 
-                  <br />
-                  Edward Norton, 
-                  <br />
-                  Jude Law, 
-                  <br />
-                  Willem Dafoe, 
-                  <br />
-                  Saoirse Ronan, 
-                  <br />
-                  Tony Revoloru, 
-                  <br />
-                  Tilda Swinton, 
-                  <br />
-                  Tom Wilkinson, 
-                  <br />
-                  Owen Wilkinson, 
-                  <br />
-                  Adrien Brody, 
-                  <br />
-                  Ralph Fiennes, 
-                  <br />
-                  Jeff Goldblum
-                </span>
-              </p>
+              8.3
             </div>
-            <div
-              className="movie-card__text-col"
+            <p
+              className="movie-rating__meta"
             >
-              <p
-                className="movie-card__details-item"
+              <span
+                className="movie-rating__level"
               >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Run Time
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  1h 39m
-                </span>
-              </p>
-              <p
-                className="movie-card__details-item"
+                Good
+              </span>
+              <span
+                className="movie-rating__count"
               >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Genre
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  Comedy
-                </span>
-              </p>
-              <p
-                className="movie-card__details-item"
-              >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Released
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  2014
-                </span>
-              </p>
-            </div>
+                187
+                 ratings
+              </span>
+            </p>
+          </div>
+          <div
+            className="movie-card__text"
+          >
+            <p>
+              Deserunt ex esse tempor aliqua labore ex ipsum ipsum. Minim elit anim consectetur eu cillum. Quis ut ut minim anim sit irure anim non officia id ex. Elit in ea ad elit consequat magna culpa excepteur Lorem. Excepteur sit sit enim irure enim in amet excepteur. Sunt ullamco et cupidatat est adipisicing occaecat nostrud voluptate aliquip consequat commodo adipisicing. Ipsum exercitation est consectetur aute magna anim dolore id enim.
+            </p>
+            <p>
+                  Sunt ullamco et cupidatat est adipisicing occaecat nostrud voluptate aliquip consequat commodo adipisicing. Ipsum exercitation est consectetur aute magna anim dolore id enim.
+            </p>
+            <p
+              className="movie-card__director"
+            >
+              <strong>
+                Director: 
+                Christopher Nolan
+              </strong>
+            </p>
+            <p
+              className="movie-card__starring"
+            >
+              <strong>
+                Starring: 
+                Bill Murray, Jack Nicholson, Edward Norton, Jude Law, Dustin Hoffman
+                 and other
+              </strong>
+            </p>
           </div>
         </div>
       </div>
