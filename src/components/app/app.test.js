@@ -6,10 +6,12 @@ import App from './app';
 describe(`App`, () => {
   const filmsListMock = [
     {
+      id: 1,
       name: `Aviator`,
       src: `img/aviator.jpg`,
     },
     {
+      id: 2,
       name: `Shutter Island`,
       src: `img/shutter-island.jpg`,
     },

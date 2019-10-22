@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import FilmCard from './film-card';
+import FilmDetails from './film-details';
 
-describe(`FilmCard`, () => {
+describe(`FilmDetails`, () => {
   const FilmCardMock = {
     id: 1,
     name: `Aviator`,
@@ -12,9 +12,8 @@ describe(`FilmCard`, () => {
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
-        <FilmCard
+        <FilmDetails
           film={FilmCardMock}
-          onCardMouseEnter={jest.fn()}
         />).toJSON();
 
     expect(tree).toMatchSnapshot();

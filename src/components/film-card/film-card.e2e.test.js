@@ -8,6 +8,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 describe(`In FilmCard`, () => {
   const FilmCardMock = {
+    id: 1,
     name: `Aviator`,
     src: `img/aviator.jpg`,
   };
