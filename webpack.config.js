@@ -13,7 +13,8 @@ const compress = false;
 const hot = true;
 const open = true;
 const port = 1339;
-const devServer = {contentBase, compress, hot, open, port};
+const historyApiFallback = true;
+const devServer = {contentBase, compress, hot, open, port, historyApiFallback};
 
 const babelizing = {
   test: /\.(js|jsx)$/,
