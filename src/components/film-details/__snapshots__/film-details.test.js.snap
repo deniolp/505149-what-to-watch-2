@@ -24,7 +24,7 @@ Array [
           fillRule="evenodd"
           id="Page-1"
           stroke="none"
-          stroke-Width="1"
+          strokeWidth="1"
         >
           <polygon
             fill="#EEE5B5"
