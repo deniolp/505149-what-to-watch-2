@@ -26,7 +26,7 @@ class App extends React.Component {
         />;
       }}
       />
-      <Route path="/details" exact render={() => {
+      <Route path="/film/:id" render={() => {
         return <FilmDetails
           film={films[this.state.id]}
         />;

@@ -20,7 +20,7 @@ const FilmCard = (props) => {
     <h3 className="small-movie-card__title"
     >
       <Link
-        to="/details"
+        to={`/film/${film.id}`}
         className="small-movie-card__link"
         onClick={() => onFilmTitleClick(film.id)}
       >
