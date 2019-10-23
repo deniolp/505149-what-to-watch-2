@@ -9,14 +9,14 @@ const FilmCard = (props) => {
     className="small-movie-card catalog__movies-card"
     onMouseEnter={() => onCardMouseEnter(film)}
   >
-    <div className="small-movie-card__image">
+    <Link to={`/film/${film.id}`}><div className="small-movie-card__image">
       <img
         src={film.src}
         alt={film.name}
         width="280"
         height="175"
       />
-    </div>
+    </div></Link>
     <h3 className="small-movie-card__title"
     >
       <Link
