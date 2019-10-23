@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FilmsList from '../films-list/films-list';
-import SvgLogo from '../svg-logo/svg-logo';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
   const {films, onFilmTitleClick} = props;
 
   return <React.Fragment>
-    <SvgLogo></SvgLogo>
     <section className="movie-card">
       <div className="movie-card__bg">
         <img

@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SvgLogo from '../svg-logo/svg-logo';
 import Footer from '../footer/footer';
+import filmsListMock from '../../mocks/films';
 
 const FilmDetails = (props) => {
-  const {film} = props;
+  let {film} = props;
+  const id = props.match.params.id;
+  if (!film) {
+    film = filmsListMock[id - 1];
+  }
 
   return <React.Fragment>
-    <SvgLogo />
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
         <div className="movie-card__bg">
@@ -160,7 +163,8 @@ FilmDetails.propTypes = {
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
+  }),
+  match: PropTypes.object.isRequired,
 };
 
 export default FilmDetails;

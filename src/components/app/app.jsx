@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      id: 0,
+      id: null,
     };
 
     this._handleFilmTitleClick = this._handleFilmTitleClick.bind(this);
@@ -26,9 +26,10 @@ class App extends React.Component {
         />;
       }}
       />
-      <Route path="/film/:id" render={() => {
+      <Route path="/film/:id" render={(routerProps) => {
         return <FilmDetails
           film={films[this.state.id]}
+          {...routerProps}
         />;
       }}
       />
