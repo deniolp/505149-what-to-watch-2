@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
 
 import Footer from '../footer/footer';
 import filmsListMock from '../../mocks/films';
@@ -7,6 +8,9 @@ import filmsListMock from '../../mocks/films';
 const FilmDetails = (props) => {
   let {film} = props;
   const id = props.match.params.id;
+  if (id > filmsListMock.length) {
+    return <Redirect to="/"></Redirect>;
+  }
   if (!film) {
     film = filmsListMock[id - 1];
   }
