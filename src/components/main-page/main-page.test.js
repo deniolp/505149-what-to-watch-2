@@ -2,16 +2,17 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
-import App from './app';
+import MainPage from './main-page';
 import filmsListMock from '../../mocks/films';
 
-describe(`App`, () => {
+describe(`MainPage`, () => {
   const filmsMock = filmsListMock.slice(0, 2);
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
-        <BrowserRouter><App
+        <BrowserRouter><MainPage
           films={filmsMock}
+          onFilmTitleClick={jest.fn()}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

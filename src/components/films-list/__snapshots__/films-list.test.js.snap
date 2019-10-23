@@ -6,22 +6,28 @@ Array [
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film/1"
+      onClick={[Function]}
     >
-      <img
-        alt="Aviator"
-        height="175"
-        src="img/aviator.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Aviator"
+          height="175"
+          src="img/aviator.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/1"
+        onClick={[Function]}
       >
         Aviator
       </a>
@@ -31,22 +37,28 @@ Array [
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film/2"
+      onClick={[Function]}
     >
-      <img
-        alt="Shutter Island"
-        height="175"
-        src="img/shutter-island.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Shutter Island"
+          height="175"
+          src="img/shutter-island.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/2"
+        onClick={[Function]}
       >
         Shutter Island
       </a>
