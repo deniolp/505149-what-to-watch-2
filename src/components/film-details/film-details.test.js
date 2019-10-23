@@ -11,6 +11,11 @@ describe(`FilmDetails`, () => {
     const tree = renderer.create(
         <FilmDetails
           film={FilmCardMock}
+          match={{
+            params: {
+              id: 1,
+            },
+          }}
         />).toJSON();
 
     expect(tree).toMatchSnapshot();
