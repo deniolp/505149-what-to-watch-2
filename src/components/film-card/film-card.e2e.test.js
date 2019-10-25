@@ -8,26 +8,23 @@ import filmsListMock from '../../mocks/films';
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`In FilmCard`, () => {
-  const FilmCardMock = filmsListMock[0];
+  const filmCardMock = filmsListMock[0];
   const mouseEnterHandler = jest.fn();
-  const clickLinkHandler = jest.fn();
   const filmCard = shallow(<FilmCard
-    film={FilmCardMock}
+    film={filmCardMock}
     onCardMouseEnter={mouseEnterHandler}
-    onFilmTitleClick={clickLinkHandler}
   />);
 
   it(`onmouseenter over the card is calling callback with this card`, () => {
     const articleElement = filmCard.find(`.small-movie-card`);
     articleElement.simulate(`mouseenter`);
 
-    expect(mouseEnterHandler).toHaveBeenCalledWith(FilmCardMock);
+    expect(mouseEnterHandler).toHaveBeenCalledWith(filmCardMock);
   });
 
-  it(`onclick on the link is calling callback with the right id`, () => {
+  it(`onclick on the link is sending to right url (film's id)`, () => {
     const linkElement = filmCard.find(`.small-movie-card__link`);
-    linkElement.simulate(`click`);
 
-    expect(clickLinkHandler).toHaveBeenCalledWith(FilmCardMock.id);
+    expect(linkElement.props().to).toBe(`/film/${filmCardMock.id}`);
   });
 });
