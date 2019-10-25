@@ -3,26 +3,28 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const FilmCard = (props) => {
-  const {film, onCardMouseEnter, onFilmTitleClick} = props;
+  const {film, onCardMouseEnter} = props;
 
   return <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={() => onCardMouseEnter(film)}
   >
-    <Link to={`/film/${film.id}`}><div className="small-movie-card__image">
-      <img
-        src={film.src}
-        alt={film.name}
-        width="280"
-        height="175"
-      />
-    </div></Link>
+    <Link
+      to={`/film/${film.id}`}
+    >
+      <div className="small-movie-card__image">
+        <img
+          src={film.src}
+          alt={film.name}
+          width="280"
+          height="175"
+        />
+      </div></Link>
     <h3 className="small-movie-card__title"
     >
       <Link
         to={`/film/${film.id}`}
         className="small-movie-card__link"
-        onClick={() => onFilmTitleClick(film.id)}
       >
         {film.name}
       </Link>
@@ -45,7 +47,6 @@ FilmCard.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   onCardMouseEnter: PropTypes.func.isRequired,
-  onFilmTitleClick: PropTypes.func.isRequired,
 };
 
 export default FilmCard;
