@@ -16,8 +16,6 @@ const MainPage = (props) => {
           alt="The Grand Budapest Hotel"
         />
       </div>
-
-      <h1 className="visually-hidden">WTW</h1>
       <Header />
       <div className="movie-card__wrap">
         <div className="movie-card__info">

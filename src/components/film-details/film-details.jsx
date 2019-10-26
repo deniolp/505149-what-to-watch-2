@@ -22,8 +22,6 @@ const FilmDetails = (props) => {
         <div className="movie-card__bg">
           <img src="/img/bg-the-grand-budapest-hotel.jpg" alt={film.name} />
         </div>
-
-        <h1 className="visually-hidden">WTW</h1>
         <Header />
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
