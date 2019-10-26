@@ -1,37 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
 import FilmCard from '../film-card/film-card';
 
-class FilmsList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: {},
-    };
-
-    this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
-  }
-
-  render() {
-    const {films} = this.props;
-
-    return films.map((film) => {
-      return <FilmCard
-        key={film.id}
-        film={film}
-        onCardMouseEnter={this._handleCardMouseEnter}
-      />;
-    });
-  }
-
-  _handleCardMouseEnter(film) {
-    this.setState({
-      activeCard: film,
-    });
-  }
-}
+const FilmsList = (props) => {
+  const {films} = props;
+  const [, setActiveCard] = useState({});
+  return films.map((film) => {
+    return <FilmCard
+      key={film.id}
+      film={film}
+      onCardMouseEnter={() => setActiveCard(film)}
+    />;
+  });
+};
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
