@@ -20,12 +20,12 @@ describe(`In VideoPlayer`, () => {
     isPreviewPlaying={true}
   />);
 
-  it(`kk`, () => {
+  it(`if isPreviewPlaying is true, playing of video should start`, () => {
     expect(videoPlayer.prop(`isPreviewPlaying`)).toEqual(true);
     expect(playStub).toHaveBeenCalled();
   });
 
-  it(`ll`, () => {
+  it(`if isPreviewPlaying is false, playing of video should be paused and got reset`, () => {
     videoPlayer.setProps({isPreviewPlaying: false});
     expect(videoPlayer.prop(`isPreviewPlaying`)).toEqual(false);
     expect(pauseStub).toHaveBeenCalled();
