@@ -6,14 +6,15 @@ import FilmCard from './film-card';
 import filmsListMock from '../../mocks/films';
 
 describe(`FilmCard`, () => {
-  const FilmCardMock = filmsListMock[0];
+  const filmCardMock = filmsListMock[0];
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
         <BrowserRouter><FilmCard
-          film={FilmCardMock}
+          film={filmCardMock}
           onCardMouseEnter={jest.fn()}
-          onFilmTitleClick={jest.fn()}
+          onCardMouseLeave={jest.fn()}
+          isPreviewPlaying={false}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

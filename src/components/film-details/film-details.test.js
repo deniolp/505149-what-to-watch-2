@@ -8,6 +8,7 @@ describe(`FilmDetails`, () => {
   const FilmCardMock = filmsListMock[0];
 
   it(`renders correctly`, () => {
+    window.history.pushState({}, ``, `/film/1`);
     const tree = renderer.create(
         <FilmDetails
           film={FilmCardMock}

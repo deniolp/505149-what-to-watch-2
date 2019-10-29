@@ -4,6 +4,7 @@ exports[`FilmCard renders correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <a
     href="/film/1"
@@ -12,12 +13,17 @@ exports[`FilmCard renders correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Aviator"
-        height="175"
-        src="img/aviator.jpg"
-        width="280"
-      />
+      <video
+        height="100%"
+        muted={true}
+        poster="img/aviator.jpg"
+        width="100%"
+      >
+        <source
+          src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+          type="video/webm"
+        />
+      </video>
     </div>
   </a>
   <h3

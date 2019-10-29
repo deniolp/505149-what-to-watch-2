@@ -2,27 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
+import VideoPlayer from '../video-player/video-player';
+
 const FilmCard = (props) => {
-  const {film, onCardMouseEnter, onFilmTitleClick} = props;
+  const {film, onCardMouseEnter, onCardMouseLeave, isPreviewPlaying} = props;
+  const cardMouseEnterHandler = () => onCardMouseEnter(true);
+  let timerId;
 
   return <article
     className="small-movie-card catalog__movies-card"
-    onMouseEnter={() => onCardMouseEnter(film)}
+    onMouseEnter={() => {
+      timerId = setTimeout(cardMouseEnterHandler, 1000);
+    }}
+    onMouseLeave={() => {
+      clearTimeout(timerId);
+      onCardMouseLeave(false);
+    }}
   >
-    <Link to={`/film/${film.id}`}><div className="small-movie-card__image">
-      <img
-        src={film.src}
-        alt={film.name}
-        width="280"
-        height="175"
-      />
-    </div></Link>
+    <Link
+      to={`/film/${film.id}`}
+    >
+      <div className="small-movie-card__image">
+        <VideoPlayer
+          preview={film.preview}
+          poster={film.src}
+          isPreviewPlaying={isPreviewPlaying}
+        >
+        </VideoPlayer>
+      </div>
+    </Link>
     <h3 className="small-movie-card__title"
     >
       <Link
         to={`/film/${film.id}`}
         className="small-movie-card__link"
-        onClick={() => onFilmTitleClick(film.id)}
       >
         {film.name}
       </Link>
@@ -35,6 +48,7 @@ FilmCard.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     score: PropTypes.number.isRequired,
@@ -45,7 +59,8 @@ FilmCard.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   onCardMouseEnter: PropTypes.func.isRequired,
-  onFilmTitleClick: PropTypes.func.isRequired,
+  onCardMouseLeave: PropTypes.func.isRequired,
+  isPreviewPlaying: PropTypes.bool.isRequired,
 };
 
 export default FilmCard;

@@ -12,7 +12,6 @@ describe(`MainPage`, () => {
     const tree = renderer.create(
         <BrowserRouter><MainPage
           films={filmsMock}
-          onFilmTitleClick={jest.fn()}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

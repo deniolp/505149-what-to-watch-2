@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Header from '../header/header';
 import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films, onFilmTitleClick} = props;
+  const {films} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -15,30 +16,7 @@ const MainPage = (props) => {
           alt="The Grand Budapest Hotel"
         />
       </div>
-
-      <h1 className="visually-hidden">WTW</h1>
-
-      <header className="page-header movie-card__head">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img
-              src="img/avatar.jpg"
-              alt="User avatar"
-              width="63"
-              height="63"
-            />
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
@@ -142,7 +120,6 @@ const MainPage = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={films}
-            onFilmTitleClick={onFilmTitleClick}
           />
         </div>
 
@@ -162,6 +139,7 @@ MainPage.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     score: PropTypes.number.isRequired,
@@ -171,7 +149,6 @@ MainPage.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
   })),
-  onFilmTitleClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;

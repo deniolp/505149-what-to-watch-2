@@ -5,6 +5,7 @@ Array [
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <a
       href="/film/1"
@@ -13,12 +14,17 @@ Array [
       <div
         className="small-movie-card__image"
       >
-        <img
-          alt="Aviator"
-          height="175"
-          src="img/aviator.jpg"
-          width="280"
-        />
+        <video
+          height="100%"
+          muted={true}
+          poster="img/aviator.jpg"
+          width="100%"
+        >
+          <source
+            src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+            type="video/webm"
+          />
+        </video>
       </div>
     </a>
     <h3
@@ -36,6 +42,7 @@ Array [
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <a
       href="/film/2"
@@ -44,12 +51,17 @@ Array [
       <div
         className="small-movie-card__image"
       >
-        <img
-          alt="Shutter Island"
-          height="175"
-          src="img/shutter-island.jpg"
-          width="280"
-        />
+        <video
+          height="100%"
+          muted={true}
+          poster="img/shutter-island.jpg"
+          width="100%"
+        >
+          <source
+            src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+            type="video/webm"
+          />
+        </video>
       </div>
     </a>
     <h3
