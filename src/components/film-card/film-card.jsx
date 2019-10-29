@@ -23,14 +23,12 @@ const FilmCard = (props) => {
       to={`/film/${film.id}`}
     >
       <div className="small-movie-card__image">
-        {isPreviewPlaying ? <VideoPlayer
-          preview={film.preview}></VideoPlayer> :
-          <img
-            src={film.src}
-            alt={film.name}
-            width="280"
-            height="175"
-          />}
+        <VideoPlayer
+          preview={film.preview}
+          poster={film.src}
+          isPreviewPlaying={isPreviewPlaying}
+        >
+        </VideoPlayer>
       </div>
     </Link>
     <h3 className="small-movie-card__title"
