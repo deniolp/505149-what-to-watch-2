@@ -20,6 +20,7 @@ FilmsList.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     score: PropTypes.number.isRequired,
