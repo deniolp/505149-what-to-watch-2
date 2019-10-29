@@ -8,6 +8,7 @@ const FilmCard = (props) => {
   const {film, onCardMouseEnter, onCardMouseLeave, isPreviewPlaying} = props;
   const cardMouseEnterHandler = () => onCardMouseEnter(true);
   let timerId;
+  const clearTimer = () => clearTimeout(timerId);
 
   return <article
     className="small-movie-card catalog__movies-card"
@@ -21,6 +22,7 @@ const FilmCard = (props) => {
   >
     <Link
       to={`/film/${film.id}`}
+      onClick={clearTimer}
     >
       <div className="small-movie-card__image">
         <VideoPlayer
