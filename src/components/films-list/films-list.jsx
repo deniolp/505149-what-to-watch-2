@@ -12,6 +12,7 @@ const FilmsList = (props) => {
       film={film}
       isPreviewPlaying={isPreviewPlaying}
       onCardMouseEnter={setActiveCard}
+      onCardMouseLeave={setActiveCard}
     />;
   });
 };

@@ -5,25 +5,32 @@ import {Link} from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 
 const FilmCard = (props) => {
-  const {film, onCardMouseEnter, isPreviewPlaying} = props;
+  const {film, onCardMouseEnter, onCardMouseLeave, isPreviewPlaying} = props;
+  const cardMouseEnterHandler = () => onCardMouseEnter(true);
+  let timerId;
 
   return <article
     className="small-movie-card catalog__movies-card"
-    onMouseEnter={() => onCardMouseEnter(true)}
+    onMouseEnter={() => {
+      timerId = setTimeout(cardMouseEnterHandler, 1000);
+    }}
+    onMouseLeave={() => {
+      clearTimeout(timerId);
+      onCardMouseLeave(false);
+    }}
   >
     <Link
       to={`/film/${film.id}`}
     >
       <div className="small-movie-card__image">
         {isPreviewPlaying ? <VideoPlayer
-          preview={film.preview}
-        >
-        </VideoPlayer> : <img
-          src={film.src}
-          alt={film.name}
-          width="280"
-          height="175"
-        />}
+          preview={film.preview}></VideoPlayer> :
+          <img
+            src={film.src}
+            alt={film.name}
+            width="280"
+            height="175"
+          />}
       </div>
     </Link>
     <h3 className="small-movie-card__title"
@@ -54,6 +61,7 @@ FilmCard.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   onCardMouseEnter: PropTypes.func.isRequired,
+  onCardMouseLeave: PropTypes.func.isRequired,
   isPreviewPlaying: PropTypes.bool.isRequired,
 };
 
