@@ -13,6 +13,8 @@ describe(`FilmCard`, () => {
         <BrowserRouter><FilmCard
           film={FilmCardMock}
           onCardMouseEnter={jest.fn()}
+          onCardMouseLeave={jest.fn()}
+          isPreviewPlaying={false}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

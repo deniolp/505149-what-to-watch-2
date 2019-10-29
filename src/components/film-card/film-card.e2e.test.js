@@ -10,16 +10,25 @@ Enzyme.configure({adapter: new Adapter()});
 describe(`In FilmCard`, () => {
   const filmCardMock = filmsListMock[0];
   const mouseEnterHandler = jest.fn();
+  const mouseLeaveHandler = jest.fn();
   const filmCard = shallow(<FilmCard
     film={filmCardMock}
     onCardMouseEnter={mouseEnterHandler}
+    onCardMouseLeave={mouseLeaveHandler}
+    isPreviewPlaying={false}
   />);
+  const articleElement = filmCard.find(`.small-movie-card`);
 
-  it(`onmouseenter over the card is calling callback with this card`, () => {
-    const articleElement = filmCard.find(`.small-movie-card`);
+  it(`onmouseenter over the card is calling callback with true`, () => {
     articleElement.simulate(`mouseenter`);
 
-    expect(mouseEnterHandler).toHaveBeenCalledWith(filmCardMock);
+    setTimeout(() => expect(mouseEnterHandler).toHaveBeenCalledWith(true), 1000);
+  });
+
+  it(`onmouseleave from the card is calling callback with false`, () => {
+    articleElement.simulate(`mouseleave`);
+
+    expect(mouseLeaveHandler).toHaveBeenCalledWith(false);
   });
 
   it(`onclick on the link is sending to right url (film's id)`, () => {
