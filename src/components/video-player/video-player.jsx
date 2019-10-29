@@ -10,6 +10,7 @@ const VideoPlayer = (props) => {
     if (isPreviewPlaying) {
       videoRef.current.play();
     } else {
+      videoRef.current.pause();
       videoRef.current.load();
     }
   }, [isPreviewPlaying]);
