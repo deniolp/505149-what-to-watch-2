@@ -6,13 +6,13 @@ import FilmCard from '../film-card/film-card';
 const FilmsList = (props) => {
   const {films} = props;
   return films.map((film) => {
-    const [isPreviewPlaying, setActiveCard] = useState(false);
+    const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
     return <FilmCard
       key={film.id}
       film={film}
       isPreviewPlaying={isPreviewPlaying}
-      onCardMouseEnter={setActiveCard}
-      onCardMouseLeave={setActiveCard}
+      onCardMouseEnter={setIsPreviewPlaying}
+      onCardMouseLeave={setIsPreviewPlaying}
     />;
   });
 };
@@ -28,9 +28,16 @@ FilmsList.propTypes = {
     score: PropTypes.number.isRequired,
     ratingLevel: PropTypes.string.isRequired,
     ratingCount: PropTypes.number.isRequired,
+    duration: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+  })),
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
   })),
 };
 

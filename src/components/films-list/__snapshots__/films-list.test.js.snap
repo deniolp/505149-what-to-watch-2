@@ -17,7 +17,7 @@ Array [
         <video
           height="100%"
           muted={true}
-          poster="img/aviator.jpg"
+          poster="/img/aviator.jpg"
           width="100%"
         >
           <source
@@ -54,7 +54,7 @@ Array [
         <video
           height="100%"
           muted={true}
-          poster="img/shutter-island.jpg"
+          poster="/img/shutter-island.jpg"
           width="100%"
         >
           <source

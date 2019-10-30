@@ -165,7 +165,12 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "cursor": "pointer",
+                    }
+                  }
                 >
                   Overview
                 </a>
@@ -175,7 +180,12 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "cursor": "pointer",
+                    }
+                  }
                 >
                   Details
                 </a>
@@ -185,7 +195,12 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "cursor": "pointer",
+                    }
+                  }
                 >
                   Reviews
                 </a>
@@ -263,71 +278,73 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/2"
+            onClick={[Function]}
           >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="100%"
+                muted={true}
+                poster="/img/shutter-island.jpg"
+                width="100%"
+              >
+                <source
+                  src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                  type="video/webm"
+                />
+              </video>
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/2"
+              onClick={[Function]}
             >
-              Fantastic Beasts: The Crimes of Grindelwald
+              Shutter Island
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/3"
+            onClick={[Function]}
           >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="/img/bohemian-rhapsody.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
             >
-              Bohemian Rhapsody
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="/img/macbeth.jpg"
-              width="280"
-            />
-          </div>
+              <video
+                height="100%"
+                muted={true}
+                poster="/img/macbeth.jpg"
+                width="100%"
+              >
+                <source
+                  src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                  type="video/webm"
+                />
+              </video>
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/3"
+              onClick={[Function]}
             >
               Macbeth
             </a>
@@ -335,25 +352,75 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/4"
+            onClick={[Function]}
           >
-            <img
-              alt="Aviator"
-              height="175"
-              src="/img/aviator.jpg"
-              width="280"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="100%"
+                muted={true}
+                poster="/img/revenant.jpg"
+                width="100%"
+              >
+                <source
+                  src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                  type="video/webm"
+                />
+              </video>
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/4"
+              onClick={[Function]}
             >
-              Aviator
+              Revenant
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <a
+            href="/film/5"
+            onClick={[Function]}
+          >
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="100%"
+                muted={true}
+                poster="/img/mindhunter.jpg"
+                width="100%"
+              >
+                <source
+                  src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                  type="video/webm"
+                />
+              </video>
+            </div>
+          </a>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/5"
+              onClick={[Function]}
+            >
+              Mindhunter
             </a>
           </h3>
         </article>

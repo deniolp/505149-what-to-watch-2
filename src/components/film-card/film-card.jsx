@@ -8,6 +8,7 @@ const FilmCard = (props) => {
   const {film, onCardMouseEnter, onCardMouseLeave, isPreviewPlaying} = props;
   const cardMouseEnterHandler = () => onCardMouseEnter(true);
   let timerId;
+  const clearTimer = () => timerId && clearTimeout(timerId);
 
   return <article
     className="small-movie-card catalog__movies-card"
@@ -21,6 +22,7 @@ const FilmCard = (props) => {
   >
     <Link
       to={`/film/${film.id}`}
+      onClick={() => clearTimer()}
     >
       <div className="small-movie-card__image">
         <VideoPlayer
@@ -31,10 +33,10 @@ const FilmCard = (props) => {
         </VideoPlayer>
       </div>
     </Link>
-    <h3 className="small-movie-card__title"
-    >
+    <h3 className="small-movie-card__title">
       <Link
         to={`/film/${film.id}`}
+        onClick={() => clearTimer()}
         className="small-movie-card__link"
       >
         {film.name}
@@ -54,9 +56,16 @@ FilmCard.propTypes = {
     score: PropTypes.number.isRequired,
     ratingLevel: PropTypes.string.isRequired,
     ratingCount: PropTypes.number.isRequired,
+    duration: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+    })),
   }).isRequired,
   onCardMouseEnter: PropTypes.func.isRequired,
   onCardMouseLeave: PropTypes.func.isRequired,

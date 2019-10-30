@@ -159,7 +159,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             All genres
           </a>
@@ -169,7 +174,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Comedies
           </a>
@@ -179,7 +189,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Crime
           </a>
@@ -189,7 +204,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Documentary
           </a>
@@ -199,7 +219,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Dramas
           </a>
@@ -209,7 +234,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Horror
           </a>
@@ -219,7 +249,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Kids & Family
           </a>
@@ -229,7 +264,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Romance
           </a>
@@ -239,7 +279,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Sci-Fi
           </a>
@@ -249,7 +294,12 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
             Thrillers
           </a>
@@ -273,7 +323,7 @@ Array [
               <video
                 height="100%"
                 muted={true}
-                poster="img/aviator.jpg"
+                poster="/img/aviator.jpg"
                 width="100%"
               >
                 <source
@@ -310,7 +360,7 @@ Array [
               <video
                 height="100%"
                 muted={true}
-                poster="img/shutter-island.jpg"
+                poster="/img/shutter-island.jpg"
                 width="100%"
               >
                 <source
