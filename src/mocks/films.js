@@ -20,6 +20,44 @@ const filmsMocks = [
       `Jude Law`,
       `Dustin Hoffman`,
     ],
+    reviews: [
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muira`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `I didn&apos;t find it amusing, and while I can appreciate the creativity, it&apos;s an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      },
+      {
+        text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+        author: `Matthew Lickona`,
+        time: `2016-12-20`,
+        rating: 7.2,
+      },
+      {
+        text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+        author: `Paula Fleri-Soler`,
+        time: `2016-12-20`,
+        rating: 7.6,
+      },
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `Anderson&apos;s films are too precious for some, but for those of us willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      }
+    ],
   },
   {
     id: 2,
@@ -41,6 +79,44 @@ const filmsMocks = [
       `Edward Norton`,
       `Jude Law`,
       `Willem Dafoe`,
+    ],
+    reviews: [
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muira`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `I didn&apos;t find it amusing, and while I can appreciate the creativity, it&apos;s an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      },
+      {
+        text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+        author: `Matthew Lickona`,
+        time: `2016-12-20`,
+        rating: 7.2,
+      },
+      {
+        text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+        author: `Paula Fleri-Soler`,
+        time: `2016-12-20`,
+        rating: 7.6,
+      },
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `Anderson&apos;s films are too precious for some, but for those of us willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      }
     ],
   },
   {
@@ -64,6 +140,44 @@ const filmsMocks = [
       `Jude Law`,
       `Willem Dafoe`,
     ],
+    reviews: [
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muira`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `I didn&apos;t find it amusing, and while I can appreciate the creativity, it&apos;s an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      },
+      {
+        text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+        author: `Matthew Lickona`,
+        time: `2016-12-20`,
+        rating: 7.2,
+      },
+      {
+        text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+        author: `Paula Fleri-Soler`,
+        time: `2016-12-20`,
+        rating: 7.6,
+      },
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `Anderson&apos;s films are too precious for some, but for those of us willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      }
+    ],
   },
   {
     id: 4,
@@ -86,6 +200,44 @@ const filmsMocks = [
       `Jude Law`,
       `Willem Dafoe`,
     ],
+    reviews: [
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muira`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `I didn&apos;t find it amusing, and while I can appreciate the creativity, it&apos;s an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      },
+      {
+        text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+        author: `Matthew Lickona`,
+        time: `2016-12-20`,
+        rating: 7.2,
+      },
+      {
+        text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+        author: `Paula Fleri-Soler`,
+        time: `2016-12-20`,
+        rating: 7.6,
+      },
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `Anderson&apos;s films are too precious for some, but for those of us willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      }
+    ],
   },
   {
     id: 5,
@@ -107,6 +259,44 @@ const filmsMocks = [
       `Edward Norton`,
       `Jude Law`,
       `Willem Dafoe`,
+    ],
+    reviews: [
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muira`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `I didn&apos;t find it amusing, and while I can appreciate the creativity, it&apos;s an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      },
+      {
+        text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+        author: `Matthew Lickona`,
+        time: `2016-12-20`,
+        rating: 7.2,
+      },
+      {
+        text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+        author: `Paula Fleri-Soler`,
+        time: `2016-12-20`,
+        rating: 7.6,
+      },
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `Anderson&apos;s films are too precious for some, but for those of us willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      }
     ],
   },
 ];
