@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 
 const TabsBelowInfo = (props) => {
   const {film, label} = props;
+  const getDuration = (duration) => {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration - hours * 60;
+    return `${hours}h ${minutes}m`;
+  };
+
   switch (label) {
     case `Overview`:
       return <React.Fragment>
@@ -28,23 +34,12 @@ const TabsBelowInfo = (props) => {
           <div className="movie-card__text-col">
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Director</strong>
-              <span className="movie-card__details-value">Wes Andreson</span>
+              <span className="movie-card__details-value">{film.director}</span>
             </p>
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Starring</strong>
               <span className="movie-card__details-value">
-                    Bill Murray, <br/>
-                    Edward Norton, <br/>
-                    Jude Law, <br/>
-                    Willem Dafoe, <br/>
-                    Saoirse Ronan, <br/>
-                    Tony Revoloru, <br/>
-                    Tilda Swinton, <br/>
-                    Tom Wilkinson, <br/>
-                    Owen Wilkinson, <br/>
-                    Adrien Brody, <br/>
-                    Ralph Fiennes, <br/>
-                    Jeff Goldblum
+                {film.starring.join(`, `)}
               </span>
             </p>
           </div>
@@ -52,15 +47,15 @@ const TabsBelowInfo = (props) => {
           <div className="movie-card__text-col">
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Run Time</strong>
-              <span className="movie-card__details-value">1h 39m</span>
+              <span className="movie-card__details-value">{getDuration(film.duration)}</span>
             </p>
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Genre</strong>
-              <span className="movie-card__details-value">Comedy</span>
+              <span className="movie-card__details-value">{film.genre}</span>
             </p>
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Released</strong>
-              <span className="movie-card__details-value">2014</span>
+              <span className="movie-card__details-value">{film.year}</span>
             </p>
           </div>
         </div>
@@ -166,6 +161,7 @@ TabsBelowInfo.propTypes = {
     score: PropTypes.number.isRequired,
     ratingLevel: PropTypes.string.isRequired,
     ratingCount: PropTypes.number.isRequired,
+    duration: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,

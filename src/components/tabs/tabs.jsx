@@ -57,6 +57,7 @@ Tabs.propTypes = {
     score: PropTypes.number.isRequired,
     ratingLevel: PropTypes.string.isRequired,
     ratingCount: PropTypes.number.isRequired,
+    duration: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
