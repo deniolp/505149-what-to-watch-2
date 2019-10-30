@@ -6,13 +6,13 @@ import FilmCard from '../film-card/film-card';
 const FilmsList = (props) => {
   const {films} = props;
   return films.map((film) => {
-    const [isPreviewPlaying, setActiveCard] = useState(false);
+    const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
     return <FilmCard
       key={film.id}
       film={film}
       isPreviewPlaying={isPreviewPlaying}
-      onCardMouseEnter={setActiveCard}
-      onCardMouseLeave={setActiveCard}
+      onCardMouseEnter={setIsPreviewPlaying}
+      onCardMouseLeave={setIsPreviewPlaying}
     />;
   });
 };
