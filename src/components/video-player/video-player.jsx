@@ -8,7 +8,12 @@ const VideoPlayer = (props) => {
 
   useEffect(() => {
     if (isPreviewPlaying) {
-      videoRef.current.play();
+      const promise = videoRef.current.play();
+      if (promise !== undefined) {
+        promise.catch((_error) => {
+        }).then(() => {
+        });
+      }
     } else {
       videoRef.current.pause();
       videoRef.current.load();
