@@ -165,7 +165,12 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "cursor": "pointer",
+                    }
+                  }
                 >
                   Overview
                 </a>
@@ -175,7 +180,12 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "cursor": "pointer",
+                    }
+                  }
                 >
                   Details
                 </a>
@@ -185,7 +195,12 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "cursor": "pointer",
+                    }
+                  }
                 >
                   Reviews
                 </a>

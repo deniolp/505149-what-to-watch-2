@@ -10,7 +10,7 @@ const Tabs = (props) => {
   return <div className="movie-card__desc">
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">
-        <li className={`movie-nav__item ${label === `Overview` ? `movie-nav__item--active` : ``}`}>
+        <li className={`movie-nav__item${label === `Overview` ? ` movie-nav__item--active` : ``}`}>
           <a
             onClick={() => setLabel(`Overview`)}
             className="movie-nav__link"
@@ -19,7 +19,7 @@ const Tabs = (props) => {
             }}
           >Overview</a>
         </li>
-        <li className={`movie-nav__item ${label === `Details` ? `movie-nav__item--active` : ``}`}>
+        <li className={`movie-nav__item${label === `Details` ? ` movie-nav__item--active` : ``}`}>
           <a
             onClick={() => setLabel(`Details`)}
             className="movie-nav__link"
@@ -28,7 +28,7 @@ const Tabs = (props) => {
             }}
           >Details</a>
         </li>
-        <li className={`movie-nav__item ${label === `Reviews` ? `movie-nav__item--active` : ``}`}>
+        <li className={`movie-nav__item${label === `Reviews` ? ` movie-nav__item--active` : ``}`}>
           <a
             onClick={() => setLabel(`Reviews`)}
             className="movie-nav__link"
