@@ -4,18 +4,21 @@ import {Redirect} from 'react-router-dom';
 
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
+import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
 import filmsListMock from '../../mocks/films';
 
 const FilmDetails = (props) => {
   let {film} = props;
   const id = props.match.params.id;
+
   if (id > filmsListMock.length) {
     return <Redirect to="/"></Redirect>;
   }
   if (!film) {
     film = filmsListMock[id - 1];
   }
+  const filteredByGenreFilms = filmsListMock.filter((item) => item.genre === film.genre && item.name !== film.name);
 
   return <React.Fragment>
     <section className="movie-card movie-card--full">
@@ -64,43 +67,10 @@ const FilmDetails = (props) => {
     <div className="page-content">
       <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
-
         <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="/img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="/img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="/img/aviator.jpg" alt="Aviator" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-            </h3>
-          </article>
+          <FilmsList
+            films={filteredByGenreFilms}
+          />
         </div>
       </section>
       <Footer />
