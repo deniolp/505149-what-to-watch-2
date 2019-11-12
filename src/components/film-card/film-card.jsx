@@ -16,7 +16,7 @@ const FilmCard = (props) => {
       timerId = setTimeout(cardMouseEnterHandler, 1000);
     }}
     onMouseLeave={() => {
-      clearTimeout(timerId);
+      clearTimer();
       onCardMouseLeave(false);
     }}
   >
