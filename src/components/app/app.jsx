@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/reducer';
 import filmsMocks from '../../mocks/films';
 
 const App = (props) => {
