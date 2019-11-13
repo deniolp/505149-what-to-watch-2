@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 
 const App = (props) => {
-  const {films} = props;
+  const {films, genre} = props;
   return <Switch>
     <Route path="/" exact render={() => {
       return <MainPage
         films={films}
+        genre={genre}
       />;
     }}
     />
@@ -47,6 +49,13 @@ App.propTypes = {
       rating: PropTypes.number.isRequired,
     })),
   })),
+  genre: PropTypes.string.isRequired,
 };
 
-export default App;
+const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  genre: state.genre,
+  films: state.films,
+});
+
+export {App};
+export default connect(mapSateToProps, null)(App);

@@ -5,7 +5,6 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
 import App from './components/app/app';
-import filmsListMock from './mocks/films';
 import {reducer} from './reducer';
 
 const init = () => {
@@ -14,9 +13,7 @@ const init = () => {
   ReactDom.render(
       <Provider store={store}>
         <BrowserRouter>
-          <App
-            films={filmsListMock}
-          />
+          <App />
         </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`)
