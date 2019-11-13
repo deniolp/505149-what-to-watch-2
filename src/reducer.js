@@ -1,7 +1,7 @@
 import filmsMocks from './mocks/films';
 
 const initialState = {
-  genre: `allGenres`,
+  genre: `All genres`,
   films: filmsMocks,
 };
 
@@ -10,8 +10,8 @@ const ActionCreator = {
     type: `CHANGE_GENRE`,
     payload: selectedGenre,
   }),
-  getFilms: (selectedGenre, films) => {
-    const filteredFilms = films.filter((film) => film.genre === selectedGenre);
+  getFilms: (selectedGenre) => {
+    const filteredFilms = selectedGenre === `All genres` ? initialState.films : initialState.films.filter((film) => film.genre === selectedGenre);
 
     return {
       type: `GET_FILTERED_FILMS`,
