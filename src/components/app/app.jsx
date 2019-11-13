@@ -5,14 +5,16 @@ import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
+import {ActionCreator} from '../../reducer';
 
 const App = (props) => {
-  const {films, genre} = props;
+  const {films, genre, onGenreClick} = props;
   return <Switch>
     <Route path="/" exact render={() => {
       return <MainPage
         films={films}
         genre={genre}
+        onGenreClick={onGenreClick}
       />;
     }}
     />
@@ -50,12 +52,20 @@ App.propTypes = {
     })),
   })),
   genre: PropTypes.string.isRequired,
+  onGenreClick: PropTypes.func.isRequired,
 };
 
-const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genre: state.genre,
   films: state.films,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onGenreClick: (selectedGenre) => {
+    dispatch(ActionCreator.changeGenre(selectedGenre));
+    dispatch(ActionCreator.getFilms(selectedGenre));
+  }
+});
+
 export {App};
-export default connect(mapSateToProps, null)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
