@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
 import App from './components/app/app';
 import filmsListMock from './mocks/films';
+import {reducer} from './reducer';
 
 const init = () => {
+  const store = createStore(reducer);
+
   ReactDom.render(
-      <BrowserRouter><App
-        films={filmsListMock}
-      /></BrowserRouter>,
+      <Provider store={store}>
+        <BrowserRouter>
+          <App
+            films={filmsListMock}
+          />
+        </BrowserRouter>
+      </Provider>,
       document.querySelector(`#root`)
   );
 };
