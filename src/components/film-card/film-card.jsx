@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import VideoPlayer from '../video-player/video-player';
 
 const FilmCard = (props) => {
-  const {film, onCardMouseEnter, onCardMouseLeave, isPreviewPlaying} = props;
-  const cardMouseEnterHandler = () => onCardMouseEnter(true);
+  const {film} = props;
+  const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
+
   let timerId;
+  const cardMouseEnterHandler = () => setIsPreviewPlaying(true);
   const clearTimer = () => timerId && clearTimeout(timerId);
 
   return <article
@@ -17,7 +19,7 @@ const FilmCard = (props) => {
     }}
     onMouseLeave={() => {
       clearTimer();
-      onCardMouseLeave(false);
+      setIsPreviewPlaying(false);
     }}
   >
     <Link
@@ -67,9 +69,6 @@ FilmCard.propTypes = {
       rating: PropTypes.number.isRequired,
     })),
   }).isRequired,
-  onCardMouseEnter: PropTypes.func.isRequired,
-  onCardMouseLeave: PropTypes.func.isRequired,
-  isPreviewPlaying: PropTypes.bool.isRequired,
 };
 
 export default FilmCard;
