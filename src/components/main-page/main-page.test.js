@@ -7,6 +7,8 @@ import filmsListMock from '../../mocks/films';
 
 describe(`MainPage`, () => {
   const filmsMock = filmsListMock.slice(0, 2);
+  const genresSet = new Set().add(`All genres`);
+  filmsListMock.forEach((film) => genresSet.add(film.genre));
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
@@ -14,6 +16,7 @@ describe(`MainPage`, () => {
           films={filmsMock}
           genre={`Thriller`}
           onGenreClick={jest.fn()}
+          genres={genresSet}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

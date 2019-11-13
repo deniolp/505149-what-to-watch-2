@@ -2,16 +2,20 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+import filmsMocks from '../../mocks/films';
 import Genres from './genres';
 
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`In Genres`, () => {
   const genreClickHandler = jest.fn();
+  const genresSet = new Set().add(`All genres`);
+  filmsMocks.forEach((film) => genresSet.add(film.genre));
 
   const GenresWrapper = mount(<Genres
     activeGenre={`Thriller`}
     onGenreClick={genreClickHandler}
+    genres={genresSet}
   />);
   const linkElements = GenresWrapper.find(`a`);
 
