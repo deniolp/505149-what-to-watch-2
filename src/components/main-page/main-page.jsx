@@ -7,7 +7,7 @@ import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films, genre, onGenreClick} = props;
+  const {films, genre, onGenreClick, genres} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -67,6 +67,7 @@ const MainPage = (props) => {
         <Genres
           activeGenre={genre}
           onGenreClick={onGenreClick}
+          genres={genres}
         />
         <div className="catalog__movies-list">
           <FilmsList
@@ -102,6 +103,7 @@ MainPage.propTypes = {
   })),
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
+  genres: PropTypes.instanceOf(Set).isRequired,
 };
 
 export default MainPage;

@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import filmsMocks from '../../mocks/films';
-
-const genres = new Set().add(`All genres`);
-filmsMocks.forEach((film) => genres.add(film.genre));
-
 const Genres = (props) => {
-  const {activeGenre, onGenreClick} = props;
+  const {activeGenre, onGenreClick, genres} = props;
 
   return <ul className="catalog__genres-list">
     {Array.from(genres).map((item) => {
@@ -27,6 +22,7 @@ const Genres = (props) => {
 Genres.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
+  genres: PropTypes.instanceOf(Set).isRequired,
 };
 
 export default Genres;

@@ -6,15 +6,20 @@ import {connect} from 'react-redux';
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 import {ActionCreator} from '../../reducer';
+import filmsMocks from '../../mocks/films';
 
 const App = (props) => {
   const {films, genre, onGenreClick} = props;
+  const genres = new Set().add(`All genres`);
+  filmsMocks.forEach((film) => genres.add(film.genre));
+
   return <Switch>
     <Route path="/" exact render={() => {
       return <MainPage
         films={films}
         genre={genre}
         onGenreClick={onGenreClick}
+        genres={genres}
       />;
     }}
     />
