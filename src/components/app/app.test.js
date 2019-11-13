@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
-import App from './app';
+import {App} from './app';
 import filmsListMock from '../../mocks/films';
 
 describe(`App`, () => {
@@ -12,6 +12,8 @@ describe(`App`, () => {
     const tree = renderer.create(
         <BrowserRouter><App
           films={filmsMock}
+          genre={`Thriller`}
+          onGenreClick={jest.fn()}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

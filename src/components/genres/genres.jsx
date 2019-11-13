@@ -1,34 +1,28 @@
-import React, {useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const genres = [
-  `All genres`,
-  `Comedies`,
-  `Crime`,
-  `Documentary`,
-  `Dramas`,
-  `Horror`,
-  `Kids & Family`,
-  `Romance`,
-  `Sci-Fi`,
-  `Thrillers`,
-];
-
-const Genres = () => {
-  const [genreLabel, setGenreLabel] = useState(`All genres`);
+const Genres = (props) => {
+  const {activeGenre, onGenreClick, genres} = props;
 
   return <ul className="catalog__genres-list">
-    {genres.map((genre) => {
-      return <li className={`catalog__genres-item${genreLabel === genre ? ` catalog__genres-item--active` : ``}`} key={genre}>
+    {Array.from(genres).map((item) => {
+      return <li className={`catalog__genres-item${item === activeGenre ? ` catalog__genres-item--active` : ``}`} key={item}>
         <a className="catalog__genres-link"
-          onClick={() => setGenreLabel(genre)}
+          onClick={() => onGenreClick(item)}
           style={{
             cursor: `pointer`,
           }}>
-          {genre}
+          {item}
         </a>
       </li>;
     })}
   </ul>;
+};
+
+Genres.propTypes = {
+  activeGenre: PropTypes.string.isRequired,
+  onGenreClick: PropTypes.func.isRequired,
+  genres: PropTypes.instanceOf(Set).isRequired,
 };
 
 export default Genres;

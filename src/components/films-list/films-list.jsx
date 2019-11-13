@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import FilmCard from '../film-card/film-card';
@@ -6,13 +6,9 @@ import FilmCard from '../film-card/film-card';
 const FilmsList = (props) => {
   const {films} = props;
   return films.map((film) => {
-    const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
     return <FilmCard
       key={film.id}
       film={film}
-      isPreviewPlaying={isPreviewPlaying}
-      onCardMouseEnter={setIsPreviewPlaying}
-      onCardMouseLeave={setIsPreviewPlaying}
     />;
   });
 };

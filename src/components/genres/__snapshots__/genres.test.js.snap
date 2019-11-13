@@ -5,7 +5,7 @@ exports[`Genres renders correctly 1`] = `
   className="catalog__genres-list"
 >
   <li
-    className="catalog__genres-item catalog__genres-item--active"
+    className="catalog__genres-item"
   >
     <a
       className="catalog__genres-link"
@@ -31,7 +31,37 @@ exports[`Genres renders correctly 1`] = `
         }
       }
     >
-      Comedies
+      Drama
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item catalog__genres-item--active"
+  >
+    <a
+      className="catalog__genres-link"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      Thriller
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item"
+  >
+    <a
+      className="catalog__genres-link"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      History
     </a>
   </li>
   <li
@@ -47,111 +77,6 @@ exports[`Genres renders correctly 1`] = `
       }
     >
       Crime
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
-    >
-      Documentary
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
-    >
-      Dramas
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
-    >
-      Horror
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
-    >
-      Kids & Family
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
-    >
-      Romance
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
-    >
-      Sci-Fi
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
-    >
-      Thrillers
     </a>
   </li>
 </ul>

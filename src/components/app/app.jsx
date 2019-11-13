@@ -1,16 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
+import {ActionCreator} from '../../reducer/reducer';
+import filmsMocks from '../../mocks/films';
 
 const App = (props) => {
-  const {films} = props;
+  const {films, genre, onGenreClick} = props;
+  const genres = new Set().add(`All genres`);
+  filmsMocks.forEach((film) => genres.add(film.genre));
+
   return <Switch>
     <Route path="/" exact render={() => {
       return <MainPage
         films={films}
+        genre={genre}
+        onGenreClick={onGenreClick}
+        genres={genres}
       />;
     }}
     />
@@ -47,6 +56,21 @@ App.propTypes = {
       rating: PropTypes.number.isRequired,
     })),
   })),
+  genre: PropTypes.string.isRequired,
+  onGenreClick: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  genre: state.genre,
+  films: state.films,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreClick: (selectedGenre) => {
+    dispatch(ActionCreator.changeGenre(selectedGenre));
+    dispatch(ActionCreator.getFilms(selectedGenre));
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
