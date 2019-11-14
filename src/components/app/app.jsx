@@ -5,15 +5,16 @@ import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
+import BigPlayer from '../big-player/big-player';
 import {ActionCreator} from '../../reducer/reducer';
 import filmsMocks from '../../mocks/films';
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onPlayButtonClick} = props;
   const genres = new Set().add(`All genres`);
   filmsMocks.forEach((film) => genres.add(film.genre));
 
-  return <Switch>
+  return playingFilm ? <BigPlayer playingFilm={playingFilm}></BigPlayer> : <Switch>
     <Route path="/" exact render={() => {
       return <MainPage
         films={films}
@@ -22,6 +23,7 @@ const App = (props) => {
         genres={genres}
         filmsCounter={filmsCounter}
         onShowMoreButtonClick={onShowMoreButtonClick}
+        onPlayButtonClick={onPlayButtonClick}
       />;
     }}
     />
@@ -61,13 +63,39 @@ App.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
+  playingFilm: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired,
+      preview: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      year: PropTypes.number.isRequired,
+      score: PropTypes.number.isRequired,
+      ratingLevel: PropTypes.string.isRequired,
+      ratingCount: PropTypes.number.isRequired,
+      duration: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      director: PropTypes.string.isRequired,
+      starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+      reviews: PropTypes.arrayOf(PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        time: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+      })),
+    }),
+  ]).isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genre: state.genre,
   films: state.films,
   filmsCounter: state.filmsCounter,
+  playingFilm: state.playingFilm,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -77,6 +105,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.resetFilmsCounter());
   },
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
+  onPlayButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
 });
 
 export {App};
