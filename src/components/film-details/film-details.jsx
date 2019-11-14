@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
-import withLabel from '../../hocs/with-label';
+import withLabel from '../../hocs/with-label/with-label';
 import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
 import filmsListMock from '../../mocks/films';
