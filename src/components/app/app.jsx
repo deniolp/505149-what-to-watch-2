@@ -74,6 +74,7 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreClick: (selectedGenre) => {
     dispatch(ActionCreator.changeGenre(selectedGenre));
     dispatch(ActionCreator.getFilms(selectedGenre));
+    dispatch(ActionCreator.resetFilmsCounter());
   },
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
 });
