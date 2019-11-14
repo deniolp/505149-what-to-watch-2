@@ -18,6 +18,7 @@ describe(`FilmDetails`, () => {
               id: 1,
             },
           }}
+          filmsCounter={2}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

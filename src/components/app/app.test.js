@@ -14,6 +14,9 @@ describe(`App`, () => {
           films={filmsMock}
           genre={`Thriller`}
           onGenreClick={jest.fn()}
+          onShowMoreButtonClick={jest.fn()}
+          onResetFilmsCounter={jest.fn()}
+          filmsCounter={1}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

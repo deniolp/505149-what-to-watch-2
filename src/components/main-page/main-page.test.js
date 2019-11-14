@@ -17,6 +17,8 @@ describe(`MainPage`, () => {
           genre={`Thriller`}
           onGenreClick={jest.fn()}
           genres={genresSet}
+          onShowMoreButtonClick={jest.fn()}
+          filmsCounter={1}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
