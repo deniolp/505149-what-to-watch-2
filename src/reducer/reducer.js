@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
     });
 
     case `INCREASE_FILMS_COUNTER`: return Object.assign({}, state, {
-      filmsCounter: state.filmsCounter + action.payload,
+      filmsCounter: state.filmsCounter < state.films.length ? state.filmsCounter + action.payload : state.filmsCounter,
     });
 
     case `RESET_FILMS_COUNTER`: return Object.assign({}, state, {
