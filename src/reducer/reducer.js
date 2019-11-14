@@ -4,6 +4,7 @@ const initialState = {
   genre: `All genres`,
   films: filmsMocks,
   filmsCounter: 2,
+  playingFilm: false,
 };
 
 const ActionCreator = {
@@ -27,6 +28,10 @@ const ActionCreator = {
     type: `RESET_FILMS_COUNTER`,
     payload: 2,
   }),
+  setPlayingFilm: (film) => ({
+    type: `SET_PLAYING_FILM`,
+    payload: film,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +50,10 @@ const reducer = (state = initialState, action) => {
 
     case `RESET_FILMS_COUNTER`: return Object.assign({}, state, {
       filmsCounter: action.payload,
+    });
+
+    case `SET_PLAYING_FILM`: return Object.assign({}, state, {
+      playingFilm: action.payload,
     });
   }
 
