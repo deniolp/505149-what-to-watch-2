@@ -8,7 +8,7 @@ import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films, genre, onGenreClick, genres} = props;
+  const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -73,9 +73,12 @@ const MainPage = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={films}
+            filmsCounter={filmsCounter}
           />
         </div>
-        <ShowMoreButton />
+        <ShowMoreButton
+          onShowMoreButtonClick={onShowMoreButtonClick}
+        />
       </section>
       <Footer />
     </div>
@@ -100,6 +103,8 @@ MainPage.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   genres: PropTypes.instanceOf(Set).isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
+  filmsCounter: PropTypes.number.isRequired,
 };
 
 export default MainPage;
