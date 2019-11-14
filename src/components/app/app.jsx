@@ -14,9 +14,9 @@ const App = (props) => {
   const genres = new Set().add(`All genres`);
   filmsMocks.forEach((film) => genres.add(film.genre));
 
-  return playingFilm ? <BigPlayer playingFilm={playingFilm}></BigPlayer> : <Switch>
+  return <Switch>
     <Route path="/" exact render={() => {
-      return <MainPage
+      return playingFilm ? <BigPlayer playingFilm={playingFilm}></BigPlayer> : <MainPage
         films={films}
         genre={genre}
         onGenreClick={onGenreClick}
@@ -27,10 +27,11 @@ const App = (props) => {
       />;
     }}
     />
-    <Route path="/film/:id" render={(routerProps) => {
-      return <FilmDetails
-        film={films.find((it) => it.id === +routerProps.match.params.id)}
+    <Route path="/film/:id" exact render={(routerProps) => {
+      return playingFilm ? <BigPlayer playingFilm={playingFilm}></BigPlayer> : <FilmDetails
         {...routerProps}
+        film={films.find((it) => it.id === +routerProps.match.params.id)}
+        onPlayButtonClick={onPlayButtonClick}
       />;
     }}
     />
