@@ -11,6 +11,8 @@ describe(`Tabs`, () => {
     const tree = renderer.create(
         <Tabs
           film={film}
+          label={`Overview`}
+          setLabel={jest.fn()}
         />).toJSON();
 
     expect(tree).toMatchSnapshot();
