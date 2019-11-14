@@ -1,12 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const BigPlayer = () => {
+const BigPlayer = (props) => {
+  const {playingFilm, onPlayButtonClick} = props;
 
   return <div className="player">
-    <video src="#" className="player__video" poster="/img/player-poster.jpg"></video>
+    <video src={playingFilm.src} className="player__video" poster="/img/player-poster.jpg"></video>
 
-    <button type="button" className="player__exit">Exit</button>
-
+    <button
+      type="button"
+      className="player__exit"
+      onClick={() => onPlayButtonClick(false)}
+    >
+    Exit
+    </button>
     <div className="player__controls">
       <div className="player__controls-row">
         <div className="player__time">
@@ -39,6 +46,31 @@ const BigPlayer = () => {
       </div>
     </div>
   </div>;
+};
+
+BigPlayer.propTypes = {
+  playingFilm: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    score: PropTypes.number.isRequired,
+    ratingLevel: PropTypes.string.isRequired,
+    ratingCount: PropTypes.number.isRequired,
+    duration: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+    })),
+  }),
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 export default BigPlayer;

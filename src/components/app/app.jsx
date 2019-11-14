@@ -16,7 +16,10 @@ const App = (props) => {
 
   return <Switch>
     <Route path="/" exact render={() => {
-      return playingFilm ? <BigPlayer playingFilm={playingFilm}></BigPlayer> : <MainPage
+      return playingFilm ? <BigPlayer
+        playingFilm={playingFilm}
+        onPlayButtonClick={onPlayButtonClick}
+      /> : <MainPage
         films={films}
         genre={genre}
         onGenreClick={onGenreClick}
@@ -28,11 +31,15 @@ const App = (props) => {
     }}
     />
     <Route path="/film/:id" exact render={(routerProps) => {
-      return playingFilm ? <BigPlayer playingFilm={playingFilm}></BigPlayer> : <FilmDetails
-        {...routerProps}
-        film={films.find((it) => it.id === +routerProps.match.params.id)}
-        onPlayButtonClick={onPlayButtonClick}
-      />;
+      return playingFilm ?
+        <BigPlayer
+          playingFilm={playingFilm}
+          onPlayButtonClick={onPlayButtonClick}
+        /> : <FilmDetails
+          {...routerProps}
+          film={films.find((it) => it.id === +routerProps.match.params.id)}
+          onPlayButtonClick={onPlayButtonClick}
+        />;
     }}
     />
     <Redirect from='*' to='/' />
