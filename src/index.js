@@ -8,7 +8,8 @@ import App from './components/app/app';
 import {reducer} from './reducer/reducer';
 
 const init = () => {
-  const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+  );
 
   ReactDom.render(
       <Provider store={store}>
