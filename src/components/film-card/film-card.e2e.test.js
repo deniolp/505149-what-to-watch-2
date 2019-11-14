@@ -11,6 +11,10 @@ describe(`In FilmCard`, () => {
   const filmCardMock = filmsListMock[0];
   const filmCard = shallow(<FilmCard
     film={filmCardMock}
+    onCardMouseEnter={jest.fn()}
+    onCardMouseLeave={jest.fn()}
+    setIsPreviewPlaying={jest.fn()}
+    isPreviewPlaying={false}
   />);
 
   it(`onclick on the link is sending to right url (film's id)`, () => {

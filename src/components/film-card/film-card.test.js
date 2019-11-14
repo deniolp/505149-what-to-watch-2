@@ -14,6 +14,7 @@ describe(`FilmCard`, () => {
           film={filmCardMock}
           onCardMouseEnter={jest.fn()}
           onCardMouseLeave={jest.fn()}
+          setIsPreviewPlaying={jest.fn()}
           isPreviewPlaying={false}
         /></BrowserRouter>).toJSON();
 

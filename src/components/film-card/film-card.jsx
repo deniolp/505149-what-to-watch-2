@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import VideoPlayer from '../video-player/video-player';
 
 const FilmCard = (props) => {
-  const {film} = props;
-  const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
+  const {film, isPreviewPlaying, setIsPreviewPlaying} = props;
 
   let timerId;
   const cardMouseEnterHandler = () => setIsPreviewPlaying(true);
@@ -69,6 +68,8 @@ FilmCard.propTypes = {
       rating: PropTypes.number.isRequired,
     })),
   }).isRequired,
+  isPreviewPlaying: PropTypes.bool.isRequired,
+  setIsPreviewPlaying: PropTypes.func.isRequired,
 };
 
 export default FilmCard;
