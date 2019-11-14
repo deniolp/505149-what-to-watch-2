@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import Header from '../header/header';
 import Genres from '../genres/genres';
 import FilmsList from '../films-list/films-list';
+import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films, genre, onGenreClick, genres} = props;
+  const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -72,14 +73,13 @@ const MainPage = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={films}
+            filmsCounter={filmsCounter}
           />
         </div>
-
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">
-            Show more
-          </button>
-        </div>
+        <ShowMoreButton
+          onShowMoreButtonClick={onShowMoreButtonClick}
+          shouldShowButton={filmsCounter < films.length}
+        />
       </section>
       <Footer />
     </div>
@@ -104,6 +104,8 @@ MainPage.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   genres: PropTypes.instanceOf(Set).isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
+  filmsCounter: PropTypes.number.isRequired,
 };
 
 export default MainPage;

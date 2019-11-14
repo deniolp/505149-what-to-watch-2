@@ -313,6 +313,43 @@ Array [
             </a>
           </h3>
         </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <a
+            href="/film/6"
+            onClick={[Function]}
+          >
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="100%"
+                muted={true}
+                poster="/img/dardjeeling-limited.jpg"
+                width="100%"
+              >
+                <source
+                  src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                  type="video/webm"
+                />
+              </video>
+            </div>
+          </a>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/6"
+              onClick={[Function]}
+            >
+              Dardjeeling limited
+            </a>
+          </h3>
+        </article>
       </div>
     </section>
     <footer

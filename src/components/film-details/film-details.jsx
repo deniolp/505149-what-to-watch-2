@@ -10,13 +10,13 @@ import filmsListMock from '../../mocks/films';
 
 const FilmDetails = (props) => {
   let {film} = props;
-  const id = props.match.params.id;
 
-  if (id > filmsListMock.length) {
-    return <Redirect to="/"></Redirect>;
-  }
+  const id = props.match.params.id;
   if (!film) {
-    film = filmsListMock[id - 1];
+    film = filmsListMock.find((it) => it.id === +id);
+    if (!film) {
+      return <Redirect to="/"></Redirect>;
+    }
   }
   const filteredByGenreFilms = filmsListMock.filter((item) => item.genre === film.genre && item.name !== film.name);
 
@@ -70,6 +70,7 @@ const FilmDetails = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={filteredByGenreFilms}
+            filmsCounter={4}
           />
         </div>
       </section>

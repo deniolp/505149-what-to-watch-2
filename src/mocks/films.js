@@ -299,6 +299,66 @@ const filmsMocks = [
       }
     ],
   },
+  {
+    id: 6,
+    name: `Dardjeeling limited`,
+    src: `/img/dardjeeling-limited.jpg`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    genre: `Drama`,
+    year: 2008,
+    score: 8.3,
+    ratingLevel: `Good`,
+    ratingCount: 187,
+    duration: 99,
+    description: `Deserunt ex esse tempor aliqua labore ex ipsum ipsum. Minim elit anim consectetur eu cillum. Quis ut ut minim anim sit irure anim non officia id ex. Elit in ea ad elit consequat magna culpa excepteur Lorem. Excepteur sit sit enim irure enim in amet excepteur. Sunt ullamco et cupidatat est adipisicing occaecat nostrud voluptate aliquip consequat commodo adipisicing. Ipsum exercitation est consectetur aute magna anim dolore id enim.
+    Sunt ullamco et cupidatat est adipisicing occaecat nostrud voluptate aliquip consequat commodo adipisicing. Ipsum exercitation est consectetur aute magna anim dolore id enim.`,
+    director: `Christopher Nolan`,
+    starring: [
+      `Bill Murray`,
+      `Jack Nicholson`,
+      `Edward Norton`,
+      `Jude Law`,
+      `Dustin Hoffman`,
+    ],
+    reviews: [
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muira`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      },
+      {
+        text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+        author: `Matthew Lickona`,
+        time: `2016-12-20`,
+        rating: 7.2,
+      },
+      {
+        text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+        author: `Paula Fleri-Soler`,
+        time: `2016-12-20`,
+        rating: 7.6,
+      },
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        time: `2016-12-24`,
+        rating: 8.9,
+      },
+      {
+        text: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        time: `2015-11-18`,
+        rating: 8.0,
+      }
+    ],
+  },
 ];
 
 export default filmsMocks;

@@ -9,7 +9,7 @@ import {ActionCreator} from '../../reducer/reducer';
 import filmsMocks from '../../mocks/films';
 
 const App = (props) => {
-  const {films, genre, onGenreClick} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick} = props;
   const genres = new Set().add(`All genres`);
   filmsMocks.forEach((film) => genres.add(film.genre));
 
@@ -20,12 +20,14 @@ const App = (props) => {
         genre={genre}
         onGenreClick={onGenreClick}
         genres={genres}
+        filmsCounter={filmsCounter}
+        onShowMoreButtonClick={onShowMoreButtonClick}
       />;
     }}
     />
     <Route path="/film/:id" render={(routerProps) => {
       return <FilmDetails
-        film={films[routerProps.match.params.id - 1]}
+        film={films.find((it) => it.id === +routerProps.match.params.id)}
         {...routerProps}
       />;
     }}
@@ -58,18 +60,23 @@ App.propTypes = {
   })),
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
+  filmsCounter: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genre: state.genre,
   films: state.films,
+  filmsCounter: state.filmsCounter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick: (selectedGenre) => {
     dispatch(ActionCreator.changeGenre(selectedGenre));
     dispatch(ActionCreator.getFilms(selectedGenre));
-  }
+    dispatch(ActionCreator.resetFilmsCounter());
+  },
+  onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
 });
 
 export {App};

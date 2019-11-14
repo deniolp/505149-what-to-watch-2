@@ -12,6 +12,7 @@ describe(`FilmsList`, () => {
     const tree = renderer.create(
         <BrowserRouter><FilmsList
           films={filmsMock}
+          filmsCounter={2}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import FilmCard from '../film-card/film-card';
 
 const FilmsList = (props) => {
-  const {films} = props;
-  return films.map((film) => {
+  const {films, filmsCounter} = props;
+  const moviesToShow = films.slice(0, filmsCounter);
+
+  return moviesToShow.map((film) => {
     return <FilmCard
       key={film.id}
       film={film}
@@ -35,6 +37,7 @@ FilmsList.propTypes = {
     time: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   })),
+  filmsCounter: PropTypes.number.isRequired,
 };
 
 export default FilmsList;

@@ -270,49 +270,13 @@ Array [
             </a>
           </h3>
         </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <a
-            href="/film/2"
-            onClick={[Function]}
-          >
-            <div
-              className="small-movie-card__image"
-            >
-              <video
-                height="100%"
-                muted={true}
-                poster="/img/shutter-island.jpg"
-                width="100%"
-              >
-                <source
-                  src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-                  type="video/webm"
-                />
-              </video>
-            </div>
-          </a>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="/film/2"
-              onClick={[Function]}
-            >
-              Shutter Island
-            </a>
-          </h3>
-        </article>
       </div>
       <div
         className="catalog__more"
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more
