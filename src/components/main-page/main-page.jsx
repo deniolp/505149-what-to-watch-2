@@ -78,6 +78,7 @@ const MainPage = (props) => {
         </div>
         <ShowMoreButton
           onShowMoreButtonClick={onShowMoreButtonClick}
+          shouldShowButton={filmsCounter < films.length}
         />
       </section>
       <Footer />
