@@ -16,7 +16,6 @@ const BigPlayer = (props) => {
       }
     } else {
       videoRef.current.pause();
-      videoRef.current.load();
     }
   }, [isPlaying]);
 
