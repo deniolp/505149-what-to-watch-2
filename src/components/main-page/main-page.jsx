@@ -8,7 +8,7 @@ import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick, onPlayButtonClick} = props;
+  const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick, onOpenCloseVideoButtonClick} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -41,7 +41,7 @@ const MainPage = (props) => {
               <button
                 className="btn btn--play movie-card__button"
                 type="button"
-                onClick={() => onPlayButtonClick(films[0])}
+                onClick={() => onOpenCloseVideoButtonClick(films[0])}
               >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
@@ -106,7 +106,7 @@ MainPage.propTypes = {
   onGenreClick: PropTypes.func.isRequired,
   genres: PropTypes.instanceOf(Set).isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
 };
 

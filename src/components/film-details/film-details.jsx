@@ -12,7 +12,7 @@ import filmsListMock from '../../mocks/films';
 const TabsWrapped = withLabel(Tabs);
 
 const FilmDetails = (props) => {
-  let {film, onPlayButtonClick} = props;
+  let {film, onOpenCloseVideoButtonClick} = props;
 
   const id = props.match.params.id;
   if (!film) {
@@ -42,7 +42,7 @@ const FilmDetails = (props) => {
               <button
                 className="btn btn--play movie-card__button"
                 type="button"
-                onClick={() => onPlayButtonClick(film)}
+                onClick={() => onOpenCloseVideoButtonClick(film)}
               >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
@@ -108,7 +108,7 @@ FilmDetails.propTypes = {
     })),
   }),
   match: PropTypes.object.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
 };
 
 export default FilmDetails;

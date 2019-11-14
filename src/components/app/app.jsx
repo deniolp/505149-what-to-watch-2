@@ -10,7 +10,7 @@ import {ActionCreator} from '../../reducer/reducer';
 import filmsMocks from '../../mocks/films';
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onPlayButtonClick} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick} = props;
   const genres = new Set().add(`All genres`);
   filmsMocks.forEach((film) => genres.add(film.genre));
 
@@ -18,7 +18,7 @@ const App = (props) => {
     <Route path="/" exact render={() => {
       return playingFilm ? <BigPlayer
         playingFilm={playingFilm}
-        onPlayButtonClick={onPlayButtonClick}
+        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
       /> : <MainPage
         films={films}
         genre={genre}
@@ -26,7 +26,7 @@ const App = (props) => {
         genres={genres}
         filmsCounter={filmsCounter}
         onShowMoreButtonClick={onShowMoreButtonClick}
-        onPlayButtonClick={onPlayButtonClick}
+        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
       />;
     }}
     />
@@ -34,11 +34,11 @@ const App = (props) => {
       return playingFilm ?
         <BigPlayer
           playingFilm={playingFilm}
-          onPlayButtonClick={onPlayButtonClick}
+          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         /> : <FilmDetails
           {...routerProps}
           film={films.find((it) => it.id === +routerProps.match.params.id)}
-          onPlayButtonClick={onPlayButtonClick}
+          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         />;
     }}
     />
@@ -71,7 +71,7 @@ App.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   playingFilm: PropTypes.oneOfType([
     PropTypes.bool,
@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.resetFilmsCounter());
   },
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
-  onPlayButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
+  onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
 });
 
 export {App};
