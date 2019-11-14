@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../header/header';
 import Genres from '../genres/genres';
 import FilmsList from '../films-list/films-list';
+import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
@@ -74,12 +75,7 @@ const MainPage = (props) => {
             films={films}
           />
         </div>
-
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">
-            Show more
-          </button>
-        </div>
+        <ShowMoreButton />
       </section>
       <Footer />
     </div>
