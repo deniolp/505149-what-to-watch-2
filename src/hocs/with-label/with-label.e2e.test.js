@@ -14,8 +14,6 @@ describe(`HOC withLabel`, () => {
 
   it(`return wrapped component with default value of prop label (Overview)`, () => {
     expect(wrapper.props().label).toEqual(`Overview`);
-    wrapper.props().setLabel(`Hi!`);
-    expect(wrapper.props().label).toEqual(`Hi!`);
   });
 
   it(`after calling of setLabel return wrapped component with proper value of label`, () => {
