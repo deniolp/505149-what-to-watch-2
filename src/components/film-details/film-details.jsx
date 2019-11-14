@@ -5,18 +5,19 @@ import {Redirect} from 'react-router-dom';
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
 import FilmsList from '../films-list/films-list';
+import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 import filmsListMock from '../../mocks/films';
 
 const FilmDetails = (props) => {
-  let {film, filmsCounter} = props;
-  const id = props.match.params.id;
+  let {film, filmsCounter, onShowMoreButtonClick} = props;
 
-  if (id > filmsListMock.length) {
-    return <Redirect to="/"></Redirect>;
-  }
+  const id = props.match.params.id;
   if (!film) {
-    film = filmsListMock[id - 1];
+    film = filmsListMock.find((it) => it.id === +id);
+    if (!film) {
+      return <Redirect to="/"></Redirect>;
+    }
   }
   const filteredByGenreFilms = filmsListMock.filter((item) => item.genre === film.genre && item.name !== film.name);
 
@@ -73,6 +74,10 @@ const FilmDetails = (props) => {
             filmsCounter={filmsCounter}
           />
         </div>
+        <ShowMoreButton
+          onShowMoreButtonClick={onShowMoreButtonClick}
+          shouldShowButton={filmsCounter < filteredByGenreFilms.length}
+        />
       </section>
       <Footer />
     </div></React.Fragment>;
@@ -102,6 +107,7 @@ FilmDetails.propTypes = {
   }),
   match: PropTypes.object.isRequired,
   filmsCounter: PropTypes.number.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 export default FilmDetails;

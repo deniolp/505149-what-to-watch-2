@@ -28,8 +28,9 @@ const App = (props) => {
     <Route path="/film/:id" render={(routerProps) => {
       onResetFilmsCounter();
       return <FilmDetails
-        film={films[routerProps.match.params.id - 1]}
+        film={films.find((it) => it.id === +routerProps.match.params.id)}
         filmsCounter={filmsCounter}
+        onShowMoreButtonClick={onShowMoreButtonClick}
         {...routerProps}
       />;
     }}
