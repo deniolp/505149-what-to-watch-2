@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FilmCard from '../film-card/film-card';
+import withIsPreviewPlaying from '../../hocs/with-is-preview-playing/with-is-preview-playing';
+
+const FilmCardWrapped = withIsPreviewPlaying(FilmCard);
 
 const FilmsList = (props) => {
   const {films, filmsCounter} = props;
   const moviesToShow = films.slice(0, filmsCounter);
 
   return moviesToShow.map((film) => {
-    return <FilmCard
+    return <FilmCardWrapped
       key={film.id}
       film={film}
     />;

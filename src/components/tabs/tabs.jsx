@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import TabsBelowInfo from '../tabs-below-info/tabs-below-info';
 
 const Tabs = (props) => {
-  const {film} = props;
-  const [label, setLabel] = useState(`Overview`);
+  const {film, label, setLabel} = props;
 
   return <div className="movie-card__desc">
     <nav className="movie-nav movie-card__nav">
@@ -68,6 +67,8 @@ Tabs.propTypes = {
       rating: PropTypes.number.isRequired,
     })),
   }),
+  label: PropTypes.string.isRequired,
+  setLabel: PropTypes.func.isRequired,
 };
 
 export default Tabs;

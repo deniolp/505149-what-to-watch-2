@@ -4,9 +4,12 @@ import {Redirect} from 'react-router-dom';
 
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
+import withLabel from '../../hocs/with-label/with-label';
 import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
 import filmsListMock from '../../mocks/films';
+
+const TabsWrapped = withLabel(Tabs);
 
 const FilmDetails = (props) => {
   let {film} = props;
@@ -59,7 +62,7 @@ const FilmDetails = (props) => {
           <div className="movie-card__poster movie-card__poster--big">
             <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
           </div>
-          <Tabs film={film}/>
+          <TabsWrapped film={film}/>
         </div>
       </div>
     </section>
