@@ -1,16 +1,39 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 const BigPlayer = (props) => {
-  const {playingFilm, onPlayButtonClick} = props;
+  const {playingFilm, onOpenCloseVideoButtonClick} = props;
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = React.createRef();
+
+  useEffect(() => {
+    if (isPlaying) {
+      const promise = videoRef.current.play();
+      if (promise !== undefined) {
+        promise.catch((_error) => {
+        }).then(() => {
+        });
+      }
+    } else {
+      videoRef.current.pause();
+      videoRef.current.load();
+    }
+  }, [isPlaying]);
+
 
   return <div className="player">
-    <video src={playingFilm.src} className="player__video" poster="/img/player-poster.jpg"></video>
-
+    <video
+      src={playingFilm.preview}
+      className="player__video"
+      poster="/img/player-poster.jpg"
+      ref={videoRef}
+      width="100%"
+      height="100%"
+    ></video>
     <button
       type="button"
       className="player__exit"
-      onClick={() => onPlayButtonClick(false)}
+      onClick={() => onOpenCloseVideoButtonClick(false)}
     >
     Exit
     </button>
@@ -29,9 +52,13 @@ const BigPlayer = (props) => {
       </div>
 
       <div className="player__controls-row">
-        <button type="button" className="player__play">
+        <button
+          type="button"
+          className="player__play"
+          onClick={() => setIsPlaying(!isPlaying)}
+        >
           <svg viewBox="0 0 19 19" width="19" height="19">
-            <use xlinkHref="#play-s"></use>
+            {!isPlaying ? <use xlinkHref="#play-s"></use> : <use xlinkHref="#pause"></use>}
           </svg>
           <span>Play</span>
         </button>
@@ -70,7 +97,7 @@ BigPlayer.propTypes = {
       rating: PropTypes.number.isRequired,
     })),
   }),
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
 };
 
 export default BigPlayer;
