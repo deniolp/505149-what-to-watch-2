@@ -9,7 +9,7 @@ import Footer from '../footer/footer';
 import filmsListMock from '../../mocks/films';
 
 const FilmDetails = (props) => {
-  let {film} = props;
+  let {film, filmsCounter} = props;
   const id = props.match.params.id;
 
   if (id > filmsListMock.length) {
@@ -70,6 +70,7 @@ const FilmDetails = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={filteredByGenreFilms}
+            filmsCounter={filmsCounter}
           />
         </div>
       </section>
@@ -100,6 +101,7 @@ FilmDetails.propTypes = {
     })),
   }),
   match: PropTypes.object.isRequired,
+  filmsCounter: PropTypes.number.isRequired,
 };
 
 export default FilmDetails;
