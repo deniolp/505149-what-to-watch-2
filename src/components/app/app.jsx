@@ -9,7 +9,7 @@ import {ActionCreator} from '../../reducer/reducer';
 import filmsMocks from '../../mocks/films';
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, onResetFilmsCounter} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick} = props;
   const genres = new Set().add(`All genres`);
   filmsMocks.forEach((film) => genres.add(film.genre));
 
@@ -26,11 +26,8 @@ const App = (props) => {
     }}
     />
     <Route path="/film/:id" render={(routerProps) => {
-      onResetFilmsCounter();
       return <FilmDetails
         film={films.find((it) => it.id === +routerProps.match.params.id)}
-        filmsCounter={filmsCounter}
-        onShowMoreButtonClick={onShowMoreButtonClick}
         {...routerProps}
       />;
     }}
@@ -64,7 +61,6 @@ App.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onResetFilmsCounter: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
 };
 
@@ -81,7 +77,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.resetFilmsCounter());
   },
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
-  onResetFilmsCounter: () => dispatch(ActionCreator.resetFilmsCounter()),
 });
 
 export {App};

@@ -5,12 +5,11 @@ import {Redirect} from 'react-router-dom';
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
 import FilmsList from '../films-list/films-list';
-import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 import filmsListMock from '../../mocks/films';
 
 const FilmDetails = (props) => {
-  let {film, filmsCounter, onShowMoreButtonClick} = props;
+  let {film} = props;
 
   const id = props.match.params.id;
   if (!film) {
@@ -71,13 +70,9 @@ const FilmDetails = (props) => {
         <div className="catalog__movies-list">
           <FilmsList
             films={filteredByGenreFilms}
-            filmsCounter={filmsCounter}
+            filmsCounter={4}
           />
         </div>
-        <ShowMoreButton
-          onShowMoreButtonClick={onShowMoreButtonClick}
-          shouldShowButton={filmsCounter < filteredByGenreFilms.length}
-        />
       </section>
       <Footer />
     </div></React.Fragment>;
@@ -106,8 +101,6 @@ FilmDetails.propTypes = {
     })),
   }),
   match: PropTypes.object.isRequired,
-  filmsCounter: PropTypes.number.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 export default FilmDetails;
