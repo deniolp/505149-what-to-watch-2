@@ -23,6 +23,10 @@ const ActionCreator = {
     type: `INCREASE_FILMS_COUNTER`,
     payload: 2,
   }),
+  resetFilmsCounter: () => ({
+    type: `RESET_FILMS_COUNTER`,
+    payload: 2,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +41,10 @@ const reducer = (state = initialState, action) => {
 
     case `INCREASE_FILMS_COUNTER`: return Object.assign({}, state, {
       filmsCounter: state.filmsCounter + action.payload,
+    });
+
+    case `RESET_FILMS_COUNTER`: return Object.assign({}, state, {
+      filmsCounter: action.payload,
     });
   }
 
