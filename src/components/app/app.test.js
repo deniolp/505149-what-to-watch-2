@@ -16,7 +16,9 @@ describe(`App`, () => {
           onGenreClick={jest.fn()}
           onShowMoreButtonClick={jest.fn()}
           onResetFilmsCounter={jest.fn()}
+          onOpenCloseVideoButtonClick={jest.fn()}
           filmsCounter={1}
+          playingFilm= {false}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
