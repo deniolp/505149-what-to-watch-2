@@ -7,6 +7,10 @@ const BigPlayer = (props) => {
 
   useEffect(() => {
     if (isPlaying) {
+      videoRef.current.onended = () => {
+        videoRef.current.load();
+        setIsPlaying(false);
+      };
       videoRef.current.ontimeupdate = () => {
         setProgress(videoRef.current.currentTime);
       };
