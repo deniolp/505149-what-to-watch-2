@@ -19,6 +19,7 @@ describe(`FilmDetails`, () => {
             },
           }}
           filmsCounter={2}
+          onOpenCloseVideoButtonClick={jest.fn()}
         /></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

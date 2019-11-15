@@ -18,6 +18,7 @@ describe(`MainPage`, () => {
           onGenreClick={jest.fn()}
           genres={genresSet}
           onShowMoreButtonClick={jest.fn()}
+          onOpenCloseVideoButtonClick={jest.fn()}
           filmsCounter={1}
         /></BrowserRouter>).toJSON();
 
