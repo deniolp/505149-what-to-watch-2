@@ -8,6 +8,7 @@ describe(`Reducer works correctly: `, () => {
       genre: `All genres`,
       films: filmsMocks,
       filmsCounter: 2,
+      playingFilm: false,
     });
   });
 });
