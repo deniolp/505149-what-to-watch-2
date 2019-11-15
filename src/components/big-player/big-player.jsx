@@ -49,7 +49,7 @@ const BigPlayer = (props) => {
           <div
             className="player__toggler"
             style={{
-              left: 30 + `%`,
+              left: `${progress}%`,
             }}
           >Toggler</div>
         </div>
