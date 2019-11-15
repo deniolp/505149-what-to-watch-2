@@ -4,14 +4,11 @@ import PropTypes from 'prop-types';
 const BigPlayer = (props) => {
   const {playingFilm, onOpenCloseVideoButtonClick, isPlaying, setIsPlaying, progress, setProgress} = props;
   const videoRef = useRef();
-  let barLength = 0;
 
   useEffect(() => {
     if (isPlaying) {
       videoRef.current.ontimeupdate = () => {
-        barLength = Math.round(videoRef.current.currentTime / playingFilm.duration * 100);
-        setProgress(barLength);
-
+        setProgress(videoRef.current.currentTime);
       };
       const promise = videoRef.current.play();
 
@@ -25,6 +22,21 @@ const BigPlayer = (props) => {
     }
   }, [isPlaying]);
 
+  const forProgressBar = progress && Math.round(progress / playingFilm.duration * 100);
+
+  const secondsToTimeElapsed = (seconds) => {
+    seconds = Math.round(seconds);
+    let hours = 0;
+    let minutes = 0;
+
+    hours = Math.floor(seconds / 3600);
+    seconds = seconds % 3600;
+    minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+
+    const time = `${String(hours).padStart(2, `0`)}:${String(minutes).padStart(2, `0`)}:${String(seconds).padStart(2, `0`)}`;
+    return time;
+  };
 
   return <div className="player">
     <video
@@ -45,15 +57,18 @@ const BigPlayer = (props) => {
     <div className="player__controls">
       <div className="player__controls-row">
         <div className="player__time">
-          <progress className="player__progress" value={progress} max="100"></progress>
+          <progress
+            className="player__progress"
+            value={forProgressBar}
+            max="100"></progress>
           <div
             className="player__toggler"
             style={{
-              left: `${progress}%`,
+              left: `${forProgressBar}%`,
             }}
           >Toggler</div>
         </div>
-        <div className="player__time-value">1:30:29</div>
+        <div className="player__time-value">{(playingFilm.duration - progress > 0) ? secondsToTimeElapsed(playingFilm.duration * 60 - progress) : `00:00:00`}</div>
       </div>
 
       <div className="player__controls-row">
