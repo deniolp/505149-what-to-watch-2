@@ -62,7 +62,13 @@ const BigPlayer = (props) => {
         </button>
         <div className="player__name">{playingFilm.name}</div>
 
-        <button type="button" className="player__full-screen">
+        <button
+          type="button"
+          className="player__full-screen"
+          onClick={() => {
+            videoRef.current.requestFullscreen();
+          }}
+        >
           <svg viewBox="0 0 27 27" width="27" height="27">
             <use xlinkHref="#full-screen"></use>
           </svg>
