@@ -1,13 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
 const BigPlayer = (props) => {
-  const {playingFilm, onOpenCloseVideoButtonClick, isPlaying, setIsPlaying} = props;
-  const videoRef = React.createRef();
+  const {playingFilm, onOpenCloseVideoButtonClick, isPlaying, setIsPlaying, progress, setProgress} = props;
+  const videoRef = useRef();
+  let barLength = 0;
 
   useEffect(() => {
     if (isPlaying) {
+      videoRef.current.ontimeupdate = () => {
+        barLength = Math.round(videoRef.current.currentTime / playingFilm.duration * 100);
+        setProgress(barLength);
+
+      };
       const promise = videoRef.current.play();
+
       if (promise !== undefined) {
         promise.catch((_error) => {
         }).then(() => {
@@ -38,7 +45,7 @@ const BigPlayer = (props) => {
     <div className="player__controls">
       <div className="player__controls-row">
         <div className="player__time">
-          <progress className="player__progress" value="30" max="100"></progress>
+          <progress className="player__progress" value={progress} max="100"></progress>
           <div
             className="player__toggler"
             style={{
@@ -104,6 +111,8 @@ BigPlayer.propTypes = {
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   setIsPlaying: PropTypes.func.isRequired,
+  progress: PropTypes.number.isRequired,
+  setProgress: PropTypes.func.isRequired,
 };
 
 export default BigPlayer;
