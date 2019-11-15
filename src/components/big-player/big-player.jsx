@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 const BigPlayer = (props) => {
-  const {playingFilm, onOpenCloseVideoButtonClick} = props;
-  const [isPlaying, setIsPlaying] = useState(false);
+  const {playingFilm, onOpenCloseVideoButtonClick, isPlaying, setIsPlaying} = props;
   const videoRef = React.createRef();
 
   useEffect(() => {
@@ -54,14 +53,14 @@ const BigPlayer = (props) => {
         <button
           type="button"
           className="player__play"
-          onClick={() => setIsPlaying(!isPlaying)}
+          onClick={() => setIsPlaying((oldState) => !oldState)}
         >
           <svg viewBox="0 0 19 19" width="19" height="19">
             {!isPlaying ? <use xlinkHref="#play-s"></use> : <use xlinkHref="#pause"></use>}
           </svg>
           <span>Play</span>
         </button>
-        <div className="player__name">Transpotting</div>
+        <div className="player__name">{playingFilm.name}</div>
 
         <button type="button" className="player__full-screen">
           <svg viewBox="0 0 27 27" width="27" height="27">
@@ -97,6 +96,8 @@ BigPlayer.propTypes = {
     })),
   }),
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  setIsPlaying: PropTypes.func.isRequired,
 };
 
 export default BigPlayer;

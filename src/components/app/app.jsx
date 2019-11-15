@@ -6,8 +6,11 @@ import {connect} from 'react-redux';
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
+import withVideo from '../../hocs/with-video/with-video';
 import {ActionCreator} from '../../reducer/reducer';
 import filmsMocks from '../../mocks/films';
+
+const BigPlayerWrapped = withVideo(BigPlayer);
 
 const App = (props) => {
   const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick} = props;
@@ -16,7 +19,7 @@ const App = (props) => {
 
   return <Switch>
     <Route path="/" exact render={() => {
-      return playingFilm ? <BigPlayer
+      return playingFilm ? <BigPlayerWrapped
         playingFilm={playingFilm}
         onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
       /> : <MainPage
@@ -32,7 +35,7 @@ const App = (props) => {
     />
     <Route path="/film/:id" exact render={(routerProps) => {
       return playingFilm ?
-        <BigPlayer
+        <BigPlayerWrapped
           playingFilm={playingFilm}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         /> : <FilmDetails
