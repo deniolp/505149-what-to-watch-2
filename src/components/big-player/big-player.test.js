@@ -14,6 +14,8 @@ describe(`BigPlayer`, () => {
           onOpenCloseVideoButtonClick={jest.fn()}
           isPlaying={false}
           setIsPlaying={jest.fn()}
+          progress={0}
+          setProgress={jest.fn()}
         />).toJSON();
 
     expect(tree).toMatchSnapshot();

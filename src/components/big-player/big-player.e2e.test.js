@@ -17,6 +17,8 @@ describe(`In BigPlayer`, () => {
     onOpenCloseVideoButtonClick={jest.fn()}
     isPlaying={false}
     setIsPlaying={jest.fn()}
+    progress={0}
+    setProgress={jest.fn()}
   />);
   const buttonElement = BigPlayerWrapper.find(`.player__play`);
 
