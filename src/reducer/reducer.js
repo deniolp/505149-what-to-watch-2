@@ -30,21 +30,13 @@ const ActionCreator = {
     type: `CHANGE_GENRE`,
     payload: selectedGenre,
   }),
-  getFilms: (selectedGenre) => {
-    const filteredFilms = selectedGenre === `All genres` ? initialState.films : initialState.films.filter((film) => film.genre === selectedGenre);
-
-    return {
-      type: `GET_FILTERED_FILMS`,
-      payload: filteredFilms,
-    };
-  },
   increaseFilmsCounter: () => ({
     type: `INCREASE_FILMS_COUNTER`,
     payload: 8,
   }),
   resetFilmsCounter: () => ({
     type: `RESET_FILMS_COUNTER`,
-    payload: 2,
+    payload: 8,
   }),
   setPlayingFilm: (film) => ({
     type: `SET_PLAYING_FILM`,
@@ -70,10 +62,6 @@ const reducer = (state = initialState, action) => {
 
     case `CHANGE_GENRE`: return Object.assign({}, state, {
       genre: action.payload,
-    });
-
-    case `GET_FILTERED_FILMS`: return Object.assign({}, state, {
-      films: action.payload,
     });
 
     case `INCREASE_FILMS_COUNTER`: return Object.assign({}, state, {

@@ -8,14 +8,13 @@ import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
 import withVideo from '../../hocs/with-video/with-video';
 import {ActionCreator} from '../../reducer/reducer';
-import filmsMocks from '../../mocks/films';
 
 const BigPlayerWrapped = withVideo(BigPlayer);
 
 const App = (props) => {
   const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick} = props;
   const genres = new Set().add(`All genres`);
-  filmsMocks.forEach((film) => genres.add(film.genre));
+  films.forEach((film) => genres.add(film.genre));
 
   return <Switch>
     <Route path="/" exact render={() => {
@@ -111,7 +110,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick: (selectedGenre) => {
     dispatch(ActionCreator.changeGenre(selectedGenre));
-    dispatch(ActionCreator.getFilms(selectedGenre));
     dispatch(ActionCreator.resetFilmsCounter());
   },
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
