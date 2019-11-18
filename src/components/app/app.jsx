@@ -40,7 +40,6 @@ const App = (props) => {
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         /> : <FilmDetails
           {...routerProps}
-          film={films.find((it) => it.id === +routerProps.match.params.id)}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         />;
     }}
