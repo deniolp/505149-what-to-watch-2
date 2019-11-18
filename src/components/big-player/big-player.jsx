@@ -12,7 +12,9 @@ const BigPlayer = (props) => {
         setIsPlaying(false);
       };
       videoRef.current.ontimeupdate = () => {
-        setProgress(videoRef.current.currentTime);
+        if (videoRef.current) {
+          setProgress(videoRef.current.currentTime);
+        }
       };
       const promise = videoRef.current.play();
 
