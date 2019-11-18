@@ -1,13 +1,31 @@
-import filmsMocks from '../mocks/films';
-
 const initialState = {
   genre: `All genres`,
-  films: filmsMocks,
+  films: [],
   filmsCounter: 2,
   playingFilm: false,
 };
 
+const snakeToCamel = (word) => word.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
+
+const normalizeKeys = (obj) => {
+  if (Array.isArray(obj)) {
+    return obj.map((item) => normalizeKeys(item));
+  }
+
+  if (obj !== null && obj.constructor === Object) {
+    return Object.keys(obj).reduce((acc, key) => Object.assign(acc, {
+      [snakeToCamel(key)]: normalizeKeys(obj[key]),
+    }), {});
+  }
+
+  return obj;
+};
+
 const ActionCreator = {
+  loadFilms: (films) => ({
+    type: `LOAD_FILMS`,
+    payload: films,
+  }),
   changeGenre: (selectedGenre) => ({
     type: `CHANGE_GENRE`,
     payload: selectedGenre,
@@ -34,8 +52,22 @@ const ActionCreator = {
   }),
 };
 
+const Operation = {
+  loadFilms: () => (dispatch, _, api) => {
+    return api.get(`films`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadFilms(preparedData));
+      });
+  }
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case `LOAD_FILMS`: return Object.assign({}, state, {
+      films: action.payload,
+    });
+
     case `CHANGE_GENRE`: return Object.assign({}, state, {
       genre: action.payload,
     });
@@ -60,4 +92,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator, reducer};
+export {ActionCreator, reducer, Operation};
