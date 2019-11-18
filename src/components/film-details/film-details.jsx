@@ -1,27 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
 import withLabel from '../../hocs/with-label/with-label';
 import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
-import filmsListMock from '../../mocks/films';
+import {Operation} from '../../reducer/reducer';
 
 const TabsWrapped = withLabel(Tabs);
 
 const FilmDetails = (props) => {
-  let {film, onOpenCloseVideoButtonClick} = props;
+  let {film} = props;
+  const {onOpenCloseVideoButtonClick, onLoadFilms, films} = props;
 
   const id = props.match.params.id;
   if (!film) {
-    film = filmsListMock.find((it) => it.id === +id);
+    onLoadFilms();
+    film = films.find((it) => it.id === +id);
     if (!film) {
       return <Redirect to="/"></Redirect>;
     }
   }
-  const filteredByGenreFilms = filmsListMock.filter((item) => item.genre === film.genre && item.name !== film.name);
+  const filteredByGenreFilms = films.filter((item) => item.genre === film.genre && item.name !== film.name);
 
   return <React.Fragment>
     <section className="movie-card movie-card--full">
@@ -35,7 +38,7 @@ const FilmDetails = (props) => {
             <h2 className="movie-card__title">{film.name}</h2>
             <p className="movie-card__meta">
               <span className="movie-card__genre">{film.genre}</span>
-              <span className="movie-card__year">{film.year}</span>
+              <span className="movie-card__year">{film.released}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -86,30 +89,60 @@ const FilmDetails = (props) => {
 };
 
 FilmDetails.propTypes = {
-  film: PropTypes.shape({
-
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      posterImage: PropTypes.string.isRequired,
-      preview: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      released: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
-      scoresCount: PropTypes.number.isRequired,
-      runTime: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      director: PropTypes.string.isRequired,
-      starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-      isFavorite: PropTypes.bool.isRequired,
-      reviews: PropTypes.arrayOf(PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        time: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-      })),
+    })),
+  })),
+  film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+    })),
   }),
   match: PropTypes.object.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
+  onLoadFilms: PropTypes.func.isRequired,
 };
 
-export default FilmDetails;
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadFilms: () => dispatch(Operation.loadFilms()),
+});
+
+export {FilmDetails};
+export default connect(mapStateToProps, mapDispatchToProps)(FilmDetails);

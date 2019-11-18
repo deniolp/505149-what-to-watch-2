@@ -26,7 +26,7 @@ const BigPlayer = (props) => {
     }
   }, [isPlaying]);
 
-  const forProgressBar = progress && Math.round(progress / playingFilm.duration * 100);
+  const forProgressBar = progress && Math.round(progress / playingFilm.runTime * 100);
 
   const secondsToTimeElapsed = (seconds) => {
     seconds = Math.round(seconds);
@@ -44,7 +44,7 @@ const BigPlayer = (props) => {
 
   return <div className="player">
     <video
-      src={playingFilm.preview}
+      src={playingFilm.previewVideoLink}
       className="player__video"
       poster="/img/player-poster.jpg"
       ref={videoRef}
@@ -72,7 +72,7 @@ const BigPlayer = (props) => {
             }}
           >Toggler</div>
         </div>
-        <div className="player__time-value">{(playingFilm.duration - progress > 0) ? secondsToTimeElapsed(playingFilm.duration * 60 - progress) : `00:00:00`}</div>
+        <div className="player__time-value">{(playingFilm.runTime - progress > 0) ? secondsToTimeElapsed(playingFilm.runTime * 60 - progress) : `00:00:00`}</div>
       </div>
 
       <div className="player__controls-row">
@@ -107,26 +107,25 @@ const BigPlayer = (props) => {
 
 BigPlayer.propTypes = {
   playingFilm: PropTypes.shape({
-
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      posterImage: PropTypes.string.isRequired,
-      preview: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
-      scoresCount: PropTypes.number.isRequired,
-      runTime: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      director: PropTypes.string.isRequired,
-      starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-      isFavorite: PropTypes.bool.isRequired,
-      reviews: PropTypes.arrayOf(PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        time: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-      })),
+    })),
   }),
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
