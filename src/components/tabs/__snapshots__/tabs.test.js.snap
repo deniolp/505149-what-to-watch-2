@@ -71,7 +71,7 @@ exports[`Tabs renders correctly 1`] = `
       <span
         className="movie-rating__level"
       >
-        Good
+        Very good
       </span>
       <span
         className="movie-rating__count"

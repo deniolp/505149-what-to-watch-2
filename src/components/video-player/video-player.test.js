@@ -5,8 +5,8 @@ import VideoPlayer from './video-player';
 import filmsListMock from '../../mocks/films';
 
 describe(`VideoPlayer`, () => {
-  const preview = filmsListMock[0].preview;
-  const poster = filmsListMock[0].src;
+  const preview = filmsListMock[0].previewVideoLink;
+  const poster = filmsListMock[0].posterImage;
 
   it(`renders correctly`, () => {
     const tree = renderer.create(

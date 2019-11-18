@@ -6,17 +6,16 @@ import {App} from './app';
 import filmsListMock from '../../mocks/films';
 
 describe(`App`, () => {
-  const filmsMock = filmsListMock.slice(0, 2);
-
   it(`renders correctly`, () => {
     const tree = renderer.create(
         <BrowserRouter><App
-          films={filmsMock}
+          films={filmsListMock}
           genre={`Thriller`}
           onGenreClick={jest.fn()}
           onShowMoreButtonClick={jest.fn()}
           onResetFilmsCounter={jest.fn()}
           onOpenCloseVideoButtonClick={jest.fn()}
+          onLoadComments={jest.fn()}
           filmsCounter={1}
           playingFilm= {false}
         /></BrowserRouter>).toJSON();

@@ -26,9 +26,5 @@ describe(`In Tabs`, () => {
     TabsWrapper.setProps({label: `Details`});
     expect(TabsWrapper.find(`li`).at(1).props().className).toEqual(CLASSNAME_ACTIVE);
     expect(TabsWrapper.find(`li`).at(0).props().className).toEqual(CLASSNAME_NOT_ACTIVE);
-    TabsWrapper.setProps({label: `Reviews`});
-    expect(TabsWrapper.find(`li`).at(2).props().className).toEqual(CLASSNAME_ACTIVE);
-    expect(TabsWrapper.find(`li`).at(1).props().className).toEqual(CLASSNAME_NOT_ACTIVE);
-    expect(TabsWrapper.find(`li`).at(0).props().className).toEqual(CLASSNAME_NOT_ACTIVE);
   });
 });
