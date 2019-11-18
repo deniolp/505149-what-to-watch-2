@@ -10,6 +10,12 @@ import Footer from '../footer/footer';
 const MainPage = (props) => {
   const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick, onOpenCloseVideoButtonClick} = props;
 
+  const getFilmsLength = () => {
+    const filteredFilms = genre === `All genres` ? films : films.filter((film) => film.genre === genre);
+
+    return filteredFilms.length;
+  };
+
   return <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -75,11 +81,12 @@ const MainPage = (props) => {
           <FilmsList
             films={films}
             filmsCounter={filmsCounter}
+            activeGenre={genre}
           />
         </div>
         <ShowMoreButton
           onShowMoreButtonClick={onShowMoreButtonClick}
-          shouldShowButton={filmsCounter < films.length}
+          shouldShowButton={filmsCounter < getFilmsLength()}
         />
       </section>
       <Footer />

@@ -7,8 +7,16 @@ import withIsPreviewPlaying from '../../hocs/with-is-preview-playing/with-is-pre
 const FilmCardWrapped = withIsPreviewPlaying(FilmCard);
 
 const FilmsList = (props) => {
-  const {films, filmsCounter} = props;
-  const moviesToShow = films.slice(0, filmsCounter);
+  const {films, filmsCounter, activeGenre} = props;
+  let filteredFilms;
+  let moviesToShow;
+  if (activeGenre) {
+    filteredFilms = activeGenre === `All genres` ? films : films.filter((film) => film.genre === activeGenre);
+    moviesToShow = filteredFilms.slice(0, filmsCounter);
+  } else {
+    filteredFilms = films;
+    moviesToShow = filteredFilms.slice(0, 4);
+  }
 
   return moviesToShow.map((film) => {
     return <FilmCardWrapped
@@ -41,6 +49,7 @@ FilmsList.propTypes = {
     })),
   })),
   filmsCounter: PropTypes.number.isRequired,
+  activeGenre: PropTypes.string,
 };
 
 export default FilmsList;
