@@ -80,7 +80,7 @@ const TabsBelowInfo = (props) => {
       </React.Fragment>;
     case `Reviews`:
       return <React.Fragment>
-        <ReviewsList reviews={film.reviews} />
+        <ReviewsList />
       </React.Fragment>;
     default:
       return null;
@@ -102,13 +102,13 @@ TabsBelowInfo.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })),
   }),
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+  })),
   label: PropTypes.string.isRequired,
 };
 

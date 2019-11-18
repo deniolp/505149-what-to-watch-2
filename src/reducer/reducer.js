@@ -1,6 +1,7 @@
 const initialState = {
   genre: `All genres`,
   films: [],
+  comments: [],
   filmsCounter: 8,
   playingFilm: false,
 };
@@ -25,6 +26,10 @@ const ActionCreator = {
   loadFilms: (films) => ({
     type: `LOAD_FILMS`,
     payload: films,
+  }),
+  loadComments: (comments) => ({
+    type: `LOAD_COMMENTS`,
+    payload: comments,
   }),
   changeGenre: (selectedGenre) => ({
     type: `CHANGE_GENRE`,
@@ -51,6 +56,13 @@ const Operation = {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadFilms(preparedData));
       });
+  },
+  loadComments: (id) => (dispatch, _, api) => {
+    return api.get(`comments/${id}`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadComments(preparedData));
+      });
   }
 };
 
@@ -58,6 +70,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case `LOAD_FILMS`: return Object.assign({}, state, {
       films: action.payload,
+    });
+
+    case `LOAD_COMMENTS`: return Object.assign({}, state, {
+      comments: action.payload,
     });
 
     case `CHANGE_GENRE`: return Object.assign({}, state, {

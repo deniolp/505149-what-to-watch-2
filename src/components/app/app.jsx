@@ -7,12 +7,12 @@ import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
 import withVideo from '../../hocs/with-video/with-video';
-import {ActionCreator} from '../../reducer/reducer';
+import {ActionCreator, Operation} from '../../reducer/reducer';
 
 const BigPlayerWrapped = withVideo(BigPlayer);
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick, onLoadComments} = props;
   const genres = new Set().add(`All genres`);
   films.forEach((film) => genres.add(film.genre));
 
@@ -33,6 +33,7 @@ const App = (props) => {
     }}
     />
     <Route path="/film/:id" exact render={(routerProps) => {
+      onLoadComments(routerProps.match.params.id);
       return playingFilm ?
         <BigPlayerWrapped
           playingFilm={playingFilm}
@@ -62,17 +63,12 @@ App.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })),
   })),
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
+  onLoadComments: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   playingFilm: PropTypes.oneOfType([
     PropTypes.bool,
@@ -90,12 +86,6 @@ App.propTypes = {
       director: PropTypes.string.isRequired,
       starring: PropTypes.arrayOf(PropTypes.string).isRequired,
       isFavorite: PropTypes.bool.isRequired,
-      reviews: PropTypes.arrayOf(PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        time: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-      })),
     }),
   ]).isRequired,
 };
@@ -114,6 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
   onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
+  onLoadComments: (id) => dispatch(Operation.loadComments(id)),
 });
 
 export {App};

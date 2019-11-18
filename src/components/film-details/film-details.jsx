@@ -59,7 +59,9 @@ const FilmDetails = (props) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
-            <TabsWrapped film={film}/>
+            <TabsWrapped
+              film={film}
+            />
           </div>
         </div>
       </section>
@@ -108,12 +110,6 @@ FilmDetails.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })),
   })),
   match: PropTypes.object.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
