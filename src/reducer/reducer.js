@@ -1,7 +1,7 @@
 const initialState = {
   genre: `All genres`,
   films: [],
-  filmsCounter: 2,
+  filmsCounter: 8,
   playingFilm: false,
 };
 
@@ -40,7 +40,7 @@ const ActionCreator = {
   },
   increaseFilmsCounter: () => ({
     type: `INCREASE_FILMS_COUNTER`,
-    payload: 2,
+    payload: 8,
   }),
   resetFilmsCounter: () => ({
     type: `RESET_FILMS_COUNTER`,
