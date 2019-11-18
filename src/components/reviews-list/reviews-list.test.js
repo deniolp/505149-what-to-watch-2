@@ -1,16 +1,14 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import ReviewsList from './reviews-list';
-import filmsListMock from '../../mocks/films';
+import {ReviewsList} from './reviews-list';
+import commentsListMock from '../../mocks/comments';
 
 describe(`ReviewsList`, () => {
-  const film = filmsListMock[0];
-
   it(`renders correctly`, () => {
     const tree = renderer.create(
         <ReviewsList
-          reviews={film.reviews}
+          reviews={commentsListMock}
         />).toJSON();
 
     expect(tree).toMatchSnapshot();

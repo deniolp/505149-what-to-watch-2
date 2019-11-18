@@ -27,8 +27,8 @@ const FilmCard = (props) => {
     >
       <div className="small-movie-card__image">
         <VideoPlayer
-          preview={film.preview}
-          poster={film.src}
+          preview={film.previewVideoLink}
+          poster={film.posterImage}
           isPreviewPlaying={isPreviewPlaying}
         >
         </VideoPlayer>
@@ -50,24 +50,24 @@ FilmCard.propTypes = {
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    score: PropTypes.number.isRequired,
-    ratingLevel: PropTypes.string.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    duration: PropTypes.number.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     reviews: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
       time: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
     })),
-  }).isRequired,
+  }),
   isPreviewPlaying: PropTypes.bool.isRequired,
   setIsPreviewPlaying: PropTypes.func.isRequired,
 };

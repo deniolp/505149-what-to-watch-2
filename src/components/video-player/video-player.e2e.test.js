@@ -8,8 +8,8 @@ import filmsListMock from '../../mocks/films';
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`In VideoPlayer`, () => {
-  const preview = filmsListMock[0].preview;
-  const poster = filmsListMock[0].src;
+  const preview = filmsListMock[0].previewVideoLink;
+  const poster = filmsListMock[0].posterImage;
   const playStub = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(() => {});
   const pauseStub = jest.spyOn(window.HTMLMediaElement.prototype, `pause`).mockImplementation(() => {});
   const loadStub = jest.spyOn(window.HTMLMediaElement.prototype, `load`).mockImplementation(() => {});

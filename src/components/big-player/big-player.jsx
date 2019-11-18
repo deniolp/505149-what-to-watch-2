@@ -1,13 +1,23 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
 const BigPlayer = (props) => {
-  const {playingFilm, onOpenCloseVideoButtonClick, isPlaying, setIsPlaying} = props;
-  const videoRef = React.createRef();
+  const {playingFilm, onOpenCloseVideoButtonClick, isPlaying, setIsPlaying, progress, setProgress} = props;
+  const videoRef = useRef();
 
   useEffect(() => {
     if (isPlaying) {
+      videoRef.current.onended = () => {
+        videoRef.current.load();
+        setIsPlaying(false);
+      };
+      videoRef.current.ontimeupdate = () => {
+        if (videoRef.current) {
+          setProgress(videoRef.current.currentTime);
+        }
+      };
       const promise = videoRef.current.play();
+
       if (promise !== undefined) {
         promise.catch((_error) => {
         }).then(() => {
@@ -18,10 +28,25 @@ const BigPlayer = (props) => {
     }
   }, [isPlaying]);
 
+  const forProgressBar = progress && Math.round(progress / playingFilm.runTime * 100);
+
+  const secondsToTimeElapsed = (seconds) => {
+    seconds = Math.round(seconds);
+    let hours = 0;
+    let minutes = 0;
+
+    hours = Math.floor(seconds / 3600);
+    seconds = seconds % 3600;
+    minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+
+    const time = `${String(hours).padStart(2, `0`)}:${String(minutes).padStart(2, `0`)}:${String(seconds).padStart(2, `0`)}`;
+    return time;
+  };
 
   return <div className="player">
     <video
-      src={playingFilm.preview}
+      src={playingFilm.previewVideoLink}
       className="player__video"
       poster="/img/player-poster.jpg"
       ref={videoRef}
@@ -38,15 +63,18 @@ const BigPlayer = (props) => {
     <div className="player__controls">
       <div className="player__controls-row">
         <div className="player__time">
-          <progress className="player__progress" value="30" max="100"></progress>
+          <progress
+            className="player__progress"
+            value={forProgressBar}
+            max="100"></progress>
           <div
             className="player__toggler"
             style={{
-              left: 30 + `%`,
+              left: `${forProgressBar}%`,
             }}
           >Toggler</div>
         </div>
-        <div className="player__time-value">1:30:29</div>
+        <div className="player__time-value">{(playingFilm.runTime - progress > 0) ? secondsToTimeElapsed(playingFilm.runTime * 60 - progress) : `00:00:00`}</div>
       </div>
 
       <div className="player__controls-row">
@@ -62,7 +90,13 @@ const BigPlayer = (props) => {
         </button>
         <div className="player__name">{playingFilm.name}</div>
 
-        <button type="button" className="player__full-screen">
+        <button
+          type="button"
+          className="player__full-screen"
+          onClick={() => {
+            videoRef.current.requestFullscreen();
+          }}
+        >
           <svg viewBox="0 0 27 27" width="27" height="27">
             <use xlinkHref="#full-screen"></use>
           </svg>
@@ -77,17 +111,17 @@ BigPlayer.propTypes = {
   playingFilm: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    score: PropTypes.number.isRequired,
-    ratingLevel: PropTypes.string.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    duration: PropTypes.number.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     reviews: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
@@ -98,6 +132,8 @@ BigPlayer.propTypes = {
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   setIsPlaying: PropTypes.func.isRequired,
+  progress: PropTypes.number.isRequired,
+  setProgress: PropTypes.func.isRequired,
 };
 
 export default BigPlayer;

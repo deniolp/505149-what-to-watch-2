@@ -7,15 +7,14 @@ import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
 import withVideo from '../../hocs/with-video/with-video';
-import {ActionCreator} from '../../reducer/reducer';
-import filmsMocks from '../../mocks/films';
+import {ActionCreator, Operation} from '../../reducer/reducer';
 
 const BigPlayerWrapped = withVideo(BigPlayer);
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick, onLoadComments} = props;
   const genres = new Set().add(`All genres`);
-  filmsMocks.forEach((film) => genres.add(film.genre));
+  films.forEach((film) => genres.add(film.genre));
 
   return <Switch>
     <Route path="/" exact render={() => {
@@ -34,13 +33,13 @@ const App = (props) => {
     }}
     />
     <Route path="/film/:id" exact render={(routerProps) => {
+      onLoadComments(routerProps.match.params.id);
       return playingFilm ?
         <BigPlayerWrapped
           playingFilm={playingFilm}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         /> : <FilmDetails
           {...routerProps}
-          film={films.find((it) => it.id === +routerProps.match.params.id)}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         />;
     }}
@@ -53,51 +52,40 @@ App.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    score: PropTypes.number.isRequired,
-    ratingLevel: PropTypes.string.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    duration: PropTypes.number.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })),
+    isFavorite: PropTypes.bool.isRequired,
   })),
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
+  onLoadComments: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   playingFilm: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired,
-      preview: PropTypes.string.isRequired,
+      posterImage: PropTypes.string.isRequired,
+      previewVideoLink: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired,
-      year: PropTypes.number.isRequired,
-      score: PropTypes.number.isRequired,
-      ratingLevel: PropTypes.string.isRequired,
-      ratingCount: PropTypes.number.isRequired,
-      duration: PropTypes.number.isRequired,
+      released: PropTypes.number.isRequired,
+      rating: PropTypes.number.isRequired,
+      scoresCount: PropTypes.number.isRequired,
+      runTime: PropTypes.number.isRequired,
       description: PropTypes.string.isRequired,
       director: PropTypes.string.isRequired,
       starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-      reviews: PropTypes.arrayOf(PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        time: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-      })),
+      isFavorite: PropTypes.bool.isRequired,
     }),
   ]).isRequired,
 };
@@ -112,11 +100,11 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick: (selectedGenre) => {
     dispatch(ActionCreator.changeGenre(selectedGenre));
-    dispatch(ActionCreator.getFilms(selectedGenre));
     dispatch(ActionCreator.resetFilmsCounter());
   },
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
   onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
+  onLoadComments: (id) => dispatch(Operation.loadComments(id)),
 });
 
 export {App};

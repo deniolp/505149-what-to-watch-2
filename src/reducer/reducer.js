@@ -1,32 +1,47 @@
-import filmsMocks from '../mocks/films';
-
 const initialState = {
   genre: `All genres`,
-  films: filmsMocks,
-  filmsCounter: 2,
+  films: [],
+  comments: [],
+  filmsCounter: 8,
   playingFilm: false,
 };
 
+const snakeToCamel = (word) => word.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
+
+const normalizeKeys = (obj) => {
+  if (Array.isArray(obj)) {
+    return obj.map((item) => normalizeKeys(item));
+  }
+
+  if (obj !== null && obj.constructor === Object) {
+    return Object.keys(obj).reduce((acc, key) => Object.assign(acc, {
+      [snakeToCamel(key)]: normalizeKeys(obj[key]),
+    }), {});
+  }
+
+  return obj;
+};
+
 const ActionCreator = {
+  loadFilms: (films) => ({
+    type: `LOAD_FILMS`,
+    payload: films,
+  }),
+  loadComments: (comments) => ({
+    type: `LOAD_COMMENTS`,
+    payload: comments,
+  }),
   changeGenre: (selectedGenre) => ({
     type: `CHANGE_GENRE`,
     payload: selectedGenre,
   }),
-  getFilms: (selectedGenre) => {
-    const filteredFilms = selectedGenre === `All genres` ? initialState.films : initialState.films.filter((film) => film.genre === selectedGenre);
-
-    return {
-      type: `GET_FILTERED_FILMS`,
-      payload: filteredFilms,
-    };
-  },
   increaseFilmsCounter: () => ({
     type: `INCREASE_FILMS_COUNTER`,
-    payload: 2,
+    payload: 8,
   }),
   resetFilmsCounter: () => ({
     type: `RESET_FILMS_COUNTER`,
-    payload: 2,
+    payload: 8,
   }),
   setPlayingFilm: (film) => ({
     type: `SET_PLAYING_FILM`,
@@ -34,14 +49,35 @@ const ActionCreator = {
   }),
 };
 
+const Operation = {
+  loadFilms: () => (dispatch, _, api) => {
+    return api.get(`films`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadFilms(preparedData));
+      });
+  },
+  loadComments: (id) => (dispatch, _, api) => {
+    return api.get(`comments/${id}`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadComments(preparedData));
+      });
+  }
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `CHANGE_GENRE`: return Object.assign({}, state, {
-      genre: action.payload,
+    case `LOAD_FILMS`: return Object.assign({}, state, {
+      films: action.payload,
     });
 
-    case `GET_FILTERED_FILMS`: return Object.assign({}, state, {
-      films: action.payload,
+    case `LOAD_COMMENTS`: return Object.assign({}, state, {
+      comments: action.payload,
+    });
+
+    case `CHANGE_GENRE`: return Object.assign({}, state, {
+      genre: action.payload,
     });
 
     case `INCREASE_FILMS_COUNTER`: return Object.assign({}, state, {
@@ -60,4 +96,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator, reducer};
+export {ActionCreator, reducer, Operation};

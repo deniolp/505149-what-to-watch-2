@@ -11,14 +11,30 @@ const TabsBelowInfo = (props) => {
     return `${hours}h ${minutes}m`;
   };
 
+  const getRatingLevel = (rating) => {
+    if (rating < 3) {
+      return `Bad`;
+    } else if (rating >= 3 && rating < 5) {
+      return `Normal`;
+    } else if (rating >= 5 && rating < 8) {
+      return `Good`;
+    } else if (rating >= 8 && rating < 10) {
+      return `Very good`;
+    } else if (rating === 10) {
+      return `Awesome`;
+    } else {
+      return null;
+    }
+  };
+
   switch (label) {
     case `Overview`:
       return <React.Fragment>
         <div className="movie-rating">
-          <div className="movie-rating__score">{film.score}</div>
+          <div className="movie-rating__score">{film.rating}</div>
           <p className="movie-rating__meta">
-            <span className="movie-rating__level">{film.ratingLevel}</span>
-            <span className="movie-rating__count">{film.ratingCount} ratings</span>
+            <span className="movie-rating__level">{getRatingLevel(film.rating)}</span>
+            <span className="movie-rating__count">{film.scoresCount} ratings</span>
           </p>
         </div>
 
@@ -49,7 +65,7 @@ const TabsBelowInfo = (props) => {
           <div className="movie-card__text-col">
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Run Time</strong>
-              <span className="movie-card__details-value">{getDuration(film.duration)}</span>
+              <span className="movie-card__details-value">{getDuration(film.runTime)}</span>
             </p>
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Genre</strong>
@@ -57,14 +73,14 @@ const TabsBelowInfo = (props) => {
             </p>
             <p className="movie-card__details-item">
               <strong className="movie-card__details-name">Released</strong>
-              <span className="movie-card__details-value">{film.year}</span>
+              <span className="movie-card__details-value">{film.released}</span>
             </p>
           </div>
         </div>
       </React.Fragment>;
     case `Reviews`:
       return <React.Fragment>
-        <ReviewsList reviews={film.reviews} />
+        <ReviewsList />
       </React.Fragment>;
     default:
       return null;
@@ -75,24 +91,24 @@ TabsBelowInfo.propTypes = {
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    score: PropTypes.number.isRequired,
-    ratingLevel: PropTypes.string.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    duration: PropTypes.number.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })),
+    isFavorite: PropTypes.bool.isRequired,
   }),
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+  })),
   label: PropTypes.string.isRequired,
 };
 
