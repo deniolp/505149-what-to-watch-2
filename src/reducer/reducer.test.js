@@ -1,5 +1,7 @@
-import {ActionCreator} from './reducer';
-import {reducer} from './reducer';
+import MockAdapter from 'axios-mock-adapter';
+
+import createAPI, {api} from '../api';
+import {ActionCreator, reducer, Operation} from './reducer';
 import filmsMocks from '../mocks/films';
 
 describe(`Reducer works correctly: `, () => {
@@ -41,6 +43,44 @@ describe(`Action creators works correctly: `, () => {
       type: `SET_PLAYING_FILM`,
       payload: filmsMocks[0],
     });
+  });
+
+  it(`should make correct API call to /films`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const filmsLoader = Operation.loadFilms();
+
+    apiMock
+      .onGet(`/films`)
+      .reply(200, [{fake: true}]);
+
+    return filmsLoader(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `LOAD_FILMS`,
+          payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`should make correct API call to /comments/1`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const commentsLoader = Operation.loadComments(1);
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, [{comment: `true`}, {comment: `alsoTrue`}]);
+
+    return commentsLoader(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `LOAD_COMMENTS`,
+          payload: [{comment: `true`}, {comment: `alsoTrue`}],
+        });
+      });
   });
 });
 
