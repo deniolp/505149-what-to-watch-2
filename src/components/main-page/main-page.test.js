@@ -35,6 +35,7 @@ describe(`MainPage`, () => {
           onShowMoreButtonClick={jest.fn()}
           onOpenCloseVideoButtonClick={jest.fn()}
           filmsCounter={1}
+          promo={filmsListMock[0]}
         /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

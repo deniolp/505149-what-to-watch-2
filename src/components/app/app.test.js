@@ -36,6 +36,7 @@ describe(`App`, () => {
           filmsCounter={1}
           playingFilm= {false}
           isAuthorizationRequired= {false}
+          promo={filmsListMock[0]}
         /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

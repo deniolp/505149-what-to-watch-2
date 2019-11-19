@@ -8,7 +8,7 @@ exports[`BigPlayer renders correctly 1`] = `
     className="player__video"
     height="100%"
     poster="/img/player-poster.jpg"
-    src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+    src="https://media.xiph.org/mango/tears_of_steel_1080p.webm"
     width="100%"
   />
   <button

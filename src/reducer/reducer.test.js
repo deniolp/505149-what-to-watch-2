@@ -9,6 +9,7 @@ describe(`Reducer works correctly: `, () => {
     expect(reducer(undefined, {type: null, payload: null})).toEqual({
       genre: `All genres`,
       films: [],
+      promo: {},
       comments: [],
       filmsCounter: 8,
       playingFilm: false,
