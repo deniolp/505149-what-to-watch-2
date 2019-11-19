@@ -67,6 +67,25 @@ describe(`Action creators works correctly: `, () => {
       });
   });
 
+  it(`should make correct API call to /films/promo`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const filmsLoader = Operation.loadPromoFilm();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, {fakeFilm: true});
+
+    return filmsLoader(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `LOAD_PROMO`,
+          payload: {fakeFilm: true},
+        });
+      });
+  });
+
   it(`should make correct API call to /comments/1`, () => {
     const apiMock = new MockAdapter(createAPI());
     const dispatch = jest.fn();
