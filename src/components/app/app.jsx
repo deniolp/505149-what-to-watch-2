@@ -6,30 +6,35 @@ import {connect} from 'react-redux';
 import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
+import SignIn from '../sign-in/sign-in';
 import withVideo from '../../hocs/with-video/with-video';
 import {ActionCreator, Operation} from '../../reducer/reducer';
 
 const BigPlayerWrapped = withVideo(BigPlayer);
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick, onLoadComments} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick, onLoadComments, isAuthorizationRequired} = props;
   const genres = new Set().add(`All genres`);
   films.forEach((film) => genres.add(film.genre));
 
   return <Switch>
     <Route path="/" exact render={() => {
-      return playingFilm ? <BigPlayerWrapped
-        playingFilm={playingFilm}
-        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
-      /> : <MainPage
-        films={films}
-        genre={genre}
-        onGenreClick={onGenreClick}
-        genres={genres}
-        filmsCounter={filmsCounter}
-        onShowMoreButtonClick={onShowMoreButtonClick}
-        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
-      />;
+      if (!isAuthorizationRequired) {
+        return playingFilm ? <BigPlayerWrapped
+          playingFilm={playingFilm}
+          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+        /> : <MainPage
+          films={films}
+          genre={genre}
+          onGenreClick={onGenreClick}
+          genres={genres}
+          filmsCounter={filmsCounter}
+          onShowMoreButtonClick={onShowMoreButtonClick}
+          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+        />;
+      } else {
+        return <SignIn />;
+      }
     }}
     />
     <Route path="/film/:id" exact render={(routerProps) => {
@@ -70,6 +75,7 @@ App.propTypes = {
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   playingFilm: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
@@ -95,6 +101,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   films: state.films,
   filmsCounter: state.filmsCounter,
   playingFilm: state.playingFilm,
+  isAuthorizationRequired: state.isAuthorizationRequired,
 });
 
 const mapDispatchToProps = (dispatch) => ({

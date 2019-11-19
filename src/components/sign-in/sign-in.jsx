@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const SignIn = (props) => {
+const SignIn = () => {
   return <div className="user-page">
     <header className="page-header user-page__head">
       <div className="logo">
@@ -47,10 +46,6 @@ const SignIn = (props) => {
       </div>
     </footer>
   </div>;
-};
-
-SignIn.propTypes = {
-
 };
 
 export default SignIn;
