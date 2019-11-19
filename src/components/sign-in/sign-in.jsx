@@ -71,4 +71,5 @@ const mapDispatchToProps = (dispatch) => ({
   submitForm: (email, password) => dispatch(Operation.logIn(email, password)),
 });
 
+export {SignIn};
 export default connect(null, mapDispatchToProps)(SignIn);
