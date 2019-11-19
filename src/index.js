@@ -21,6 +21,7 @@ const init = () => {
       ));
 
   store.dispatch(Operation.loadFilms());
+  store.dispatch(Operation.checkIsLogin());
 
   ReactDom.render(
       <Provider store={store}>

@@ -5,6 +5,7 @@ const initialState = {
   filmsCounter: 8,
   playingFilm: false,
   isAuthorizationRequired: false,
+  user: {},
 };
 
 const snakeToCamel = (word) => word.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
@@ -52,6 +53,10 @@ const ActionCreator = {
     type: `CHANGE_IS_AUTHORIZATION_REQUIRED`,
     payload: bool,
   }),
+  authorizeUser: (user) => ({
+    type: `AUTHORIZE_USER`,
+    payload: normalizeKeys(user),
+  }),
 };
 
 const Operation = {
@@ -68,7 +73,28 @@ const Operation = {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadComments(preparedData));
       });
-  }
+  },
+  checkIsLogin: () => (dispatch, _, api) => {
+    return api.get(`login`)
+      .then((response) => {
+        if (response.data) {
+          dispatch(ActionCreator.authorizeUser(response.data));
+        } else {
+          dispatch(ActionCreator.authorizeUser({}));
+        }
+      })
+      .catch((_err) => {});
+  },
+  logIn: (email, password) => (dispatch, _, api) => {
+    return api.post(`login`, {email, password})
+      .then((response) => {
+        if (response.data) {
+          dispatch(ActionCreator.changeIsAuthorizationRequired(false));
+          dispatch(ActionCreator.authorizeUser(response.data));
+        }
+      })
+      .catch((_err) => {});
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -99,6 +125,10 @@ const reducer = (state = initialState, action) => {
 
     case `CHANGE_IS_AUTHORIZATION_REQUIRED`: return Object.assign({}, state, {
       isAuthorizationRequired: action.payload,
+    });
+
+    case `AUTHORIZE_USER`: return Object.assign({}, state, {
+      user: action.payload,
     });
   }
 
