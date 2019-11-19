@@ -13,7 +13,18 @@ import {ActionCreator, Operation} from '../../reducer/reducer';
 const BigPlayerWrapped = withVideo(BigPlayer);
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick, onLoadComments, isAuthorizationRequired, user, onChangeIsAuthorisationRequired} = props;
+  const {films,
+    genre,
+    onGenreClick,
+    filmsCounter,
+    onShowMoreButtonClick,
+    playingFilm,
+    onOpenCloseVideoButtonClick,
+    onLoadComments,
+    isAuthorizationRequired,
+    user,
+    onChangeIsAuthorisationRequired,
+    promo} = props;
   const genres = new Set().add(`All genres`);
   films.forEach((film) => genres.add(film.genre));
 
@@ -31,6 +42,7 @@ const App = (props) => {
           filmsCounter={filmsCounter}
           onShowMoreButtonClick={onShowMoreButtonClick}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+          promo={promo}
         />;
       } else {
         return <SignIn />;
@@ -46,6 +58,7 @@ const App = (props) => {
         /> : <FilmDetails
           {...routerProps}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+          promo={promo}
         />;
     }}
     />
@@ -74,6 +87,10 @@ App.propTypes = {
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
@@ -84,6 +101,25 @@ App.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
   })),
+  promo: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewVideoLink: PropTypes.string,
+    videoLink: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    previewImage: PropTypes.string,
+    genre: PropTypes.string,
+    released: PropTypes.number,
+    rating: PropTypes.number,
+    scoresCount: PropTypes.number,
+    runTime: PropTypes.number,
+    description: PropTypes.string,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    isFavorite: PropTypes.bool,
+  }),
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
@@ -99,6 +135,10 @@ App.propTypes = {
       name: PropTypes.string.isRequired,
       posterImage: PropTypes.string.isRequired,
       previewVideoLink: PropTypes.string.isRequired,
+      videoLink: PropTypes.string.isRequired,
+      backgroundColor: PropTypes.string.isRequired,
+      backgroundImage: PropTypes.string.isRequired,
+      previewImage: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired,
       released: PropTypes.number.isRequired,
       rating: PropTypes.number.isRequired,
@@ -121,6 +161,7 @@ App.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genre: state.genre,
   films: state.films,
+  promo: state.promo,
   filmsCounter: state.filmsCounter,
   playingFilm: state.playingFilm,
   isAuthorizationRequired: state.isAuthorizationRequired,
