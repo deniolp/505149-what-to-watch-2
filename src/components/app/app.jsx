@@ -13,7 +13,7 @@ import {ActionCreator, Operation} from '../../reducer/reducer';
 const BigPlayerWrapped = withVideo(BigPlayer);
 
 const App = (props) => {
-  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick, onLoadComments, isAuthorizationRequired} = props;
+  const {films, genre, onGenreClick, filmsCounter, onShowMoreButtonClick, playingFilm, onOpenCloseVideoButtonClick, onLoadComments, isAuthorizationRequired, user, onChangeIsAuthorisationRequired} = props;
   const genres = new Set().add(`All genres`);
   films.forEach((film) => genres.add(film.genre));
 
@@ -49,6 +49,21 @@ const App = (props) => {
         />;
     }}
     />
+    <Route path="/login" exact render={() => {
+      return <SignIn
+        isAuthorizationRequired={isAuthorizationRequired}
+      />;
+    }}
+    />
+    <Route path="/favorites" exact render={() => {
+      if (user.id) {
+        return ``;
+      } else {
+        onChangeIsAuthorisationRequired();
+        return <Redirect to='/login' />;
+      }
+    }}
+    />
     <Redirect from='*' to='/' />
   </Switch>;
 };
@@ -74,6 +89,7 @@ App.propTypes = {
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
+  onChangeIsAuthorisationRequired: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
   playingFilm: PropTypes.oneOfType([
@@ -94,6 +110,12 @@ App.propTypes = {
       isFavorite: PropTypes.bool.isRequired,
     }),
   ]).isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    avatarUrl: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -102,6 +124,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   filmsCounter: state.filmsCounter,
   playingFilm: state.playingFilm,
   isAuthorizationRequired: state.isAuthorizationRequired,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -112,6 +135,7 @@ const mapDispatchToProps = (dispatch) => ({
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
   onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
   onLoadComments: (id) => dispatch(Operation.loadComments(id)),
+  onChangeIsAuthorisationRequired: () => dispatch(ActionCreator.changeIsAuthorizationRequired(true)),
 });
 
 export {App};
