@@ -9,9 +9,12 @@ describe(`Reducer works correctly: `, () => {
     expect(reducer(undefined, {type: null, payload: null})).toEqual({
       genre: `All genres`,
       films: [],
+      promo: {},
       comments: [],
       filmsCounter: 8,
       playingFilm: false,
+      isAuthorizationRequired: false,
+      user: {},
     });
   });
 });
@@ -64,6 +67,25 @@ describe(`Action creators works correctly: `, () => {
       });
   });
 
+  it(`should make correct API call to /films/promo`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const filmsLoader = Operation.loadPromoFilm();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, {fakeFilm: true});
+
+    return filmsLoader(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `LOAD_PROMO`,
+          payload: {fakeFilm: true},
+        });
+      });
+  });
+
   it(`should make correct API call to /comments/1`, () => {
     const apiMock = new MockAdapter(createAPI());
     const dispatch = jest.fn();
@@ -79,6 +101,48 @@ describe(`Action creators works correctly: `, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: `LOAD_COMMENTS`,
           payload: [{comment: `true`}, {comment: `alsoTrue`}],
+        });
+      });
+  });
+
+  it(`should make correct API GET call to /login`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const checker = Operation.checkIsLogin();
+
+    apiMock
+      .onGet(`/login`)
+      .reply(200, {userName: `Den`});
+
+    return checker(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `AUTHORIZE_USER`,
+          payload: {userName: `Den`},
+        });
+      });
+  });
+
+  it(`should make correct API POST call to /login`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const logger = Operation.logIn({email: `d@ya.ru`, password: `hg`});
+
+    apiMock
+      .onPost(`/login`)
+      .reply(200, {email: `d@ya.ru`, password: `hg`});
+
+    return logger(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `CHANGE_IS_AUTHORIZATION_REQUIRED`,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: `AUTHORIZE_USER`,
+          payload: {email: `d@ya.ru`, password: `hg`},
         });
       });
   });

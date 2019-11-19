@@ -46,7 +46,7 @@ const BigPlayer = (props) => {
 
   return <div className="player">
     <video
-      src={playingFilm.previewVideoLink}
+      src={playingFilm.videoLink}
       className="player__video"
       poster="/img/player-poster.jpg"
       ref={videoRef}
@@ -113,6 +113,10 @@ BigPlayer.propTypes = {
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
@@ -122,12 +126,6 @@ BigPlayer.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })),
   }),
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,

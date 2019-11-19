@@ -20,7 +20,9 @@ const init = () => {
           window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
       ));
 
+  store.dispatch(Operation.loadPromoFilm());
   store.dispatch(Operation.loadFilms());
+  store.dispatch(Operation.checkIsLogin());
 
   ReactDom.render(
       <Provider store={store}>
