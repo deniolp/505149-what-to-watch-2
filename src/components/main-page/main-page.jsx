@@ -8,8 +8,7 @@ import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick, onOpenCloseVideoButtonClick} = props;
-
+  const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick, onOpenCloseVideoButtonClick, promo} = props;
   const getFilmsLength = () => {
     const filteredFilms = genre === `All genres` ? films : films.filter((film) => film.genre === genre);
 
@@ -18,10 +17,14 @@ const MainPage = (props) => {
 
   return <React.Fragment>
     <section className="movie-card">
-      <div className="movie-card__bg">
+      <div
+        className="movie-card__bg"
+        style={{
+          backgroundColor: `${promo.backgroundColor}`,
+        }}>
         <img
-          src="img/bg-the-grand-budapest-hotel.jpg"
-          alt="The Grand Budapest Hotel"
+          src={promo.backgroundImage}
+          alt={promo.name}
         />
       </div>
       <Header />
@@ -29,18 +32,18 @@ const MainPage = (props) => {
         <div className="movie-card__info">
           <div className="movie-card__poster">
             <img
-              src="img/the-grand-budapest-hotel-poster.jpg"
-              alt="The Grand Budapest Hotel poster"
+              src={promo.posterImage}
+              alt={promo.name}
               width="218"
               height="327"
             />
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="movie-card__title">{promo.name}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">Drama</span>
-              <span className="movie-card__year">2014</span>
+              <span className="movie-card__genre">{promo.genre}</span>
+              <span className="movie-card__year">{promo.released}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -100,6 +103,10 @@ MainPage.propTypes = {
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
@@ -110,6 +117,25 @@ MainPage.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
   })),
+  promo: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewVideoLink: PropTypes.string,
+    videoLink: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    previewImage: PropTypes.string,
+    genre: PropTypes.string,
+    released: PropTypes.number,
+    rating: PropTypes.number,
+    scoresCount: PropTypes.number,
+    runTime: PropTypes.number,
+    description: PropTypes.string,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    isFavorite: PropTypes.bool,
+  }),
   genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   genres: PropTypes.instanceOf(Set).isRequired,
