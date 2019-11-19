@@ -7,6 +7,7 @@ import MainPage from '../main-page/main-page';
 import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
 import SignIn from '../sign-in/sign-in';
+import AddReview from '../add-review/add-review';
 import withVideo from '../../hocs/with-video/with-video';
 import {ActionCreator, Operation} from '../../reducer/reducer';
 
@@ -60,6 +61,13 @@ const App = (props) => {
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
           promo={promo}
         />;
+    }}
+    />
+    <Route path="/film/:id/review" exact render={(routerProps) => {
+      return <AddReview
+        {...routerProps}
+        isAuthorizationRequired={isAuthorizationRequired}
+      />;
     }}
     />
     <Route path="/login" exact render={() => {
