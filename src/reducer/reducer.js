@@ -4,6 +4,7 @@ const initialState = {
   comments: [],
   filmsCounter: 8,
   playingFilm: false,
+  isAuthorizationRequired: false,
 };
 
 const snakeToCamel = (word) => word.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
@@ -46,6 +47,10 @@ const ActionCreator = {
   setPlayingFilm: (film) => ({
     type: `SET_PLAYING_FILM`,
     payload: film,
+  }),
+  changeIsAuthorizationRequired: (bool) => ({
+    type: `CHANGE_IS_AUTHORIZATION_REQUIRED`,
+    payload: bool,
   }),
 };
 
@@ -90,6 +95,10 @@ const reducer = (state = initialState, action) => {
 
     case `SET_PLAYING_FILM`: return Object.assign({}, state, {
       playingFilm: action.payload,
+    });
+
+    case `CHANGE_IS_AUTHORIZATION_REQUIRED`: return Object.assign({}, state, {
+      isAuthorizationRequired: action.payload,
     });
   }
 
