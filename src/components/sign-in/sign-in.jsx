@@ -1,10 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const SignIn = () => {
-  return <div className="user-page">
+import {Operation} from '../../reducer/reducer';
+
+const SignIn = (props) => {
+  const {submitForm, isAuthorizationRequired} = props;
+  const handleFormSubmit = (email, password) => {
+    submitForm(email, password);
+  };
+
+  return isAuthorizationRequired ? <div className="user-page">
     <header className="page-header user-page__head">
       <div className="logo">
-        <a href="main.html" className="logo__link">
+        <a href="/" className="logo__link">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
@@ -15,7 +25,11 @@ const SignIn = () => {
     </header>
 
     <div className="sign-in user-page__content">
-      <form action="#" className="sign-in__form">
+      <form action="#" className="sign-in__form" onSubmit={(evt) => {
+        evt.preventDefault();
+        const data = new FormData(evt.currentTarget);
+        handleFormSubmit(data.get(`user-email`), data.get(`user-password`));
+      }}>
         <div className="sign-in__fields">
           <div className="sign-in__field">
             <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" />
@@ -45,7 +59,16 @@ const SignIn = () => {
         <p>© 2019 What to watch Ltd.</p>
       </div>
     </footer>
-  </div>;
+  </div> : <Redirect to="/"></Redirect>;
 };
 
-export default SignIn;
+SignIn.propTypes = {
+  submitForm: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  submitForm: (email, password) => dispatch(Operation.logIn(email, password)),
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
