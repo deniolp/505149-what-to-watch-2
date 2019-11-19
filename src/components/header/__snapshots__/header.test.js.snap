@@ -15,7 +15,7 @@ Array [
     >
       <a
         className="logo__link"
-        href="/"
+        href={null}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -43,7 +43,7 @@ Array [
         <img
           alt="User avatar"
           height="63"
-          src="/img/avatar.jpg"
+          src="https://htmlacademy-react-2.appspot.com/img/photo.jpg"
           width="63"
         />
       </div>

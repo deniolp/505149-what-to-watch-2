@@ -1,13 +1,19 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Header from './header';
+import {Header} from './header';
 
 describe(`Header`, () => {
   it(`renders correctly`, () => {
-    window.history.pushState({}, ``, `/film/1`);
     const tree = renderer.create(
-        <Header/>).toJSON();
+        <Header
+          user={{
+            id: 1,
+            name: `Olga`,
+            email: `r@ya.ru`,
+            avatarUrl: `/img/photo.jpg`,
+          }}
+        />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
