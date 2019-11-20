@@ -8,10 +8,18 @@ import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
 
 const MainPage = (props) => {
-  const {films, genre, onGenreClick, genres, filmsCounter, onShowMoreButtonClick, onOpenCloseVideoButtonClick, promo} = props;
+  const {films,
+    genre,
+    onGenreClick,
+    genres,
+    filmsCounter,
+    onShowMoreButtonClick,
+    onOpenCloseVideoButtonClick,
+    onPostFavorite,
+    promo} = props;
+
   const getFilmsLength = () => {
     const filteredFilms = genre === `All genres` ? films : films.filter((film) => film.genre === genre);
-
     return filteredFilms.length;
   };
 
@@ -60,10 +68,13 @@ const MainPage = (props) => {
               <button
                 className="btn btn--list movie-card__button"
                 type="button"
+                onClick={() => onPostFavorite(promo.id, promo.isFavorite, true)}
               >
-                <svg viewBox="0 0 19 20" width="19" height="20">
+                {promo.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
+                  <use xlinkHref="#in-list"></use>
+                </svg> : <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>
-                </svg>
+                </svg>}
                 <span>My list</span>
               </button>
             </div>
@@ -141,6 +152,7 @@ MainPage.propTypes = {
   genres: PropTypes.instanceOf(Set).isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
+  onPostFavorite: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
 };
 

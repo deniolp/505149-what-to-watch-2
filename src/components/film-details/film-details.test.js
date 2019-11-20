@@ -14,11 +14,15 @@ describe(`FilmDetails`, () => {
   const initialState = {
     genre: `All genres`,
     films: [],
+    promo: {},
     comments: [],
     filmsCounter: 8,
     playingFilm: false,
     isAuthorizationRequired: false,
     user: {},
+    favorites: [],
+    isReviewSending: false,
+    didReviewSend: false,
   };
   const store = mockStore(initialState);
 
@@ -35,6 +39,7 @@ describe(`FilmDetails`, () => {
           onOpenCloseVideoButtonClick={jest.fn()}
           onLoadFilms={jest.fn()}
           isAuthorizationRequired={false}
+          onPostFavorite={jest.fn()}
         /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

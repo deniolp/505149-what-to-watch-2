@@ -8,6 +8,7 @@ import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
 import SignIn from '../sign-in/sign-in';
 import AddReview from '../add-review/add-review';
+import Favorites from '../favorites/favorites';
 import withVideo from '../../hocs/with-video/with-video';
 import {ActionCreator, Operation} from '../../reducer/reducer';
 
@@ -22,6 +23,8 @@ const App = (props) => {
     playingFilm,
     onOpenCloseVideoButtonClick,
     onLoadComments,
+    onLoadFavorites,
+    onPostFavorite,
     isAuthorizationRequired,
     user,
     onChangeIsAuthorisationRequired,
@@ -31,23 +34,20 @@ const App = (props) => {
 
   return <Switch>
     <Route path="/" exact render={() => {
-      if (!isAuthorizationRequired) {
-        return playingFilm ? <BigPlayerWrapped
-          playingFilm={playingFilm}
-          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
-        /> : <MainPage
-          films={films}
-          genre={genre}
-          onGenreClick={onGenreClick}
-          genres={genres}
-          filmsCounter={filmsCounter}
-          onShowMoreButtonClick={onShowMoreButtonClick}
-          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
-          promo={promo}
-        />;
-      } else {
-        return <SignIn />;
-      }
+      return playingFilm ? <BigPlayerWrapped
+        playingFilm={playingFilm}
+        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+      /> : <MainPage
+        films={films}
+        genre={genre}
+        onGenreClick={onGenreClick}
+        genres={genres}
+        filmsCounter={filmsCounter}
+        onShowMoreButtonClick={onShowMoreButtonClick}
+        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+        promo={promo}
+        onPostFavorite={onPostFavorite}
+      />;
     }}
     />
     <Route path="/film/:id" exact render={(routerProps) => {
@@ -60,7 +60,7 @@ const App = (props) => {
           {...routerProps}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
           isAuthorizationRequired={isAuthorizationRequired}
-          promo={promo}
+          onPostFavorite={onPostFavorite}
         />;
     }}
     />
@@ -83,9 +83,14 @@ const App = (props) => {
       />;
     }}
     />
-    <Route path="/favorites" exact render={() => {
+    <Route path="/favorites" exact render={(routerProps) => {
       if (user.id) {
-        return ``;
+        onLoadFavorites();
+        return <Favorites
+          {...routerProps}
+          films={films}
+          user={user}
+        />;
       } else {
         onChangeIsAuthorisationRequired();
         return <Redirect to='/login' />;
@@ -140,6 +145,8 @@ App.propTypes = {
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
+  onLoadFavorites: PropTypes.func.isRequired,
+  onPostFavorite: PropTypes.func.isRequired,
   onChangeIsAuthorisationRequired: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
@@ -188,9 +195,17 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeGenre(selectedGenre));
     dispatch(ActionCreator.resetFilmsCounter());
   },
+
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
+
   onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
+
   onLoadComments: (id) => dispatch(Operation.loadComments(id)),
+
+  onLoadFavorites: () => dispatch(Operation.loadFavorites()),
+
+  onPostFavorite: (id, isFavorite, isPromo) => dispatch(Operation.postFavorite(id, isFavorite, isPromo)),
+
   onChangeIsAuthorisationRequired: () => dispatch(ActionCreator.changeIsAuthorizationRequired(true)),
 });
 

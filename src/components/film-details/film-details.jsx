@@ -13,7 +13,7 @@ import {Operation} from '../../reducer/reducer';
 const TabsWrapped = withLabel(Tabs);
 
 const FilmDetails = (props) => {
-  const {onOpenCloseVideoButtonClick, onLoadFilms, films, isAuthorizationRequired} = props;
+  const {onOpenCloseVideoButtonClick, onLoadFilms, films, isAuthorizationRequired, onPostFavorite} = props;
 
   const renderFilms = (film, filteredByGenreFilms) => {
     return <React.Fragment>
@@ -46,10 +46,16 @@ const FilmDetails = (props) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
+                <button
+                  className="btn btn--list movie-card__button"
+                  type="button"
+                  onClick={() => onPostFavorite(film.id, film.isFavorite, false)}
+                >
+                  {film.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
+                    <use xlinkHref="#in-list"></use>
+                  </svg> : <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
-                  </svg>
+                  </svg>}
                   <span>My list</span>
                 </button>
                 {!isAuthorizationRequired && <Link to={`/film/${film.id}/review`} className="btn movie-card__button">Add review</Link>}
@@ -122,6 +128,7 @@ FilmDetails.propTypes = {
   match: PropTypes.object.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadFilms: PropTypes.func.isRequired,
+  onPostFavorite: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 

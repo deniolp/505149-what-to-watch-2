@@ -14,11 +14,15 @@ describe(`MainPage`, () => {
   const initialState = {
     genre: `All genres`,
     films: [],
+    promo: {},
     comments: [],
     filmsCounter: 8,
     playingFilm: false,
     isAuthorizationRequired: false,
     user: {},
+    favorites: [],
+    isReviewSending: false,
+    didReviewSend: false,
   };
   const store = mockStore(initialState);
   const filmsMock = filmsListMock.slice(0, 2);
@@ -34,6 +38,7 @@ describe(`MainPage`, () => {
           genres={genresSet}
           onShowMoreButtonClick={jest.fn()}
           onOpenCloseVideoButtonClick={jest.fn()}
+          onPostFavorite={jest.fn()}
           filmsCounter={1}
           promo={filmsListMock[0]}
         /></Provider></BrowserRouter>).toJSON();

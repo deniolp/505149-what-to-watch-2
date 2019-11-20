@@ -14,11 +14,13 @@ describe(`AddReview`, () => {
   const initialState = {
     genre: `All genres`,
     films: [],
+    promo: {},
     comments: [],
     filmsCounter: 8,
     playingFilm: false,
     isAuthorizationRequired: false,
     user: {},
+    favorites: [],
     isReviewSending: false,
     didReviewSend: false,
   };

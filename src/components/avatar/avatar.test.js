@@ -2,12 +2,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
-import {Header} from './header';
+import Avatar from './avatar';
 
-describe(`Header`, () => {
+describe(`Avatar`, () => {
   it(`renders correctly`, () => {
     const tree = renderer.create(
-        <BrowserRouter><Header
+        <BrowserRouter><Avatar
           user={{
             id: 1,
             name: `Olga`,

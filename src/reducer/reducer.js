@@ -7,6 +7,7 @@ const initialState = {
   playingFilm: false,
   isAuthorizationRequired: false,
   user: {},
+  favorites: [],
   isReviewSending: false,
   didReviewSend: false,
 };
@@ -27,6 +28,12 @@ const normalizeKeys = (obj) => {
   return obj;
 };
 
+const changeFilm = (films, newFilm) => {
+  return films.map((item) => {
+    return item.id === newFilm.id ? newFilm : item;
+  });
+};
+
 const ActionCreator = {
   loadFilms: (films) => ({
     type: `LOAD_FILMS`,
@@ -36,9 +43,17 @@ const ActionCreator = {
     type: `LOAD_PROMO`,
     payload: film,
   }),
+  updatePromo: (film) => ({
+    type: `UPDATE_PROMO`,
+    payload: film,
+  }),
   loadComments: (comments) => ({
     type: `LOAD_COMMENTS`,
     payload: comments,
+  }),
+  loadFavorites: (favorites) => ({
+    type: `LOAD_FAVORITES`,
+    payload: favorites,
   }),
   changeGenre: (selectedGenre) => ({
     type: `CHANGE_GENRE`,
@@ -72,6 +87,14 @@ const ActionCreator = {
     type: `CLEAN_FORM`,
     payload: bool,
   }),
+  addToFavorites: (film) => ({
+    type: `ADD_TO_FAVORITES`,
+    payload: film,
+  }),
+  deleteFromFavorites: (film) => ({
+    type: `DELETE_FROM_FAVORITES`,
+    payload: film,
+  }),
 };
 
 const Operation = {
@@ -80,21 +103,44 @@ const Operation = {
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadFilms(preparedData));
-      });
+      })
+      .catch((_err) => {});
   },
   loadPromoFilm: () => (dispatch, _, api) => {
     return api.get(`films/promo`)
       .then((response) => {
         const preparedData = normalizeKeys(response.data);
         dispatch(ActionCreator.loadPromo(preparedData));
-      });
+      })
+      .catch((_err) => {});
   },
   loadComments: (id) => (dispatch, _, api) => {
     return api.get(`comments/${id}`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadComments(preparedData));
-      });
+      })
+      .catch((_err) => {});
+  },
+  loadFavorites: () => (dispatch, _, api) => {
+    return api.get(`favorite`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadFavorites(preparedData));
+      })
+      .catch((_err) => {});
+  },
+  postFavorite: (id, isFavorite, isPromo) => (dispatch, _, api) => {
+    const status = isFavorite ? 0 : 1;
+    return api.post(`favorite/${id}/${status}`)
+      .then((response) => {
+        const preparedData = normalizeKeys(response.data);
+        if (isPromo) {
+          dispatch(ActionCreator.updatePromo(preparedData));
+        }
+        return status ? dispatch(ActionCreator.addToFavorites(preparedData)) : dispatch(ActionCreator.deleteFromFavorites(preparedData));
+      })
+      .catch((_err) => {});
   },
   checkIsLogin: () => (dispatch, _, api) => {
     return api.get(`login`)
@@ -103,6 +149,7 @@ const Operation = {
           dispatch(ActionCreator.authorizeUser(response.data));
         } else {
           dispatch(ActionCreator.authorizeUser({}));
+          dispatch(ActionCreator.changeIsAuthorizationRequired(true));
         }
       })
       .catch((_err) => {});
@@ -139,8 +186,16 @@ const reducer = (state = initialState, action) => {
       promo: action.payload,
     });
 
+    case `UPDATE_PROMO`: return Object.assign({}, state, {
+      promo: action.payload,
+    });
+
     case `LOAD_COMMENTS`: return Object.assign({}, state, {
       comments: action.payload,
+    });
+
+    case `LOAD_FAVORITES`: return Object.assign({}, state, {
+      favorites: action.payload,
     });
 
     case `CHANGE_GENRE`: return Object.assign({}, state, {
@@ -173,6 +228,14 @@ const reducer = (state = initialState, action) => {
 
     case `CLEAN_FORM`: return Object.assign({}, state, {
       didReviewSend: action.payload,
+    });
+
+    case `ADD_TO_FAVORITES`: return Object.assign({}, state, {
+      films: changeFilm(state.films, action.payload),
+    });
+
+    case `DELETE_FROM_FAVORITES`: return Object.assign({}, state, {
+      films: changeFilm(state.films, action.payload),
     });
   }
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+
+import Avatar from '../avatar/avatar';
 
 const Header = (props) => {
   const {user} = props;
@@ -18,21 +19,7 @@ const Header = (props) => {
           <span className="logo__letter logo__letter--3">W</span>
         </a>
       </div>
-
-      <div className="user-block">
-        <div className="user-block__avatar">
-          {!user.avatarUrl ? <p>
-            <Link
-              to="/favorites"
-              style={{
-                color: `#dfcf77`,
-                textDecoration: `none`,
-              }}
-            >Sign in
-            </Link>
-          </p> : <img src={`https://htmlacademy-react-2.appspot.com${user.avatarUrl}`} alt="User avatar" width="63" height="63" />}
-        </div>
-      </div>
+      <Avatar user={user}/>
     </header>
   </React.Fragment>;
 };
