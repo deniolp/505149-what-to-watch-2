@@ -1,31 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+import {ActionCreator, Operation} from '../../reducer/reducer';
 
 const AddReview = (props) => {
-  const {isAuthorizationRequired} = props;
+  const {isAuthorizationRequired, films, user, submitForm} = props;
+  const id = props.match.params.id;
+  const film = films.find((it) => it.id === +id);
+  if (!film) {
+    return <Redirect to="/"></Redirect>;
+  }
+
+  const handleFormSubmit = (comment, rating, filmId) => {
+    const review = {
+      rating,
+      comment
+    };
+    submitForm(review, filmId);
+  };
 
   return !isAuthorizationRequired ? <section className="movie-card     movie-card--full">
     <div className="movie-card__header">
       <div className="movie-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+        <img src={film.backgroundImage} alt={film.name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
 
       <header className="page-header">
         <div className="logo">
-          <a href="main.html" className="logo__link">
+          <Link to={`/`} className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
         <nav className="breadcrumbs">
           <ul className="breadcrumbs__list">
             <li className="breadcrumbs__item">
-              <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+              <Link to={`/film/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
             </li>
             <li className="breadcrumbs__item">
               <a className="breadcrumbs__link">Add review</a>
@@ -35,33 +51,46 @@ const AddReview = (props) => {
 
         <div className="user-block">
           <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+            {!user.avatarUrl ? <p>
+              <Link
+                to="/favorites"
+                style={{
+                  color: `#dfcf77`,
+                  textDecoration: `none`,
+                }}
+              >Sign in
+              </Link>
+            </p> : <img src={`https://htmlacademy-react-2.appspot.com${user.avatarUrl}`} alt="User avatar" width="63" height="63" />}
           </div>
         </div>
       </header>
 
       <div className="movie-card__poster movie-card__poster--small">
-        <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+        <img src={film.posterImage} alt={film.name} width="218" height="327" />
       </div>
     </div>
 
     <div className="add-review">
-      <form action="#" className="add-review__form">
+      <form action="#" className="add-review__form" onSubmit={(evt) => {
+        evt.preventDefault();
+        const data = new FormData(evt.currentTarget);
+        handleFormSubmit(data.get(`review-text`), data.get(`rating`), id);
+      }}>
         <div className="rating">
           <div className="rating__stars">
-            <input className="rating__input" htmlId="star-1" type="radio" name="rating" value="1"/>
+            <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
             <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-            <input className="rating__input" htmlId="star-2" type="radio" name="rating" value="2" />
+            <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
             <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-            <input className="rating__input" htmlId="star-3" type="radio" name="rating" value="3" checked />
+            <input className="rating__input" id="star-3" type="radio" name="rating" value="3" defaultChecked />
             <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-            <input className="rating__input" htmlId="star-4" type="radio" name="rating" value="4" />
+            <input className="rating__input" id="star-4" type="radio" name="rating" value="4" />
             <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-            <input className="rating__input" htmlId="star-5" type="radio" name="rating" value="5" />
+            <input className="rating__input" id="star-5" type="radio" name="rating" value="5" />
             <label className="rating__label" htmlFor="star-5">Rating 5</label>
           </div>
         </div>
@@ -80,7 +109,44 @@ const AddReview = (props) => {
 };
 
 AddReview.propTypes = {
+  films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  })),
+  match: PropTypes.object.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
+  submitForm: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    avatarUrl: PropTypes.string,
+  }),
 };
 
-export default AddReview;
+const mapDispatchToProps = (dispatch) => ({
+  submitForm: (review, id) => {
+    dispatch(ActionCreator.blockForm(true));
+    dispatch(Operation.postReview(review, id));
+  },
+  updateForm: () => dispatch(ActionCreator.cleanForm(false)),
+});
+
+export {AddReview};
+export default connect(null, mapDispatchToProps)(AddReview);
+

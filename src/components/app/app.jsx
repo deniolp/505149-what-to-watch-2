@@ -67,6 +67,8 @@ const App = (props) => {
       return <AddReview
         {...routerProps}
         isAuthorizationRequired={isAuthorizationRequired}
+        films={films}
+        user={user}
       />;
     }}
     />

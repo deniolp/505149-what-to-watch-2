@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
@@ -52,7 +52,7 @@ const FilmDetails = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                <Link to={`/film/${film.id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
           </div>

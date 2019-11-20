@@ -7,6 +7,8 @@ const initialState = {
   playingFilm: false,
   isAuthorizationRequired: false,
   user: {},
+  isReviewSending: false,
+  didReviewSend: false,
 };
 
 const snakeToCamel = (word) => word.replace(/(_\w)/g, (matches) => matches[1].toUpperCase());
@@ -62,6 +64,14 @@ const ActionCreator = {
     type: `AUTHORIZE_USER`,
     payload: normalizeKeys(user),
   }),
+  blockForm: (bool) => ({
+    type: `BLOCK_FORM`,
+    payload: bool,
+  }),
+  cleanForm: (bool) => ({
+    type: `CLEAN_FORM`,
+    payload: bool,
+  }),
 };
 
 const Operation = {
@@ -107,6 +117,16 @@ const Operation = {
       })
       .catch((_err) => {});
   },
+  postReview: (review, id) => (dispatch, _, api) => {
+    return api.post(`comments/${id}`, review)
+      .then((response) => {
+        if (response.data) {
+          const preparedData = response.data.map((item) => normalizeKeys(item));
+          dispatch(ActionCreator.loadComments(preparedData));
+        }
+      })
+      .catch((_err) => {});
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -145,6 +165,14 @@ const reducer = (state = initialState, action) => {
 
     case `AUTHORIZE_USER`: return Object.assign({}, state, {
       user: action.payload,
+    });
+
+    case `BLOCK_FORM`: return Object.assign({}, state, {
+      isReviewSending: action.payload,
+    });
+
+    case `CLEAN_FORM`: return Object.assign({}, state, {
+      didReviewSend: action.payload,
     });
   }
 
