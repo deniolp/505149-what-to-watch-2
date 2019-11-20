@@ -15,6 +15,7 @@ describe(`Reducer works correctly: `, () => {
       playingFilm: false,
       isAuthorizationRequired: false,
       user: {},
+      favorites: [],
       isReviewSending: false,
       didReviewSend: false,
     });
@@ -84,6 +85,63 @@ describe(`Action creators works correctly: `, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: `LOAD_PROMO`,
           payload: {fakeFilm: true},
+        });
+      });
+  });
+
+  it(`should make correct API call to /favorite`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const favoriteLoader = Operation.loadFavorites();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fakeFilm: true}, {fakeFilm2: true}]);
+
+    return favoriteLoader(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `LOAD_FAVORITES`,
+          payload: [{fakeFilm: true}, {fakeFilm2: true}],
+        });
+      });
+  });
+
+  it(`should make correct API POST call to /favorite/:id/1`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const favoritePoster = Operation.postFavorite(1, false, false);
+
+    apiMock
+      .onPost(`/favorite/1/1`)
+      .reply(200, {fakeFilm: true, isFavorite: true});
+
+    return favoritePoster(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `ADD_TO_FAVORITES`,
+          payload: {fakeFilm: true, isFavorite: true},
+        });
+      });
+  });
+
+  it(`should make correct API POST call to /favorite/:id/0`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const favoritePoster = Operation.postFavorite(1, true, false);
+
+    apiMock
+      .onPost(`/favorite/1/0`)
+      .reply(200, {fakeFilm: true, isFavorite: false});
+
+    return favoritePoster(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `DELETE_FROM_FAVORITES`,
+          payload: {fakeFilm: true, isFavorite: false},
         });
       });
   });
