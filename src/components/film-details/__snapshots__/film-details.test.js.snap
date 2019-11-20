@@ -4,17 +4,17 @@ exports[`FilmDetails renders correctly 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
+    style={
+      Object {
+        "backgroundColor": "#BDAD8F",
+      }
+    }
   >
     <div
       className="movie-card__hero"
     >
       <div
         className="movie-card__bg"
-        style={
-          Object {
-            "backgroundColor": "#BDAD8F",
-          }
-        }
       >
         <img
           alt="Aviator"
@@ -141,7 +141,8 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="add-review.html"
+              href="/film/1/review"
+              onClick={[Function]}
             >
               Add review
             </a>

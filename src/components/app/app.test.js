@@ -20,6 +20,8 @@ describe(`App`, () => {
       playingFilm: false,
       isAuthorizationRequired: false,
       user: {},
+      isReviewSending: false,
+      didReviewSend: false,
     };
     const store = mockStore(initialState);
 
