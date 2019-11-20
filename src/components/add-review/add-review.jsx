@@ -4,6 +4,7 @@ import {Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {ActionCreator, Operation} from '../../reducer/reducer';
+import Avatar from '../avatar/avatar';
 
 const AddReview = (props) => {
   const {isAuthorizationRequired, films, user, submitForm} = props;
@@ -48,21 +49,7 @@ const AddReview = (props) => {
             </li>
           </ul>
         </nav>
-
-        <div className="user-block">
-          <div className="user-block__avatar">
-            {!user.avatarUrl ? <p>
-              <Link
-                to="/favorites"
-                style={{
-                  color: `#dfcf77`,
-                  textDecoration: `none`,
-                }}
-              >Sign in
-              </Link>
-            </p> : <img src={`https://htmlacademy-react-2.appspot.com${user.avatarUrl}`} alt="User avatar" width="63" height="63" />}
-          </div>
-        </div>
+        <Avatar user={user}/>
       </header>
 
       <div className="movie-card__poster movie-card__poster--small">

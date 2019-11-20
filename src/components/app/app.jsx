@@ -31,23 +31,19 @@ const App = (props) => {
 
   return <Switch>
     <Route path="/" exact render={() => {
-      if (!isAuthorizationRequired) {
-        return playingFilm ? <BigPlayerWrapped
-          playingFilm={playingFilm}
-          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
-        /> : <MainPage
-          films={films}
-          genre={genre}
-          onGenreClick={onGenreClick}
-          genres={genres}
-          filmsCounter={filmsCounter}
-          onShowMoreButtonClick={onShowMoreButtonClick}
-          onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
-          promo={promo}
-        />;
-      } else {
-        return <SignIn />;
-      }
+      return playingFilm ? <BigPlayerWrapped
+        playingFilm={playingFilm}
+        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+      /> : <MainPage
+        films={films}
+        genre={genre}
+        onGenreClick={onGenreClick}
+        genres={genres}
+        filmsCounter={filmsCounter}
+        onShowMoreButtonClick={onShowMoreButtonClick}
+        onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+        promo={promo}
+      />;
     }}
     />
     <Route path="/film/:id" exact render={(routerProps) => {

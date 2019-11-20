@@ -103,6 +103,7 @@ const Operation = {
           dispatch(ActionCreator.authorizeUser(response.data));
         } else {
           dispatch(ActionCreator.authorizeUser({}));
+          dispatch(ActionCreator.changeIsAuthorizationRequired(true));
         }
       })
       .catch((_err) => {});
