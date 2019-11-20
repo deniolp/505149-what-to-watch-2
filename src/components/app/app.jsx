@@ -24,6 +24,7 @@ const App = (props) => {
     onOpenCloseVideoButtonClick,
     onLoadComments,
     onLoadFavorites,
+    onPostFavorite,
     isAuthorizationRequired,
     user,
     onChangeIsAuthorisationRequired,
@@ -45,6 +46,7 @@ const App = (props) => {
         onShowMoreButtonClick={onShowMoreButtonClick}
         onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         promo={promo}
+        onPostFavorite={onPostFavorite}
       />;
     }}
     />
@@ -59,6 +61,7 @@ const App = (props) => {
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
           isAuthorizationRequired={isAuthorizationRequired}
           promo={promo}
+          onPostFavorite={onPostFavorite}
         />;
     }}
     />
@@ -144,6 +147,7 @@ App.propTypes = {
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   onLoadFavorites: PropTypes.func.isRequired,
+  onPostFavorite: PropTypes.func.isRequired,
   onChangeIsAuthorisationRequired: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
@@ -200,6 +204,8 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadComments: (id) => dispatch(Operation.loadComments(id)),
 
   onLoadFavorites: () => dispatch(Operation.loadFavorites()),
+
+  onPostFavorite: (id, isFavorite) => dispatch(Operation.postFavorite(id, isFavorite)),
 
   onChangeIsAuthorisationRequired: () => dispatch(ActionCreator.changeIsAuthorizationRequired(true)),
 });
