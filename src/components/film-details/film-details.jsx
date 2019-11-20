@@ -13,7 +13,7 @@ import {Operation} from '../../reducer/reducer';
 const TabsWrapped = withLabel(Tabs);
 
 const FilmDetails = (props) => {
-  const {onOpenCloseVideoButtonClick, onLoadFilms, films} = props;
+  const {onOpenCloseVideoButtonClick, onLoadFilms, films, isAuthorizationRequired} = props;
 
   const renderFilms = (film, filteredByGenreFilms) => {
     return <React.Fragment>
@@ -52,7 +52,7 @@ const FilmDetails = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/film/${film.id}/review`} className="btn movie-card__button">Add review</Link>
+                {!isAuthorizationRequired && <Link to={`/film/${film.id}/review`} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -122,6 +122,7 @@ FilmDetails.propTypes = {
   match: PropTypes.object.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadFilms: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -59,6 +59,7 @@ const App = (props) => {
         /> : <FilmDetails
           {...routerProps}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
+          isAuthorizationRequired={isAuthorizationRequired}
           promo={promo}
         />;
     }}
