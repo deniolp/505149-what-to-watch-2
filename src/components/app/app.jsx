@@ -64,12 +64,16 @@ const App = (props) => {
     }}
     />
     <Route path="/film/:id/review" exact render={(routerProps) => {
-      return <AddReview
-        {...routerProps}
-        isAuthorizationRequired={isAuthorizationRequired}
-        films={films}
-        user={user}
-      />;
+      if (!isAuthorizationRequired) {
+        return <AddReview
+          {...routerProps}
+          isAuthorizationRequired={isAuthorizationRequired}
+          films={films}
+          user={user}
+        />;
+      } else {
+        return <SignIn />;
+      }
     }}
     />
     <Route path="/login" exact render={() => {
