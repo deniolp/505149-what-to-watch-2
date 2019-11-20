@@ -7,6 +7,7 @@ const initialState = {
   playingFilm: false,
   isAuthorizationRequired: false,
   user: {},
+  favorites: [],
   isReviewSending: false,
   didReviewSend: false,
 };

@@ -8,6 +8,7 @@ import FilmDetails from '../film-details/film-details';
 import BigPlayer from '../big-player/big-player';
 import SignIn from '../sign-in/sign-in';
 import AddReview from '../add-review/add-review';
+import Favorites from '../favorites/favorites';
 import withVideo from '../../hocs/with-video/with-video';
 import {ActionCreator, Operation} from '../../reducer/reducer';
 
@@ -79,9 +80,13 @@ const App = (props) => {
       />;
     }}
     />
-    <Route path="/favorites" exact render={() => {
+    <Route path="/favorites" exact render={(routerProps) => {
       if (user.id) {
-        return ``;
+        return <Favorites
+          {...routerProps}
+          films={films}
+          user={user}
+        />;
       } else {
         onChangeIsAuthorisationRequired();
         return <Redirect to='/login' />;
