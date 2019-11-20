@@ -5,10 +5,10 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import {FilmDetails} from './film-details';
+import AddReview from './add-review';
 import filmsListMock from '../../mocks/films';
 
-describe(`FilmDetails`, () => {
+describe(`AddReview`, () => {
   const middleware = [thunk];
   const mockStore = configureMockStore(middleware);
   const initialState = {
@@ -19,22 +19,27 @@ describe(`FilmDetails`, () => {
     playingFilm: false,
     isAuthorizationRequired: false,
     user: {},
+    isReviewSending: false,
+    didReviewSend: false,
   };
   const store = mockStore(initialState);
 
   it(`renders correctly`, () => {
-    window.history.pushState({}, ``, `/film/1`);
     const tree = renderer.create(
-        <BrowserRouter><Provider store={store}><FilmDetails
-          films={filmsListMock}
+        <BrowserRouter><Provider store={store}><AddReview
+          isAuthorizationRequired={false}
           match={{
             params: {
               id: 1,
             },
           }}
-          onOpenCloseVideoButtonClick={jest.fn()}
-          onLoadFilms={jest.fn()}
-          isAuthorizationRequired={false}
+          films={filmsListMock}
+          user={{
+            id: 1,
+            name: `Olga`,
+            email: `r@ya.ru`,
+            avatarUrl: `/img/photo.jpg`,
+          }}
         /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

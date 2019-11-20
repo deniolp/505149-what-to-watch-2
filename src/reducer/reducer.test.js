@@ -15,6 +15,8 @@ describe(`Reducer works correctly: `, () => {
       playingFilm: false,
       isAuthorizationRequired: false,
       user: {},
+      isReviewSending: false,
+      didReviewSend: false,
     });
   });
 });
@@ -143,6 +145,32 @@ describe(`Action creators works correctly: `, () => {
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: `AUTHORIZE_USER`,
           payload: {email: `d@ya.ru`, password: `hg`},
+        });
+      });
+  });
+
+  it(`should make correct API POST call to /comments/id`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const id = 1;
+    const commentPoster = Operation.postReview({rating: 4, comment: `Pretty good!`}, id);
+
+    apiMock
+      .onPost(`/comments/${id}`)
+      .reply(200, [
+        {rating: 5, comment: `Wow!`},
+        {rating: 4, comment: `Pretty good!`}
+      ]);
+
+    return commentPoster(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `LOAD_COMMENTS`,
+          payload: [
+            {rating: 5, comment: `Wow!`},
+            {rating: 4, comment: `Pretty good!`}
+          ],
         });
       });
   });

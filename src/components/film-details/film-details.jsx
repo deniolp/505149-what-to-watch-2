@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
@@ -13,17 +13,17 @@ import {Operation} from '../../reducer/reducer';
 const TabsWrapped = withLabel(Tabs);
 
 const FilmDetails = (props) => {
-  const {onOpenCloseVideoButtonClick, onLoadFilms, films} = props;
+  const {onOpenCloseVideoButtonClick, onLoadFilms, films, isAuthorizationRequired} = props;
 
   const renderFilms = (film, filteredByGenreFilms) => {
     return <React.Fragment>
-      <section className="movie-card movie-card--full">
+      <section
+        className="movie-card movie-card--full"
+        style={{
+          backgroundColor: `${film.backgroundColor}`,
+        }}>
         <div className="movie-card__hero">
-          <div
-            className="movie-card__bg"
-            style={{
-              backgroundColor: `${film.backgroundColor}`,
-            }}>
+          <div className="movie-card__bg">
             <img src={film.backgroundImage} alt={film.name} />
           </div>
           <Header />
@@ -52,7 +52,7 @@ const FilmDetails = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {!isAuthorizationRequired && <Link to={`/film/${film.id}/review`} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -122,6 +122,7 @@ FilmDetails.propTypes = {
   match: PropTypes.object.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadFilms: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
