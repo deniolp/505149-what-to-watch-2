@@ -60,7 +60,6 @@ const App = (props) => {
           {...routerProps}
           onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
           isAuthorizationRequired={isAuthorizationRequired}
-          promo={promo}
           onPostFavorite={onPostFavorite}
         />;
     }}
@@ -205,7 +204,7 @@ const mapDispatchToProps = (dispatch) => ({
 
   onLoadFavorites: () => dispatch(Operation.loadFavorites()),
 
-  onPostFavorite: (id, isFavorite) => dispatch(Operation.postFavorite(id, isFavorite)),
+  onPostFavorite: (id, isFavorite, isPromo) => dispatch(Operation.postFavorite(id, isFavorite, isPromo)),
 
   onChangeIsAuthorisationRequired: () => dispatch(ActionCreator.changeIsAuthorizationRequired(true)),
 });

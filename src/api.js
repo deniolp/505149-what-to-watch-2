@@ -18,6 +18,7 @@ const createAPI = (dispatch) => {
     }
     if (error.response === 401) {
       dispatch(ActionCreator.changeIsAuthorizationRequired(true));
+      history.push(`/login`);
     }
     return error;
   };

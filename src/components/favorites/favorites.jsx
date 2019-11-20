@@ -5,6 +5,9 @@ import {connect} from 'react-redux';
 import Avatar from '../avatar/avatar';
 import Footer from '../footer/footer';
 import FilmCard from '../film-card/film-card';
+import withIsPreviewPlaying from '../../hocs/with-is-preview-playing/with-is-preview-playing';
+
+const FilmCardWrapped = withIsPreviewPlaying(FilmCard);
 
 const Favorites = (props) => {
   const {favorites, user} = props;
@@ -29,7 +32,7 @@ const Favorites = (props) => {
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
       <div className="catalog__movies-list">
-        {favorites.map((film) => <FilmCard film={film} key={film.id}/>)}
+        {favorites.map((film) => <FilmCardWrapped film={film} key={film.id}/>)}
       </div>
     </section>
 

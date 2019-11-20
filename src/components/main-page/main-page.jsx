@@ -17,9 +17,9 @@ const MainPage = (props) => {
     onOpenCloseVideoButtonClick,
     onPostFavorite,
     promo} = props;
+
   const getFilmsLength = () => {
     const filteredFilms = genre === `All genres` ? films : films.filter((film) => film.genre === genre);
-
     return filteredFilms.length;
   };
 
@@ -68,7 +68,7 @@ const MainPage = (props) => {
               <button
                 className="btn btn--list movie-card__button"
                 type="button"
-                onClick={() => onPostFavorite(promo.id, promo.isFavorite)}
+                onClick={() => onPostFavorite(promo.id, promo.isFavorite, true)}
               >
                 {promo.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
                   <use xlinkHref="#in-list"></use>

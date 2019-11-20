@@ -43,6 +43,10 @@ const ActionCreator = {
     type: `LOAD_PROMO`,
     payload: film,
   }),
+  updatePromo: (film) => ({
+    type: `UPDATE_PROMO`,
+    payload: film,
+  }),
   loadComments: (comments) => ({
     type: `LOAD_COMMENTS`,
     payload: comments,
@@ -99,36 +103,44 @@ const Operation = {
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadFilms(preparedData));
-      });
+      })
+      .catch((_err) => {});
   },
   loadPromoFilm: () => (dispatch, _, api) => {
     return api.get(`films/promo`)
       .then((response) => {
         const preparedData = normalizeKeys(response.data);
         dispatch(ActionCreator.loadPromo(preparedData));
-      });
+      })
+      .catch((_err) => {});
   },
   loadComments: (id) => (dispatch, _, api) => {
     return api.get(`comments/${id}`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadComments(preparedData));
-      });
+      })
+      .catch((_err) => {});
   },
   loadFavorites: () => (dispatch, _, api) => {
     return api.get(`favorite`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
         dispatch(ActionCreator.loadFavorites(preparedData));
-      });
+      })
+      .catch((_err) => {});
   },
-  postFavorite: (id, isFavorite) => (dispatch, _, api) => {
+  postFavorite: (id, isFavorite, isPromo) => (dispatch, _, api) => {
     const status = isFavorite ? 0 : 1;
     return api.post(`favorite/${id}/${status}`)
       .then((response) => {
         const preparedData = normalizeKeys(response.data);
+        if (isPromo) {
+          dispatch(ActionCreator.updatePromo(preparedData));
+        }
         return status ? dispatch(ActionCreator.addToFavorites(preparedData)) : dispatch(ActionCreator.deleteFromFavorites(preparedData));
-      });
+      })
+      .catch((_err) => {});
   },
   checkIsLogin: () => (dispatch, _, api) => {
     return api.get(`login`)
@@ -171,6 +183,10 @@ const reducer = (state = initialState, action) => {
     });
 
     case `LOAD_PROMO`: return Object.assign({}, state, {
+      promo: action.payload,
+    });
+
+    case `UPDATE_PROMO`: return Object.assign({}, state, {
       promo: action.payload,
     });
 

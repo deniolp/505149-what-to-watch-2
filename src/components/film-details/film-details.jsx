@@ -49,7 +49,7 @@ const FilmDetails = (props) => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
-                  onClick={() => onPostFavorite(film.id, film.isFavorite)}
+                  onClick={() => onPostFavorite(film.id, film.isFavorite, false)}
                 >
                   {film.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
                     <use xlinkHref="#in-list"></use>
