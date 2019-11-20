@@ -56,20 +56,20 @@ Array [
         <div
           className="user-block__avatar"
         >
-          <p>
-            <a
-              href="/favorites"
-              onClick={[Function]}
-              style={
-                Object {
-                  "color": "#dfcf77",
-                  "textDecoration": "none",
-                }
+          <a
+            href="/favorites"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#dfcf77",
+                "textDecoration": "none",
               }
-            >
+            }
+          >
+            <p>
               Sign in
-            </a>
-          </p>
+            </p>
+          </a>
         </div>
       </div>
     </header>

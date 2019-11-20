@@ -82,12 +82,23 @@ exports[`AddReview renders correctly 1`] = `
         <div
           className="user-block__avatar"
         >
-          <img
-            alt="User avatar"
-            height="63"
-            src="https://htmlacademy-react-2.appspot.com/img/photo.jpg"
-            width="63"
-          />
+          <a
+            href="/favorites"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#dfcf77",
+                "textDecoration": "none",
+              }
+            }
+          >
+            <img
+              alt="User avatar"
+              height="63"
+              src="https://htmlacademy-react-2.appspot.com/img/photo.jpg"
+              width="63"
+            />
+          </a>
         </div>
       </div>
     </header>
