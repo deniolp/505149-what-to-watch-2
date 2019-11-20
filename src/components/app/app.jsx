@@ -23,6 +23,7 @@ const App = (props) => {
     playingFilm,
     onOpenCloseVideoButtonClick,
     onLoadComments,
+    onLoadFavorites,
     isAuthorizationRequired,
     user,
     onChangeIsAuthorisationRequired,
@@ -82,6 +83,7 @@ const App = (props) => {
     />
     <Route path="/favorites" exact render={(routerProps) => {
       if (user.id) {
+        onLoadFavorites();
         return <Favorites
           {...routerProps}
           films={films}
@@ -141,6 +143,7 @@ App.propTypes = {
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
+  onLoadFavorites: PropTypes.func.isRequired,
   onChangeIsAuthorisationRequired: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
@@ -189,9 +192,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeGenre(selectedGenre));
     dispatch(ActionCreator.resetFilmsCounter());
   },
+
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
+
   onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
+
   onLoadComments: (id) => dispatch(Operation.loadComments(id)),
+
+  onLoadFavorites: () => dispatch(Operation.loadFavorites()),
+
   onChangeIsAuthorisationRequired: () => dispatch(ActionCreator.changeIsAuthorizationRequired(true)),
 });
 

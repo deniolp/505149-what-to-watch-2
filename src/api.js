@@ -16,6 +16,9 @@ const createAPI = (dispatch) => {
     if (error.response === 403) {
       dispatch(ActionCreator.changeIsAuthorizationRequired(true));
     }
+    if (error.response === 401) {
+      dispatch(ActionCreator.changeIsAuthorizationRequired(true));
+    }
     return error;
   };
   api.interceptors.response.use(onSuccess, onFail);

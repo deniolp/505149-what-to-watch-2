@@ -41,6 +41,10 @@ const ActionCreator = {
     type: `LOAD_COMMENTS`,
     payload: comments,
   }),
+  loadFavorites: (favorites) => ({
+    type: `LOAD_FAVORITES`,
+    payload: favorites,
+  }),
   changeGenre: (selectedGenre) => ({
     type: `CHANGE_GENRE`,
     payload: selectedGenre,
@@ -97,6 +101,13 @@ const Operation = {
         dispatch(ActionCreator.loadComments(preparedData));
       });
   },
+  loadFavorites: () => (dispatch, _, api) => {
+    return api.get(`favorite`)
+      .then((response) => {
+        const preparedData = response.data.map((item) => normalizeKeys(item));
+        dispatch(ActionCreator.loadFavorites(preparedData));
+      });
+  },
   checkIsLogin: () => (dispatch, _, api) => {
     return api.get(`login`)
       .then((response) => {
@@ -143,6 +154,10 @@ const reducer = (state = initialState, action) => {
 
     case `LOAD_COMMENTS`: return Object.assign({}, state, {
       comments: action.payload,
+    });
+
+    case `LOAD_FAVORITES`: return Object.assign({}, state, {
+      favorites: action.payload,
     });
 
     case `CHANGE_GENRE`: return Object.assign({}, state, {
