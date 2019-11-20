@@ -126,6 +126,29 @@ describe(`Action creators works correctly: `, () => {
       });
   });
 
+  it(`should make correct API GET call to /login and in case of error should change isAuth`, () => {
+    const apiMock = new MockAdapter(createAPI());
+    const dispatch = jest.fn();
+    const checker = Operation.checkIsLogin();
+
+    apiMock
+      .onGet(`/login`)
+      .reply(401, null);
+
+    return checker(dispatch, {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `AUTHORIZE_USER`,
+          payload: {},
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: `CHANGE_IS_AUTHORIZATION_REQUIRED`,
+          payload: true,
+        });
+      });
+  });
+
   it(`should make correct API POST call to /login`, () => {
     const apiMock = new MockAdapter(createAPI());
     const dispatch = jest.fn();
