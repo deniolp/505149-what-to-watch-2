@@ -23,14 +23,14 @@ const Header = (props) => {
         <div className="user-block__avatar">
           {!user.avatarUrl ? <p>
             <Link
-              to="/favorites"
+              to="/login"
               style={{
                 color: `#dfcf77`,
                 textDecoration: `none`,
               }}
             >Sign in
             </Link>
-          </p> : <img src={`https://htmlacademy-react-2.appspot.com${user.avatarUrl}`} alt="User avatar" width="63" height="63" />}
+          </p> : <Link to="/favorites"><img src={`https://htmlacademy-react-2.appspot.com${user.avatarUrl}`} alt="User avatar" width="63" height="63" /></Link>}
         </div>
       </div>
     </header>
