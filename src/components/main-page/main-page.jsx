@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {withRouter} from "react-router-dom";
 
 import Header from '../header/header';
 import Genres from '../genres/genres';
@@ -16,7 +17,9 @@ const MainPage = (props) => {
     onShowMoreButtonClick,
     onOpenCloseVideoButtonClick,
     onPostFavorite,
-    promo} = props;
+    promo,
+    isAuthorizationRequired,
+    history} = props;
 
   const getFilmsLength = () => {
     const filteredFilms = genre === `All genres` ? films : films.filter((film) => film.genre === genre);
@@ -68,7 +71,7 @@ const MainPage = (props) => {
               <button
                 className="btn btn--list movie-card__button"
                 type="button"
-                onClick={() => onPostFavorite(promo.id, promo.isFavorite, true)}
+                onClick={() => isAuthorizationRequired ? history.push(`/login`) : onPostFavorite(promo.id, promo.isFavorite, true)}
               >
                 {promo.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
                   <use xlinkHref="#in-list"></use>
@@ -154,6 +157,8 @@ MainPage.propTypes = {
   onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
   onPostFavorite: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-export default MainPage;
+export default withRouter(MainPage);

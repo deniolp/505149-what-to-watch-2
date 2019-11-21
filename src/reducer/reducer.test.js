@@ -184,7 +184,7 @@ describe(`Action creators works correctly: `, () => {
       });
   });
 
-  it(`should make correct API GET call to /login and in case of error should change isAuth`, () => {
+  it(`should make correct API GET call to /login and in case of error 401 should been caught by interceptor in api`, () => {
     const apiMock = new MockAdapter(createAPI());
     const dispatch = jest.fn();
     const checker = Operation.checkIsLogin();
@@ -195,15 +195,7 @@ describe(`Action creators works correctly: `, () => {
 
     return checker(dispatch, {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: `AUTHORIZE_USER`,
-          payload: {},
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: `CHANGE_IS_AUTHORIZATION_REQUIRED`,
-          payload: true,
-        });
+        expect(dispatch).toHaveBeenCalledTimes(0);
       });
   });
 

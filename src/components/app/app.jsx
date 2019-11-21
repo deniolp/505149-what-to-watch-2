@@ -10,6 +10,7 @@ import SignIn from '../sign-in/sign-in';
 import AddReview from '../add-review/add-review';
 import Favorites from '../favorites/favorites';
 import withVideo from '../../hocs/with-video/with-video';
+import withPrivate from '../../hocs/with-private/with-private';
 import {ActionCreator, Operation} from '../../reducer/reducer';
 
 const BigPlayerWrapped = withVideo(BigPlayer);
@@ -27,7 +28,6 @@ const App = (props) => {
     onPostFavorite,
     isAuthorizationRequired,
     user,
-    onChangeIsAuthorisationRequired,
     promo} = props;
   const genres = new Set().add(`All genres`);
   films.forEach((film) => genres.add(film.genre));
@@ -47,6 +47,7 @@ const App = (props) => {
         onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         promo={promo}
         onPostFavorite={onPostFavorite}
+        isAuthorizationRequired={isAuthorizationRequired}
       />;
     }}
     />
@@ -65,16 +66,13 @@ const App = (props) => {
     }}
     />
     <Route path="/film/:id/review" exact render={(routerProps) => {
-      if (!isAuthorizationRequired) {
-        return <AddReview
-          {...routerProps}
-          isAuthorizationRequired={isAuthorizationRequired}
-          films={films}
-          user={user}
-        />;
-      } else {
-        return <SignIn />;
-      }
+      const AddReviewWrapped = withPrivate(AddReview);
+      return <AddReviewWrapped
+        {...routerProps}
+        isAuthorizationRequired={isAuthorizationRequired}
+        films={films}
+        user={user}
+      />;
     }}
     />
     <Route path="/login" exact render={() => {
@@ -84,17 +82,13 @@ const App = (props) => {
     }}
     />
     <Route path="/favorites" exact render={(routerProps) => {
-      if (user.id) {
-        onLoadFavorites();
-        return <Favorites
-          {...routerProps}
-          films={films}
-          user={user}
-        />;
-      } else {
-        onChangeIsAuthorisationRequired();
-        return <Redirect to='/login' />;
-      }
+      const FavoritesWrapped = withPrivate(Favorites);
+      onLoadFavorites();
+      return <FavoritesWrapped
+        {...routerProps}
+        films={films}
+        user={user}
+      />;
     }}
     />
     <Redirect from='*' to='/' />
@@ -147,9 +141,8 @@ App.propTypes = {
   onLoadComments: PropTypes.func.isRequired,
   onLoadFavorites: PropTypes.func.isRequired,
   onPostFavorite: PropTypes.func.isRequired,
-  onChangeIsAuthorisationRequired: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
+  isAuthorizationRequired: PropTypes.bool,
   playingFilm: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
@@ -205,8 +198,6 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadFavorites: () => dispatch(Operation.loadFavorites()),
 
   onPostFavorite: (id, isFavorite, isPromo) => dispatch(Operation.postFavorite(id, isFavorite, isPromo)),
-
-  onChangeIsAuthorisationRequired: () => dispatch(ActionCreator.changeIsAuthorizationRequired(true)),
 });
 
 export {App};
