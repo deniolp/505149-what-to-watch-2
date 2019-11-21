@@ -11,6 +11,7 @@ import AddReview from '../add-review/add-review';
 import Favorites from '../favorites/favorites';
 import withVideo from '../../hocs/with-video/with-video';
 import withPrivate from '../../hocs/with-private/with-private';
+import withValidated from '../../hocs/with-validated/with-validated';
 import {ActionCreator, Operation} from '../../reducer/reducer';
 
 const BigPlayerWrapped = withVideo(BigPlayer);
@@ -66,7 +67,7 @@ const App = (props) => {
     }}
     />
     <Route path="/film/:id/review" exact render={(routerProps) => {
-      const AddReviewWrapped = withPrivate(AddReview);
+      const AddReviewWrapped = withPrivate(withValidated(AddReview));
       return <AddReviewWrapped
         {...routerProps}
         films={films}

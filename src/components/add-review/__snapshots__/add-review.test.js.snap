@@ -2,7 +2,7 @@
 
 exports[`AddReview renders correctly 1`] = `
 <section
-  className="movie-card     movie-card--full"
+  className="movie-card movie-card--full"
 >
   <div
     className="movie-card__header"

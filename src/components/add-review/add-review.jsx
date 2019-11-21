@@ -7,7 +7,7 @@ import {ActionCreator, Operation} from '../../reducer/reducer';
 import Avatar from '../avatar/avatar';
 
 const AddReview = (props) => {
-  const {films, user, onSubmitForm, onLoadFilms} = props;
+  const {films, user, onSubmitForm, onLoadFilms, onRadioClick, onTextareaChange, isValidated} = props;
 
   const handleFormSubmit = (comment, rating, filmId) => {
     const review = {
@@ -61,27 +61,27 @@ const AddReview = (props) => {
         }}>
           <div className="rating">
             <div className="rating__stars">
-              <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
+              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onClick={() => onRadioClick()} defaultChecked/>
               <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-              <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
+              <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onClick={() => onRadioClick()} />
               <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" defaultChecked />
+              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onClick={() => onRadioClick()} />
               <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-              <input className="rating__input" id="star-4" type="radio" name="rating" value="4" />
+              <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onClick={() => onRadioClick()} />
               <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-              <input className="rating__input" id="star-5" type="radio" name="rating" value="5" />
+              <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onClick={() => onRadioClick()} />
               <label className="rating__label" htmlFor="star-5">Rating 5</label>
             </div>
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="First select rating. Then write review" onChange={(evt) => onTextareaChange(evt)}></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="submit" disabled={isValidated ? false : true}>Post</button>
             </div>
 
           </div>
@@ -126,6 +126,9 @@ AddReview.propTypes = {
   match: PropTypes.object.isRequired,
   onSubmitForm: PropTypes.func.isRequired,
   onLoadFilms: PropTypes.func.isRequired,
+  onRadioClick: PropTypes.func.isRequired,
+  onTextareaChange: PropTypes.func.isRequired,
+  isValidated: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
