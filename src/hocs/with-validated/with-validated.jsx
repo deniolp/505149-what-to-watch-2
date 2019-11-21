@@ -12,7 +12,7 @@ const withValidated = ((Component) => {
     const handleTextareaChange = (evt) => {
       evt.preventDefault();
 
-      if (evt.target.value.length >= 50 && evt.target.value.length <= 300) {
+      if (evt.target.value.length >= 50 && evt.target.value.length <= 400) {
         if (isRadioPressed) {
           setIsValidated(true);
         }

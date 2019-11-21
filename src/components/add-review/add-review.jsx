@@ -1,13 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {withRouter} from "react-router-dom";
 
 import {ActionCreator, Operation} from '../../reducer/reducer';
 import Avatar from '../avatar/avatar';
 
 const AddReview = (props) => {
-  const {films, user, onSubmitForm, onLoadFilms, onRadioClick, onTextareaChange, isValidated} = props;
+  const {films,
+    user,
+    onSubmitForm,
+    onLoadFilms,
+    onRadioClick,
+    onTextareaChange,
+    isValidated,
+    isReviewSending,
+    onUpdateForm,
+    didReviewSend,
+    history} = props;
+  const formRef = React.createRef();
+  let id;
+
+  useEffect(() => {
+    if (didReviewSend) {
+      formRef.current.reset();
+      onUpdateForm();
+      redirect();
+    }
+  }, [isReviewSending]);
+
+  const redirect = () => history.push(`/film/${id}`);
 
   const handleFormSubmit = (comment, rating, filmId) => {
     const review = {
@@ -54,11 +77,16 @@ const AddReview = (props) => {
       </div>
 
       <div className="add-review">
-        <form action="#" className="add-review__form" onSubmit={(evt) => {
-          evt.preventDefault();
-          const data = new FormData(evt.currentTarget);
-          handleFormSubmit(data.get(`review-text`), data.get(`rating`), film.id);
-        }}>
+        <form
+          action="#"
+          className="add-review__form"
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            const data = new FormData(evt.currentTarget);
+            handleFormSubmit(data.get(`review-text`), data.get(`rating`), film.id);
+          }}
+          ref={formRef}
+        >
           <div className="rating">
             <div className="rating__stars">
               <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onClick={() => onRadioClick()} defaultChecked/>
@@ -79,9 +107,9 @@ const AddReview = (props) => {
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="First select rating. Then write review" onChange={(evt) => onTextareaChange(evt)}></textarea>
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="First select rating. Then write review (not less than 50, not more than 400)." onChange={(evt) => onTextareaChange(evt)}></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" disabled={isValidated ? false : true}>Post</button>
+              <button className="add-review__btn" type="submit" disabled={isValidated && !isReviewSending ? false : true}>Post</button>
             </div>
 
           </div>
@@ -91,7 +119,7 @@ const AddReview = (props) => {
   };
 
   if (films.length !== 0) {
-    const id = props.match.params.id;
+    id = props.match.params.id;
     const film = films.find((it) => it.id === +id);
     if (!film) {
       return <Redirect to="/"></Redirect>;
@@ -128,7 +156,11 @@ AddReview.propTypes = {
   onLoadFilms: PropTypes.func.isRequired,
   onRadioClick: PropTypes.func.isRequired,
   onTextareaChange: PropTypes.func.isRequired,
+  onUpdateForm: PropTypes.func.isRequired,
   isValidated: PropTypes.bool.isRequired,
+  isReviewSending: PropTypes.bool.isRequired,
+  didReviewSend: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -137,15 +169,20 @@ AddReview.propTypes = {
   }),
 };
 
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  isReviewSending: state.isReviewSending,
+  didReviewSend: state.isReviewSending,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmitForm: (review, id) => {
     dispatch(ActionCreator.blockForm(true));
     dispatch(Operation.postReview(review, id));
   },
-  updateForm: () => dispatch(ActionCreator.cleanForm(false)),
+  onUpdateForm: () => dispatch(ActionCreator.cleanForm(false)),
   onLoadFilms: () => dispatch(Operation.loadFilms()),
 });
 
 export {AddReview};
-export default connect(null, mapDispatchToProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddReview));
 

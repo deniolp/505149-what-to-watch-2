@@ -169,7 +169,9 @@ const Operation = {
       .then((response) => {
         if (response.data) {
           const preparedData = response.data.map((item) => normalizeKeys(item));
+          dispatch(ActionCreator.blockForm(false));
           dispatch(ActionCreator.loadComments(preparedData));
+          dispatch(ActionCreator.cleanForm(true));
         }
       })
       .catch((_err) => {});
