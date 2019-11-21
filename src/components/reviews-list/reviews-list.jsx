@@ -11,8 +11,9 @@ const ReviewsList = (props) => {
   let reviewsSecondPart;
   if (reviews) {
     const middle = Math.floor(reviews.length / 2);
-    reviewsFirstPart = reviews.slice(0, middle);
-    reviewsSecondPart = reviews.slice(middle, reviews.length);
+    const filteredReviews = reviews.slice().sort((a, b) => a.date < b.date);
+    reviewsFirstPart = filteredReviews.slice(0, middle);
+    reviewsSecondPart = filteredReviews.slice(middle, reviews.length);
   }
 
   return <div className="movie-card__reviews movie-card__row">
