@@ -41,6 +41,7 @@ describe(`MainPage`, () => {
           onPostFavorite={jest.fn()}
           filmsCounter={1}
           promo={filmsListMock[0]}
+          isAuthorizationRequired={false}
         /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
