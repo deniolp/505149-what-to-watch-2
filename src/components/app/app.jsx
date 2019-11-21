@@ -69,7 +69,6 @@ const App = (props) => {
       const AddReviewWrapped = withPrivate(AddReview);
       return <AddReviewWrapped
         {...routerProps}
-        isAuthorizationRequired={isAuthorizationRequired}
         films={films}
         user={user}
       />;
