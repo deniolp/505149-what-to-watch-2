@@ -237,13 +237,21 @@ describe(`Action creators works correctly: `, () => {
 
     return commentPoster(dispatch, {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `BLOCK_FORM`,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: `LOAD_COMMENTS`,
           payload: [
             {rating: 5, comment: `Wow!`},
             {rating: 4, comment: `Pretty good!`}
           ],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: `CLEAN_FORM`,
+          payload: true,
         });
       });
   });

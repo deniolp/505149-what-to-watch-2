@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import AddReview from './add-review';
+import {AddReview} from './add-review';
 import filmsListMock from '../../mocks/films';
 
 describe(`AddReview`, () => {
@@ -41,6 +41,17 @@ describe(`AddReview`, () => {
             name: `Olga`,
             email: `r@ya.ru`,
             avatarUrl: `/img/photo.jpg`,
+          }}
+          isValidated={true}
+          onRadioClick={jest.fn()}
+          onTextareaChange={jest.fn()}
+          onSubmitForm={jest.fn()}
+          onLoadFilms={jest.fn()}
+          onUpdateForm={jest.fn()}
+          isReviewSending={false}
+          didReviewSend={false}
+          history={{
+            push: jest.fn(),
           }}
         /></Provider></BrowserRouter>).toJSON();
 

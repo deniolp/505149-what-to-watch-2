@@ -129,8 +129,10 @@ exports[`AddReview renders correctly 1`] = `
         >
           <input
             className="rating__input"
+            defaultChecked={true}
             id="star-1"
             name="rating"
+            onClick={[Function]}
             type="radio"
             value="1"
           />
@@ -144,6 +146,7 @@ exports[`AddReview renders correctly 1`] = `
             className="rating__input"
             id="star-2"
             name="rating"
+            onClick={[Function]}
             type="radio"
             value="2"
           />
@@ -155,9 +158,9 @@ exports[`AddReview renders correctly 1`] = `
           </label>
           <input
             className="rating__input"
-            defaultChecked={true}
             id="star-3"
             name="rating"
+            onClick={[Function]}
             type="radio"
             value="3"
           />
@@ -171,6 +174,7 @@ exports[`AddReview renders correctly 1`] = `
             className="rating__input"
             id="star-4"
             name="rating"
+            onClick={[Function]}
             type="radio"
             value="4"
           />
@@ -184,6 +188,7 @@ exports[`AddReview renders correctly 1`] = `
             className="rating__input"
             id="star-5"
             name="rating"
+            onClick={[Function]}
             type="radio"
             value="5"
           />
@@ -202,13 +207,15 @@ exports[`AddReview renders correctly 1`] = `
           className="add-review__textarea"
           id="review-text"
           name="review-text"
-          placeholder="Review text"
+          onChange={[Function]}
+          placeholder="First select rating. Then write review (not less than 50, not more than 400)."
         />
         <div
           className="add-review__submit"
         >
           <button
             className="add-review__btn"
+            disabled={false}
             type="submit"
           >
             Post
