@@ -47,6 +47,7 @@ const App = (props) => {
         onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
         promo={promo}
         onPostFavorite={onPostFavorite}
+        isAuthorizationRequired={isAuthorizationRequired}
       />;
     }}
     />

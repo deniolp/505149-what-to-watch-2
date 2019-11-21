@@ -13,14 +13,10 @@ const createAPI = (dispatch) => {
   const onSuccess = (response) => response;
 
   const onFail = (error) => {
-    if (error.response === 403) {
+    if (error.response.status === 401) {
       dispatch(ActionCreator.changeIsAuthorizationRequired(true));
     }
-    if (error.response === 401) {
-      dispatch(ActionCreator.changeIsAuthorizationRequired(true));
-      history.push(`/login`);
-    }
-    return error;
+    return;
   };
   api.interceptors.response.use(onSuccess, onFail);
 
