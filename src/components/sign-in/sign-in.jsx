@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
@@ -6,11 +6,10 @@ import {Redirect} from 'react-router-dom';
 import {Operation} from '../../reducer/reducer';
 
 const SignIn = (props) => {
-  const {submitForm, isAuthorizationRequired} = props;
-  const [error, setError] = useState(null);
+  const {submitForm, isAuthorizationRequired, error, setError} = props;
   const handleFormSubmit = (email, password = null) => {
     if (!password) {
-      setError(`Error!`);
+      setError(`Error! What about enter password? :-)`);
     } else {
       submitForm(email, password);
     }
@@ -71,6 +70,8 @@ const SignIn = (props) => {
 SignIn.propTypes = {
   submitForm: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  setError: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
