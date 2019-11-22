@@ -2,8 +2,22 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
 const BigPlayer = (props) => {
-  const {playingFilm, onOpenCloseVideoButtonClick, isPlaying, setIsPlaying, progress, setProgress} = props;
+  const {playingFilm,
+    onOpenCloseVideoButtonClick,
+    isPlaying,
+    setIsPlaying,
+    progress,
+    setProgress,
+    isLoading,
+    setIsLoading
+  } = props;
   const videoRef = useRef();
+
+  useEffect(() => {
+    videoRef.current.oncanplaythrough = () => {
+      setIsLoading(false);
+    };
+  }, []);
 
   useEffect(() => {
     if (isPlaying) {
@@ -47,6 +61,7 @@ const BigPlayer = (props) => {
   return <div className="player">
     <video
       src={playingFilm.videoLink}
+      preload = "auto"
       className="player__video"
       poster="/img/player-poster.jpg"
       ref={videoRef}
@@ -82,6 +97,7 @@ const BigPlayer = (props) => {
           type="button"
           className="player__play"
           onClick={() => setIsPlaying((oldState) => !oldState)}
+          disabled={isLoading}
         >
           <svg viewBox="0 0 19 19" width="19" height="19">
             {!isPlaying ? <use xlinkHref="#play-s"></use> : <use xlinkHref="#pause"></use>}
@@ -132,6 +148,8 @@ BigPlayer.propTypes = {
   setIsPlaying: PropTypes.func.isRequired,
   progress: PropTypes.number.isRequired,
   setProgress: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  setIsLoading: PropTypes.func.isRequired,
 };
 
 export default BigPlayer;

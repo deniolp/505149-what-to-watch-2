@@ -21,11 +21,12 @@ const VideoPlayer = (props) => {
   }, [isPreviewPlaying]);
 
   return <video
+    ref={videoRef}
+    preload = "auto"
     muted
     poster={poster}
     width="100%"
     height="100%"
-    ref={videoRef}
   >
     <source
       src={preview}
