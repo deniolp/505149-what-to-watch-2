@@ -30,11 +30,13 @@ const App = (props) => {
     onPostFavorite,
     isAuthorizationRequired,
     user,
-    promo} = props;
+    promo,
+    error,
+  } = props;
   const genres = new Set().add(`All genres`);
   films.forEach((film) => genres.add(film.genre));
 
-  return <Switch>
+  return error ? <h1>{error}</h1> : <Switch>
     <Route path="/" exact render={() => {
       return playingFilm ? <BigPlayerWrapped
         playingFilm={playingFilm}
@@ -145,6 +147,7 @@ App.propTypes = {
   onPostFavorite: PropTypes.func.isRequired,
   filmsCounter: PropTypes.number.isRequired,
   isAuthorizationRequired: PropTypes.bool,
+  error: PropTypes.string,
   playingFilm: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
@@ -183,6 +186,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   playingFilm: state.playingFilm,
   isAuthorizationRequired: state.isAuthorizationRequired,
   user: state.user,
+  error: state.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

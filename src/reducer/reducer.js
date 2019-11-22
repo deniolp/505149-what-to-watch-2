@@ -5,13 +5,14 @@ const initialState = {
   films: [],
   promo: {},
   comments: [],
-  filmsCounter: 8,
+  filmsCounter: 20,
   playingFilm: false,
   isAuthorizationRequired: false,
   user: {},
   favorites: [],
   isReviewSending: false,
   didReviewSend: false,
+  error: null,
 };
 
 const ActionCreator = {
@@ -41,11 +42,11 @@ const ActionCreator = {
   }),
   increaseFilmsCounter: () => ({
     type: `INCREASE_FILMS_COUNTER`,
-    payload: 8,
+    payload: 20,
   }),
   resetFilmsCounter: () => ({
     type: `RESET_FILMS_COUNTER`,
-    payload: 8,
+    payload: 20,
   }),
   setPlayingFilm: (film) => ({
     type: `SET_PLAYING_FILM`,
@@ -74,6 +75,10 @@ const ActionCreator = {
   deleteFromFavorites: (film) => ({
     type: `DELETE_FROM_FAVORITES`,
     payload: film,
+  }),
+  showError: (error) => ({
+    type: `SHOW_ERROR`,
+    payload: error,
   }),
 };
 
@@ -154,7 +159,9 @@ const Operation = {
           dispatch(ActionCreator.cleanForm(true));
         }
       })
-      .catch((_err) => {});
+      .catch((_err) => {
+        dispatch(ActionCreator.blockForm(false));
+      });
   },
 };
 
@@ -218,6 +225,10 @@ const reducer = (state = initialState, action) => {
 
     case `DELETE_FROM_FAVORITES`: return Object.assign({}, state, {
       films: changeFilm(state.films, action.payload),
+    });
+
+    case `SHOW_ERROR`: return Object.assign({}, state, {
+      error: action.payload,
     });
   }
 

@@ -31,7 +31,7 @@ const TabsBelowInfo = (props) => {
     case `Overview`:
       return <React.Fragment>
         <div className="movie-rating">
-          <div className="movie-rating__score">{film.rating}</div>
+          <div className="movie-rating__score">{film.rating.toFixed(1)}</div>
           <p className="movie-rating__meta">
             <span className="movie-rating__level">{getRatingLevel(film.rating)}</span>
             <span className="movie-rating__count">{film.scoresCount} ratings</span>

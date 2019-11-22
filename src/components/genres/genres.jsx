@@ -5,7 +5,7 @@ const Genres = (props) => {
   const {activeGenre, onGenreClick, genres} = props;
 
   return <ul className="catalog__genres-list">
-    {Array.from(genres).map((item) => {
+    {Array.from(genres).slice(0, 10).map((item) => {
       return <li className={`catalog__genres-item${item === activeGenre ? ` catalog__genres-item--active` : ``}`} key={item}>
         <a className="catalog__genres-link"
           onClick={() => onGenreClick(item)}
