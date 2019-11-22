@@ -95,7 +95,7 @@ describe(`Action creators works correctly: `, () => {
     const favoriteLoader = Operation.loadFavorites();
 
     apiMock
-      .onGet(`/favorite`)
+      .onGet(`/mylist`)
       .reply(200, [{fakeFilm: true}, {fakeFilm2: true}]);
 
     return favoriteLoader(dispatch, {}, api)
@@ -114,7 +114,7 @@ describe(`Action creators works correctly: `, () => {
     const favoritePoster = Operation.postFavorite(1, false, false);
 
     apiMock
-      .onPost(`/favorite/1/1`)
+      .onPost(`/mylist/1/1`)
       .reply(200, {fakeFilm: true, isFavorite: true});
 
     return favoritePoster(dispatch, {}, api)
@@ -133,7 +133,7 @@ describe(`Action creators works correctly: `, () => {
     const favoritePoster = Operation.postFavorite(1, true, false);
 
     apiMock
-      .onPost(`/favorite/1/0`)
+      .onPost(`/mylist/1/0`)
       .reply(200, {fakeFilm: true, isFavorite: false});
 
     return favoritePoster(dispatch, {}, api)

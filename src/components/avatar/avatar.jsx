@@ -8,7 +8,7 @@ const Avatar = (props) => {
   return <div className="user-block">
     <div className="user-block__avatar">
       <Link
-        to="/favorites"
+        to="/mylist"
         style={{
           color: `#dfcf77`,
           textDecoration: `none`,

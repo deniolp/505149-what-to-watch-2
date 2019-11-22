@@ -83,7 +83,7 @@ const App = (props) => {
       />;
     }}
     />
-    <Route path="/favorites" exact render={(routerProps) => {
+    <Route path="/mylist" exact render={(routerProps) => {
       const FavoritesWrapped = withPrivate(Favorites);
       onLoadFavorites();
       return <FavoritesWrapped
