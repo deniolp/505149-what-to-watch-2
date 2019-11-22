@@ -16,6 +16,8 @@ describe(`BigPlayer`, () => {
           setIsPlaying={jest.fn()}
           progress={0}
           setProgress={jest.fn()}
+          isLoading={true}
+          setIsLoading={jest.fn()}
         />).toJSON();
 
     expect(tree).toMatchSnapshot();

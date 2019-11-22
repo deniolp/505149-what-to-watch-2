@@ -264,6 +264,7 @@ Array [
                 height="100%"
                 muted={true}
                 poster="/img/shutter-island.jpg"
+                preload="auto"
                 width="100%"
               >
                 <source

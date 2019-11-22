@@ -19,6 +19,8 @@ describe(`In BigPlayer`, () => {
     setIsPlaying={jest.fn()}
     progress={0}
     setProgress={jest.fn()}
+    isLoading={true}
+    setIsLoading={jest.fn()}
   />);
   const buttonElement = BigPlayerWrapper.find(`.player__play`);
 

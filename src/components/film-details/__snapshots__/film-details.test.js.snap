@@ -308,6 +308,7 @@ Array [
                 height="100%"
                 muted={true}
                 poster="/img/revenant.jpg"
+                preload="auto"
                 width="100%"
               >
                 <source
@@ -345,6 +346,7 @@ Array [
                 height="100%"
                 muted={true}
                 poster="/img/dardjeeling-limited.jpg"
+                preload="auto"
                 width="100%"
               >
                 <source
