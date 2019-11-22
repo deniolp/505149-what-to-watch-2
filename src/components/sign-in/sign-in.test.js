@@ -9,6 +9,8 @@ describe(`SignIn`, () => {
         <SignIn
           isAuthorizationRequired={true}
           submitForm={jest.fn()}
+          error={null}
+          setError={jest.fn()}
         />).toJSON();
 
     expect(tree).toMatchSnapshot();
