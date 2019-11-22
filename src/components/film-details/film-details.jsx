@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
 
 import Header from '../header/header';
 import Tabs from '../tabs/tabs';
@@ -13,7 +13,12 @@ import {Operation} from '../../reducer/reducer';
 const TabsWrapped = withLabel(Tabs);
 
 const FilmDetails = (props) => {
-  const {onOpenCloseVideoButtonClick, onLoadFilms, films, isAuthorizationRequired, onPostFavorite} = props;
+  const {onOpenCloseVideoButtonClick,
+    onLoadFilms,
+    films,
+    isAuthorizationRequired,
+    onPostFavorite,
+    history} = props;
 
   const renderFilms = (film, filteredByGenreFilms) => {
     return <React.Fragment>
@@ -49,7 +54,7 @@ const FilmDetails = (props) => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
-                  onClick={() => onPostFavorite(film.id, film.isFavorite, false)}
+                  onClick={() => isAuthorizationRequired ? history.push(`/login`) : onPostFavorite(film.id, film.isFavorite, true)}
                 >
                   {film.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
                     <use xlinkHref="#in-list"></use>
@@ -130,6 +135,7 @@ FilmDetails.propTypes = {
   onLoadFilms: PropTypes.func.isRequired,
   onPostFavorite: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -141,4 +147,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {FilmDetails};
-export default connect(mapStateToProps, mapDispatchToProps)(FilmDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilmDetails));
