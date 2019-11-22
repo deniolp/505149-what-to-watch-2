@@ -11,13 +11,14 @@ describe(`Reducer works correctly: `, () => {
       films: [],
       promo: {},
       comments: [],
-      filmsCounter: 8,
+      filmsCounter: 20,
       playingFilm: false,
       isAuthorizationRequired: false,
       user: {},
       favorites: [],
       isReviewSending: false,
       didReviewSend: false,
+      error: null,
     });
   });
 });
@@ -33,14 +34,14 @@ describe(`Action creators works correctly: `, () => {
   it(`action creator for increasing counter returns correct action`, () => {
     expect(ActionCreator.increaseFilmsCounter()).toEqual({
       type: `INCREASE_FILMS_COUNTER`,
-      payload: 8,
+      payload: 20,
     });
   });
 
   it(`action creator for reseting counter returns correct action`, () => {
     expect(ActionCreator.resetFilmsCounter()).toEqual({
       type: `RESET_FILMS_COUNTER`,
-      payload: 8,
+      payload: 20,
     });
   });
 
