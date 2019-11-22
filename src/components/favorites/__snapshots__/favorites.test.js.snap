@@ -43,7 +43,7 @@ exports[`Favorites renders correctly 1`] = `
         className="user-block__avatar"
       >
         <a
-          href="/favorites"
+          href="/mylist"
           onClick={[Function]}
           style={
             Object {
