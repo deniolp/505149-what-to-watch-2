@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
@@ -7,8 +7,13 @@ import {Operation} from '../../reducer/reducer';
 
 const SignIn = (props) => {
   const {submitForm, isAuthorizationRequired} = props;
-  const handleFormSubmit = (email, password) => {
-    submitForm(email, password);
+  const [error, setError] = useState(null);
+  const handleFormSubmit = (email, password = null) => {
+    if (!password) {
+      setError(`Error!`);
+    } else {
+      submitForm(email, password);
+    }
   };
 
   return isAuthorizationRequired ? <div className="user-page">
@@ -44,6 +49,7 @@ const SignIn = (props) => {
           <button className="sign-in__btn" type="submit">Sign in</button>
         </div>
       </form>
+      {error && <div>{error}</div>}
     </div>
 
     <footer className="page-footer">
