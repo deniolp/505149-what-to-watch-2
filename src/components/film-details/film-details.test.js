@@ -40,6 +40,9 @@ describe(`FilmDetails`, () => {
           onLoadFilms={jest.fn()}
           isAuthorizationRequired={false}
           onPostFavorite={jest.fn()}
+          history={{
+            push: jest.fn(),
+          }}
         /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -42,6 +42,9 @@ describe(`MainPage`, () => {
           filmsCounter={1}
           promo={filmsListMock[0]}
           isAuthorizationRequired={false}
+          history={{
+            push: jest.fn(),
+          }}
         /></Provider></BrowserRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
