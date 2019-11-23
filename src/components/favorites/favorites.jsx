@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import Avatar from '../avatar/avatar';
 import Footer from '../footer/footer';
@@ -11,16 +12,15 @@ const FilmCardWrapped = withIsPreviewPlaying(FilmCard);
 
 const Favorites = (props) => {
   const {favorites, user} = props;
-  const path = location.pathname === `/` ? null : `/`;
 
   return <div className="user-page">
     <header className="page-header user-page__head">
       <div className="logo">
-        <a href={path} className="logo__link">
+        <Link className="logo__link" to="/">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </a>
+        </Link>
       </div>
 
       <h1 className="page-title user-page__title">My list</h1>
@@ -74,4 +74,4 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 export {Favorites};
-export default connect(mapStateToProps, null)(Favorites);
+export default connect(mapStateToProps, null)(memo(Favorites));
