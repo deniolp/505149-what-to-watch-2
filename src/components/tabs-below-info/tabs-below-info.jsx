@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 import ReviewsList from '../reviews-list/reviews-list';
@@ -116,4 +116,4 @@ TabsBelowInfo.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-export default TabsBelowInfo;
+export default memo(TabsBelowInfo);

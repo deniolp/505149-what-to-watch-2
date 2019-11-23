@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, memo} from 'react';
 import PropTypes from 'prop-types';
 
 const BigPlayer = (props) => {
@@ -152,4 +152,4 @@ BigPlayer.propTypes = {
   setIsLoading: PropTypes.func.isRequired,
 };
 
-export default BigPlayer;
+export default memo(BigPlayer);

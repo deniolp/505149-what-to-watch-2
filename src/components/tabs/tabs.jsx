@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 import TabsBelowInfo from '../tabs-below-info/tabs-below-info';
@@ -75,4 +75,4 @@ Tabs.propTypes = {
   setLabel: PropTypes.func.isRequired,
 };
 
-export default Tabs;
+export default memo(Tabs);

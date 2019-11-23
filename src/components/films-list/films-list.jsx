@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 import FilmCard from '../film-card/film-card';
@@ -50,4 +50,4 @@ FilmsList.propTypes = {
   activeGenre: PropTypes.string,
 };
 
-export default FilmsList;
+export default memo(FilmsList);

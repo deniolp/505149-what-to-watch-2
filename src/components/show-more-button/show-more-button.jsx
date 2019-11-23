@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 const ShowMoreButton = (props) => {
@@ -20,4 +20,4 @@ ShowMoreButton.propTypes = {
   shouldShowButton: PropTypes.bool.isRequired,
 };
 
-export default ShowMoreButton;
+export default memo(ShowMoreButton);

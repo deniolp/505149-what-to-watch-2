@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from "react-router-dom";
 
@@ -161,4 +161,4 @@ MainPage.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default withRouter(MainPage);
+export default memo(withRouter(MainPage));

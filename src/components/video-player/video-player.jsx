@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, memo} from 'react';
 import PropTypes from 'prop-types';
 
 const VideoPlayer = (props) => {
@@ -41,4 +41,4 @@ VideoPlayer.propTypes = {
   isPreviewPlaying: PropTypes.bool.isRequired,
 };
 
-export default VideoPlayer;
+export default memo(VideoPlayer);

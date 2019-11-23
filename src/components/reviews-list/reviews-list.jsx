@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -44,4 +44,4 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 export {ReviewsList};
-export default connect(mapStateToProps, null)(ReviewsList);
+export default connect(mapStateToProps, null)(memo(ReviewsList));

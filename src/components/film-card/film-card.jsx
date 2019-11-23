@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
@@ -70,4 +70,4 @@ FilmCard.propTypes = {
   setIsPreviewPlaying: PropTypes.func.isRequired,
 };
 
-export default FilmCard;
+export default memo(FilmCard);

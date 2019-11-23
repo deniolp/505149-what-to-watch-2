@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
@@ -147,4 +147,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {FilmDetails};
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilmDetails));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(withRouter(FilmDetails)));

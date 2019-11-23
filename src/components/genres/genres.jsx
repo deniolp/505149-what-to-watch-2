@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 const Genres = (props) => {
@@ -25,4 +25,4 @@ Genres.propTypes = {
   genres: PropTypes.instanceOf(Set).isRequired,
 };
 
-export default Genres;
+export default memo(Genres);

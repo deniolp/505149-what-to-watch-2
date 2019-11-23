@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
@@ -34,4 +34,4 @@ Avatar.propTypes = {
   }),
 };
 
-export default Avatar;
+export default memo(Avatar);
