@@ -18,7 +18,7 @@ Array [
           height="100%"
           muted={true}
           poster="/img/aviator.jpg"
-          preload="auto"
+          preload="none"
           width="100%"
         >
           <source
@@ -56,7 +56,7 @@ Array [
           height="100%"
           muted={true}
           poster="/img/shutter-island.jpg"
-          preload="auto"
+          preload="none"
           width="100%"
         >
           <source

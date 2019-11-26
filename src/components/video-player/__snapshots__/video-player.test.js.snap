@@ -5,7 +5,7 @@ exports[`VideoPlayer renders correctly 1`] = `
   height="100%"
   muted={true}
   poster="/img/aviator.jpg"
-  preload="auto"
+  preload="none"
   width="100%"
 >
   <source
