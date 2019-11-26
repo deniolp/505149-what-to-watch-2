@@ -1,4 +1,4 @@
-import {normalizeKeys, changeFilm} from '../utils';
+import {normalizeKeys, changeFilm, changeVideoUrl} from '../utils';
 
 const initialState = {
   genre: `All genres`,
@@ -87,6 +87,7 @@ const Operation = {
     return api.get(`films`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
+        changeVideoUrl(preparedData);
         dispatch(ActionCreator.loadFilms(preparedData));
       })
       .catch((_err) => {});

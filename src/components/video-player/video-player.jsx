@@ -22,7 +22,7 @@ const VideoPlayer = (props) => {
 
   return <video
     ref={videoRef}
-    preload = "auto"
+    preload = "none"
     muted
     poster={poster}
     width="100%"
