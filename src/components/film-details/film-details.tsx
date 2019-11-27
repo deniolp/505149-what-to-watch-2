@@ -1,5 +1,4 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 
@@ -9,16 +8,35 @@ import withLabel from '../../hocs/with-label/with-label';
 import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
 import {Operation} from '../../reducer/reducer';
+import {Film} from "../../types";
+
+interface Props {
+  onOpenCloseVideoButtonClick: (film: Film) => void;
+  onLoadFilms: () => void;
+  films: Film[];
+  isAuthorizationRequired: boolean;
+  onPostFavorite: (id: number, isFavorite: boolean, isPromo: boolean) => void;
+  history: {
+    push: (path: string) => void;
+  };
+  match: {
+    params: {
+      id: number;
+    };
+  };
+}
 
 const TabsWrapped = withLabel(Tabs);
 
-const FilmDetails = (props) => {
-  const {onOpenCloseVideoButtonClick,
+const FilmDetails = (props: Props) => {
+  const {
+    onOpenCloseVideoButtonClick,
     onLoadFilms,
     films,
     isAuthorizationRequired,
     onPostFavorite,
-    history} = props;
+    history
+  } = props;
 
   const renderFilms = (film, filteredByGenreFilms) => {
     return <React.Fragment>
@@ -110,34 +128,6 @@ const FilmDetails = (props) => {
   return null;
 };
 
-FilmDetails.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  })),
-  match: PropTypes.object.isRequired,
-  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
-  onLoadFilms: PropTypes.func.isRequired,
-  onPostFavorite: PropTypes.func.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   films: state.films,
 });
@@ -147,4 +137,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {FilmDetails};
-export default connect(mapStateToProps, mapDispatchToProps)(memo(withRouter(FilmDetails)));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(withRouter(FilmDetails)));

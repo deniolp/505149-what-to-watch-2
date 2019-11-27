@@ -1,12 +1,17 @@
-import React, {useEffect, memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const VideoPlayer = (props) => {
+interface Props {
+  preview: string;
+  poster: string;
+  isPreviewPlaying: boolean;
+}
+
+const VideoPlayer = (props: Props) => {
   const {preview, poster, isPreviewPlaying} = props;
   const format = preview.match(/\w+$/);
   const videoRef = React.createRef();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isPreviewPlaying) {
       const promise = videoRef.current.play();
       if (promise !== undefined) {
@@ -35,10 +40,4 @@ const VideoPlayer = (props) => {
   </video>;
 };
 
-VideoPlayer.propTypes = {
-  preview: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
-  isPreviewPlaying: PropTypes.bool.isRequired,
-};
-
-export default memo(VideoPlayer);
+export default React.memo(VideoPlayer);

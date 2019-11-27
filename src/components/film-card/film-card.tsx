@@ -1,10 +1,16 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 import VideoPlayer from '../video-player/video-player';
+import {Film} from "../../types";
 
-const FilmCard = (props) => {
+interface Props {
+  film: Film;
+  setIsPreviewPlaying: (isPreviewPlaying: boolean) => void;
+  isPreviewPlaying: boolean;
+}
+
+const FilmCard = (props: Props) => {
   const {film, isPreviewPlaying, setIsPreviewPlaying} = props;
 
   let timerId;
@@ -46,28 +52,4 @@ const FilmCard = (props) => {
   </article>;
 };
 
-FilmCard.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }),
-  isPreviewPlaying: PropTypes.bool.isRequired,
-  setIsPreviewPlaying: PropTypes.func.isRequired,
-};
-
-export default memo(FilmCard);
+export default React.memo(FilmCard);

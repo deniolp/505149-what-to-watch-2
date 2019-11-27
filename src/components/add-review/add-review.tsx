@@ -1,14 +1,38 @@
-import React, {useEffect, memo} from 'react';
-import PropTypes from 'prop-types';
-import {Redirect, Link} from 'react-router-dom';
+import * as React from 'react';
+import {Redirect, Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {withRouter} from "react-router-dom";
 
 import {ActionCreator, Operation} from '../../reducer/reducer';
 import Avatar from '../avatar/avatar';
+import {Film, User} from "../../types";
 
-const AddReview = (props) => {
-  const {films,
+interface Props {
+  films: Film[];
+  user: User;
+  onSubmitForm: (review: {
+    rating: number;
+    comment: string;
+  }, id: number) => void;
+  onLoadFilms: () => void;
+  onRadioClick: () => void;
+  onTextareaChange: (evt: any) => void;
+  isValidated: boolean;
+  isReviewSending: boolean;
+  onUpdateForm: () => void;
+  didReviewSend: boolean;
+  history: {
+    push: (path: string) => void;
+  };
+  match: {
+    params: {
+      id: number;
+    };
+  };
+}
+
+const AddReview = (props: Props) => {
+  const {
+    films,
     user,
     onSubmitForm,
     onLoadFilms,
@@ -18,11 +42,12 @@ const AddReview = (props) => {
     isReviewSending,
     onUpdateForm,
     didReviewSend,
-    history} = props;
+    history
+  } = props;
   const formRef = React.createRef();
   let id;
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (didReviewSend) {
       formRef.current.reset();
       onUpdateForm();
@@ -32,7 +57,7 @@ const AddReview = (props) => {
 
   const redirect = () => history.push(`/film/${id}`);
 
-  const handleFormSubmit = (comment, rating, filmId) => {
+  const handleFormSubmit = (comment, rating, filmId: number) => {
     const review = {
       rating,
       comment
@@ -40,7 +65,7 @@ const AddReview = (props) => {
     onSubmitForm(review, filmId);
   };
 
-  const renderFilm = (film) => {
+  const renderFilm = (film: Film) => {
     return <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
@@ -131,44 +156,6 @@ const AddReview = (props) => {
   return null;
 };
 
-AddReview.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  })),
-  match: PropTypes.object.isRequired,
-  onSubmitForm: PropTypes.func.isRequired,
-  onLoadFilms: PropTypes.func.isRequired,
-  onRadioClick: PropTypes.func.isRequired,
-  onTextareaChange: PropTypes.func.isRequired,
-  onUpdateForm: PropTypes.func.isRequired,
-  isValidated: PropTypes.bool.isRequired,
-  isReviewSending: PropTypes.bool.isRequired,
-  didReviewSend: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    avatarUrl: PropTypes.string,
-  }),
-};
-
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isReviewSending: state.isReviewSending,
   didReviewSend: state.isReviewSending,
@@ -184,5 +171,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {AddReview};
-export default connect(mapStateToProps, mapDispatchToProps)(memo(withRouter(AddReview)));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(withRouter(AddReview)));
 

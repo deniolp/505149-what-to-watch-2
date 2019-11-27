@@ -1,8 +1,13 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 
-const Avatar = (props) => {
+import {User} from "../../types";
+
+interface Props {
+  user: User;
+}
+
+const Avatar = (props: Props) => {
   const {user} = props;
 
   return <div className="user-block">
@@ -25,13 +30,4 @@ const Avatar = (props) => {
   </div>;
 };
 
-Avatar.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    avatarUrl: PropTypes.string,
-  }),
-};
-
-export default memo(Avatar);
+export default React.memo(Avatar);

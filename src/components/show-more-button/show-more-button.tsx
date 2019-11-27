@@ -1,7 +1,11 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const ShowMoreButton = (props) => {
+interface Props {
+  onShowMoreButtonClick: () => void;
+  shouldShowButton: boolean;
+}
+
+const ShowMoreButton = (props: Props) => {
   const {onShowMoreButtonClick, shouldShowButton} = props;
 
   return shouldShowButton && <div className="catalog__more">
@@ -15,9 +19,4 @@ const ShowMoreButton = (props) => {
   </div>;
 };
 
-ShowMoreButton.propTypes = {
-  onShowMoreButtonClick: PropTypes.func.isRequired,
-  shouldShowButton: PropTypes.bool.isRequired,
-};
-
-export default memo(ShowMoreButton);
+export default React.memo(ShowMoreButton);

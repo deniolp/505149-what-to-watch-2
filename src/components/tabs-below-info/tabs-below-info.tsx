@@ -1,9 +1,14 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import ReviewsList from '../reviews-list/reviews-list';
+import {Film} from "../../types";
 
-const TabsBelowInfo = (props) => {
+interface Props {
+  film: Film;
+  label: string;
+}
+
+const TabsBelowInfo = (props: Props) => {
   const {film, label} = props;
   const getDuration = (duration) => {
     const hours = Math.floor(duration / 60);
@@ -87,33 +92,4 @@ const TabsBelowInfo = (props) => {
   }
 };
 
-TabsBelowInfo.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }),
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  })),
-  label: PropTypes.string.isRequired,
-};
-
-export default memo(TabsBelowInfo);
+export default React.memo(TabsBelowInfo);

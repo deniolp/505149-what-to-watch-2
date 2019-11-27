@@ -24,7 +24,12 @@ const babelizing = {
   },
 };
 
-const rules = [babelizing];
+const tsLoader = {
+  test: /\.(tsx|ts)?$/,
+  loader: `ts-loader`
+};
+
+const rules = [babelizing, tsLoader];
 
 const resolve = {
   extensions: ['.ts', '.tsx', '.js', '.jsx']

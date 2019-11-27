@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import * as React from 'react';
 
 const withValidated = ((Component) => {
   const WithValidated = (props) => {
-    const [isRadioPressed, setIsRadioPressed] = useState(false);
-    const [isValidated, setIsValidated] = useState(false);
+    const [isRadioPressed, setIsRadioPressed] = React.useState(false);
+    const [isValidated, setIsValidated] = React.useState(false);
 
     const handleRadioClick = () => {
       setIsRadioPressed(true);

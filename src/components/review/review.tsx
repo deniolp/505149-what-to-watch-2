@@ -1,7 +1,12 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const Review = (props) => {
+import {Review} from "../../types";
+
+interface Props {
+  review: Review;
+}
+
+const Review = (props: Props) => {
   const {review} = props;
   const getDate = (data) => {
     const year = data.getFullYear();
@@ -24,17 +29,4 @@ const Review = (props) => {
   </div>;
 };
 
-Review.propTypes = {
-  review: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-    date: PropTypes.string.isRequired,
-    comment: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  }),
-};
-
-export default memo(Review);
+export default React.memo(Review);

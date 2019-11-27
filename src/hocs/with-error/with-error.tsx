@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import * as React from 'react';
 
 const withError = ((Component) => {
   const WithError = (props) => {
-    const [error, setError] = useState(null);
+    const [error, setError] = React.useState(null);
     return <Component
       {...props}
       error={error}

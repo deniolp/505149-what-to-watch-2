@@ -1,15 +1,32 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
-import {withRouter} from "react-router-dom";
+import * as React from 'react';
+import {withRouter} from 'react-router-dom';
 
 import Header from '../header/header';
 import Genres from '../genres/genres';
 import FilmsList from '../films-list/films-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
+import {Film} from "../../types";
 
-const MainPage = (props) => {
-  const {films,
+interface Props {
+  films: Film[];
+  genre: string;
+  onGenreClick: (genre: string) => void;
+  genres: string[];
+  filmsCounter: number;
+  onShowMoreButtonClick: () => void;
+  onOpenCloseVideoButtonClick: (film: Film) => void;
+  onPostFavorite: (id: number, isFavorite: boolean, isPromo: boolean) => void;
+  promo: Film;
+  isAuthorizationRequired: boolean;
+  history: {
+    push: (path: string) => void;
+  };
+}
+
+const MainPage = (props: Props) => {
+  const {
+    films,
     genre,
     onGenreClick,
     genres,
@@ -19,7 +36,8 @@ const MainPage = (props) => {
     onPostFavorite,
     promo,
     isAuthorizationRequired,
-    history} = props;
+    history
+  } = props;
 
   const getFilmsLength = () => {
     const filteredFilms = genre === `All genres` ? films : films.filter((film) => film.genre === genre);
@@ -111,54 +129,4 @@ const MainPage = (props) => {
   </React.Fragment>;
 };
 
-MainPage.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  })),
-  promo: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    posterImage: PropTypes.string,
-    previewVideoLink: PropTypes.string,
-    videoLink: PropTypes.string,
-    backgroundColor: PropTypes.string,
-    backgroundImage: PropTypes.string,
-    previewImage: PropTypes.string,
-    genre: PropTypes.string,
-    released: PropTypes.number,
-    rating: PropTypes.number,
-    scoresCount: PropTypes.number,
-    runTime: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    isFavorite: PropTypes.bool,
-  }),
-  genre: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func.isRequired,
-  genres: PropTypes.instanceOf(Set).isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
-  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
-  onPostFavorite: PropTypes.func.isRequired,
-  filmsCounter: PropTypes.number.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
-};
-
-export default memo(withRouter(MainPage));
+export default React.memo(withRouter(MainPage));

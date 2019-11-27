@@ -1,7 +1,12 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const Genres = (props) => {
+interface Props {
+  activeGenre: string;
+  onGenreClick: (genre: string) => void;
+  genres: string[];
+}
+
+const Genres = (props: Props) => {
   const {activeGenre, onGenreClick, genres} = props;
 
   return <ul className="catalog__genres-list">
@@ -19,10 +24,4 @@ const Genres = (props) => {
   </ul>;
 };
 
-Genres.propTypes = {
-  activeGenre: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func.isRequired,
-  genres: PropTypes.instanceOf(Set).isRequired,
-};
-
-export default memo(Genres);
+export default React.memo(Genres);

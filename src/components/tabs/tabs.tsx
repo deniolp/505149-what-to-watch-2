@@ -1,9 +1,15 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import TabsBelowInfo from '../tabs-below-info/tabs-below-info';
+import {Film} from "../../types";
 
-const Tabs = (props) => {
+interface Props {
+  film: Film;
+  label: string;
+  setLabel: (label: string) => void;
+}
+
+const Tabs = (props: Props) => {
   const {film, label, setLabel} = props;
 
   return <div className="movie-card__desc">
@@ -45,34 +51,4 @@ const Tabs = (props) => {
   </div>;
 };
 
-Tabs.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }),
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  })),
-  label: PropTypes.string.isRequired,
-  setLabel: PropTypes.func.isRequired,
-};
-
-export default memo(Tabs);
+export default React.memo(Tabs);

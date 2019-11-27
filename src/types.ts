@@ -1,3 +1,8 @@
+interface Commenter {
+  id: number,
+  name: string,
+}
+
 export interface Film {
   id: number,
   name: string,
@@ -23,4 +28,12 @@ export interface User {
   name: string,
   email: string,
   avatarUrl: string,
+}
+
+export interface Review {
+  id: number,
+  user: Commenter,
+  rating: number,
+  comment: string,
+  date: any,
 }

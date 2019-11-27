@@ -1,8 +1,21 @@
-import React, {useEffect, useRef, memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const BigPlayer = (props) => {
-  const {playingFilm,
+import {Film} from "../../types";
+
+interface Props {
+  playingFilm: Film;
+  onOpenCloseVideoButtonClick: (bool: boolean) => void;
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: any) => void;
+  progress: number;
+  setProgress: (progress: number) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+}
+
+const BigPlayer = (props: Props) => {
+  const {
+    playingFilm,
     onOpenCloseVideoButtonClick,
     isPlaying,
     setIsPlaying,
@@ -11,15 +24,15 @@ const BigPlayer = (props) => {
     isLoading,
     setIsLoading
   } = props;
-  const videoRef = useRef();
+  const videoRef = React.useRef();
 
-  useEffect(() => {
+  React.useEffect(() => {
     videoRef.current.oncanplaythrough = () => {
       setIsLoading(false);
     };
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isPlaying) {
       videoRef.current.onended = () => {
         videoRef.current.load();
@@ -123,33 +136,4 @@ const BigPlayer = (props) => {
   </div>;
 };
 
-BigPlayer.propTypes = {
-  playingFilm: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }),
-  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  setIsPlaying: PropTypes.func.isRequired,
-  progress: PropTypes.number.isRequired,
-  setProgress: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  setIsLoading: PropTypes.func.isRequired,
-};
-
-export default memo(BigPlayer);
+export default React.memo(BigPlayer);

@@ -1,10 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
+interface Props {
+  isAuthorizationRequired: boolean;
+}
+
 const withPrivate = ((Component) => {
-  const WithPrivate = (props) => {
+  const WithPrivate = (props: Props) => {
     const {isAuthorizationRequired} = props;
     if (isAuthorizationRequired) {
       return <Redirect to="/login" />;
@@ -13,10 +16,6 @@ const withPrivate = ((Component) => {
         {...props}
       />;
     }
-  };
-
-  WithPrivate.propTypes = {
-    isAuthorizationRequired: PropTypes.bool.isRequired,
   };
 
   const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

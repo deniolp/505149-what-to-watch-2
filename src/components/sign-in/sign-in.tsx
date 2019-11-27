@@ -1,11 +1,18 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 import {Operation} from '../../reducer/reducer';
+import {Film} from "../../types";
 
-const SignIn = (props) => {
+interface Props {
+  submitForm: (email: string, password: string) => void;
+  isAuthorizationRequired: boolean;
+  error: string;
+  setError: (error: string) => void;
+}
+
+const SignIn = (props: Props) => {
   const {submitForm, isAuthorizationRequired, error, setError} = props;
   const handleFormSubmit = (email, password = null) => {
     if (!password) {
@@ -67,16 +74,9 @@ const SignIn = (props) => {
   </div> : <Redirect to="/"></Redirect>;
 };
 
-SignIn.propTypes = {
-  submitForm: PropTypes.func.isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-  setError: PropTypes.func.isRequired,
-};
-
 const mapDispatchToProps = (dispatch) => ({
   submitForm: (email, password) => dispatch(Operation.logIn(email, password)),
 });
 
 export {SignIn};
-export default connect(null, mapDispatchToProps)(memo(SignIn));
+export default connect(null, mapDispatchToProps)(React.memo(SignIn));

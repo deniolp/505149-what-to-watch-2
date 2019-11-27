@@ -1,5 +1,4 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
@@ -7,10 +6,16 @@ import Avatar from '../avatar/avatar';
 import Footer from '../footer/footer';
 import FilmCard from '../film-card/film-card';
 import withIsPreviewPlaying from '../../hocs/with-is-preview-playing/with-is-preview-playing';
+import {Film, User} from "../../types";
+
+interface Props {
+  favorites: Film[];
+  user: User;
+}
 
 const FilmCardWrapped = withIsPreviewPlaying(FilmCard);
 
-const Favorites = (props) => {
+const Favorites = (props: Props) => {
   const {favorites, user} = props;
 
   return <div className="user-page">
@@ -40,38 +45,9 @@ const Favorites = (props) => {
   </div>;
 };
 
-Favorites.propTypes = {
-  favorites: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  })),
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    avatarUrl: PropTypes.string,
-  }),
-  match: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   favorites: state.favorites,
 });
 
 export {Favorites};
-export default connect(mapStateToProps, null)(memo(Favorites));
+export default connect(mapStateToProps, null)(React.memo(Favorites));

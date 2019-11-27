@@ -1,11 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import Avatar from '../avatar/avatar';
 
-const Header = (props) => {
+import {User} from "../../types";
+
+interface Props {
+  user: User;
+}
+
+const Header = (props: Props) => {
   const {user} = props;
 
   return <React.Fragment>
@@ -21,15 +26,6 @@ const Header = (props) => {
       <Avatar user={user}/>
     </header>
   </React.Fragment>;
-};
-
-Header.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    avatarUrl: PropTypes.string,
-  }),
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
