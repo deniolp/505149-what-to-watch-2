@@ -1,4 +1,10 @@
 import {normalizeKeys, changeFilm, changeVideoUrl} from '../utils';
+import {Film, Review, User} from '../types';
+
+interface ActionType {
+  type: string;
+  payload: any;
+}
 
 const initialState = {
   genre: `All genres`,
@@ -16,74 +22,74 @@ const initialState = {
 };
 
 const ActionCreator = {
-  loadFilms: (films) => ({
+  loadFilms: (films: Film[]): ActionType => ({
     type: `LOAD_FILMS`,
     payload: films,
   }),
-  loadPromo: (film) => ({
+  loadPromo: (film: Film | {}): ActionType => ({
     type: `LOAD_PROMO`,
     payload: film,
   }),
-  updatePromo: (film) => ({
+  updatePromo: (film: Film | {}): ActionType => ({
     type: `UPDATE_PROMO`,
     payload: film,
   }),
-  loadComments: (comments) => ({
+  loadComments: (comments: Review[]): ActionType => ({
     type: `LOAD_COMMENTS`,
     payload: comments,
   }),
-  loadFavorites: (favorites) => ({
+  loadFavorites: (favorites: Film[]): ActionType => ({
     type: `LOAD_FAVORITES`,
     payload: favorites,
   }),
-  changeGenre: (selectedGenre) => ({
+  changeGenre: (selectedGenre: string): ActionType => ({
     type: `CHANGE_GENRE`,
     payload: selectedGenre,
   }),
-  increaseFilmsCounter: () => ({
+  increaseFilmsCounter: (): ActionType => ({
     type: `INCREASE_FILMS_COUNTER`,
     payload: 20,
   }),
-  resetFilmsCounter: () => ({
+  resetFilmsCounter: (): ActionType => ({
     type: `RESET_FILMS_COUNTER`,
     payload: 20,
   }),
-  setPlayingFilm: (film) => ({
+  setPlayingFilm: (film: Film): ActionType => ({
     type: `SET_PLAYING_FILM`,
     payload: film,
   }),
-  changeIsAuthorizationRequired: (bool) => ({
+  changeIsAuthorizationRequired: (bool: boolean): ActionType => ({
     type: `CHANGE_IS_AUTHORIZATION_REQUIRED`,
     payload: bool,
   }),
-  authorizeUser: (user) => ({
+  authorizeUser: (user: User | {}): ActionType => ({
     type: `AUTHORIZE_USER`,
     payload: normalizeKeys(user),
   }),
-  blockForm: (bool) => ({
+  blockForm: (bool: boolean): ActionType => ({
     type: `BLOCK_FORM`,
     payload: bool,
   }),
-  cleanForm: (bool) => ({
+  cleanForm: (bool: boolean): ActionType => ({
     type: `CLEAN_FORM`,
     payload: bool,
   }),
-  addToFavorites: (film) => ({
+  addToFavorites: (film: Film | {}): ActionType => ({
     type: `ADD_TO_FAVORITES`,
     payload: film,
   }),
-  deleteFromFavorites: (film) => ({
+  deleteFromFavorites: (film: Film | {}): ActionType => ({
     type: `DELETE_FROM_FAVORITES`,
     payload: film,
   }),
-  showError: (error) => ({
+  showError: (error: string): ActionType => ({
     type: `SHOW_ERROR`,
     payload: error,
   }),
 };
 
 const Operation = {
-  loadFilms: () => (dispatch, _, api) => {
+  loadFilms: () => (dispatch, _, api): void => {
     return api.get(`films`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
@@ -92,7 +98,7 @@ const Operation = {
       })
       .catch((_err) => {});
   },
-  loadPromoFilm: () => (dispatch, _, api) => {
+  loadPromoFilm: () => (dispatch, _, api): void => {
     return api.get(`films/promo`)
       .then((response) => {
         const preparedData = normalizeKeys(response.data);
@@ -100,7 +106,7 @@ const Operation = {
       })
       .catch((_err) => {});
   },
-  loadComments: (id) => (dispatch, _, api) => {
+  loadComments: (id) => (dispatch, _, api): void => {
     return api.get(`comments/${id}`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
@@ -108,7 +114,7 @@ const Operation = {
       })
       .catch((_err) => {});
   },
-  loadFavorites: () => (dispatch, _, api) => {
+  loadFavorites: () => (dispatch, _, api): void => {
     return api.get(`favorite`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
@@ -117,7 +123,7 @@ const Operation = {
       })
       .catch((_err) => {});
   },
-  postFavorite: (id, isFavorite, isPromo) => (dispatch, _, api) => {
+  postFavorite: (id, isFavorite, isPromo) => (dispatch, _, api): void => {
     const status = isFavorite ? 0 : 1;
     return api.post(`favorite/${id}/${status}`)
       .then((response) => {
@@ -129,7 +135,7 @@ const Operation = {
       })
       .catch((_err) => {});
   },
-  checkIsLogin: () => (dispatch, _, api) => {
+  checkIsLogin: () => (dispatch, _, api): void => {
     return api.get(`login`)
       .then((response) => {
         if (response.data) {
@@ -141,7 +147,7 @@ const Operation = {
       })
       .catch((_err) => {});
   },
-  logIn: (email, password) => (dispatch, _, api) => {
+  logIn: (email, password) => (dispatch, _, api): void => {
     return api.post(`login`, {email, password})
       .then((response) => {
         if (response.data) {
@@ -151,7 +157,7 @@ const Operation = {
       })
       .catch((_err) => {});
   },
-  postReview: (review, id) => (dispatch, _, api) => {
+  postReview: (review, id) => (dispatch, _, api): void => {
     return api.post(`comments/${id}`, review)
       .then((response) => {
         if (response.data) {
@@ -167,7 +173,7 @@ const Operation = {
   },
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: ActionType): object => {
   switch (action.type) {
     case `LOAD_FILMS`: return Object.assign({}, state, {
       films: action.payload,
