@@ -3,16 +3,16 @@ import axios from 'axios';
 import {ActionCreator} from './reducer/reducer';
 
 let api;
-const createAPI = (dispatch) => {
+const createAPI = (dispatch): object => {
   api = axios.create({
     baseURL: `https://htmlacademy-react-2.appspot.com/wtw`,
     timeout: 5000,
     withCredentials: true,
   });
 
-  const onSuccess = (response) => response;
+  const onSuccess = (response): object => response;
 
-  const onFail = (error) => {
+  const onFail = (error): void => {
     if (error.response.status === 401) {
       dispatch(ActionCreator.authorizeUser({}));
       dispatch(ActionCreator.changeIsAuthorizationRequired(true));
