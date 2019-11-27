@@ -107,7 +107,15 @@ describe(`Action creators works correctly: `, () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: `LOAD_FAVORITES`,
-          payload: [{fakeFilm: true}, {fakeFilm2: true}],
+          payload: [
+            {
+              fakeFilm: true,
+              previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+            },
+            {
+              fakeFilm2: true,
+              previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+            }],
         });
       });
   });
