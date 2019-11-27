@@ -9,8 +9,8 @@ Enzyme.configure({adapter: new Adapter()});
 
 describe(`In BigPlayer`, () => {
   const filmMock = filmsListMock[0];
-  const pauseStub = jest.spyOn(window.HTMLMediaElement.prototype, `pause`).mockImplementation(() => {});
-  const playStub = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(() => {});
+  const pauseStub = jest.spyOn(window.HTMLMediaElement.prototype, `pause`).mockImplementation(jest.fn());
+  const playStub = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(jest.fn());
 
   const BigPlayerWrapper = mount(<BigPlayer
     playingFilm={filmMock}

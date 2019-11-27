@@ -13,11 +13,10 @@ const VideoPlayer = (props: Props) => {
 
   React.useEffect(() => {
     if (isPreviewPlaying) {
-      const promise = videoRef.current.play();
-      if (promise !== undefined) {
-        promise.catch((_error) => {
-        }).then(() => {
-        });
+      try {
+        videoRef.current.play();
+      } catch (_err) {
+        throw _err;
       }
     } else {
       videoRef.current.pause();

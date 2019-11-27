@@ -10,9 +10,9 @@ Enzyme.configure({adapter: new Adapter()});
 describe(`In VideoPlayer`, () => {
   const preview = filmsListMock[0].previewVideoLink;
   const poster = filmsListMock[0].posterImage;
-  const playStub = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(() => {});
-  const pauseStub = jest.spyOn(window.HTMLMediaElement.prototype, `pause`).mockImplementation(() => {});
-  const loadStub = jest.spyOn(window.HTMLMediaElement.prototype, `load`).mockImplementation(() => {});
+  const playStub = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(jest.fn());
+  const pauseStub = jest.spyOn(window.HTMLMediaElement.prototype, `pause`).mockImplementation(jest.fn());
+  const loadStub = jest.spyOn(window.HTMLMediaElement.prototype, `load`).mockImplementation(jest.fn());
 
   const videoPlayer = mount(<VideoPlayer
     preview={preview}
