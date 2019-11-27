@@ -2,7 +2,7 @@ const {join} = require('path');
 
 const path = join(__dirname, 'public');
 
-const entry = './src/index.js';
+const entry = './src/index.tsx';
 const output = {
   filename: 'bundle.js',
   path,
