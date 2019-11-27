@@ -6,8 +6,8 @@ interface Props {
   isAuthorizationRequired: boolean;
 }
 
-const withPrivate = ((Component) => {
-  const WithPrivate = (props: Props) => {
+const withPrivate = ((Component: React.SFC): React.SFC => {
+  const WithPrivate = (props: Props): React.SFC => {
     const {isAuthorizationRequired} = props;
     if (isAuthorizationRequired) {
       return <Redirect to="/login" />;

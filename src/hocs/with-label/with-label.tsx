@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-const withLabel = ((Component) => {
-  const WithLabel = (props) => {
+const withLabel = ((Component: React.SFC): React.SFC => {
+  const WithLabel = (props): React.SFC => {
     const [label, setLabel] = React.useState(`Overview`);
     return <Component
       {...props}

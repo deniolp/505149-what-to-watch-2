@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-const withVideo = ((Component) => {
-  const WithVideo = (props) => {
+const withVideo = ((Component: React.SFC): React.SFC => {
+  const WithVideo = (props): React.SFC => {
     const [isPlaying, setIsPlaying] = React.useState(false);
     const [progress, setProgress] = React.useState(0);
     const [isLoading, setIsLoading] = React.useState(true);

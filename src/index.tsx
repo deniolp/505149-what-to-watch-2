@@ -12,7 +12,7 @@ import createAPI from './api';
 
 let store;
 
-const init = () => {
+const init = (): void => {
   const api = createAPI((...args) => store.dispatch(...args));
 
   store = createStore(

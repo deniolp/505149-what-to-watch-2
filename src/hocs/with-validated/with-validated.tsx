@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-const withValidated = ((Component) => {
-  const WithValidated = (props) => {
+const withValidated = ((Component: React.SFC): React.SFC => {
+  const WithValidated = (props): React.SFC => {
     const [isRadioPressed, setIsRadioPressed] = React.useState(false);
     const [isValidated, setIsValidated] = React.useState(false);
 

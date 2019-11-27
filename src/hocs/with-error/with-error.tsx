@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-const withError = ((Component) => {
-  const WithError = (props) => {
+const withError = ((Component: React.SFC): React.SFC => {
+  const WithError = (props): React.SFC => {
     const [error, setError] = React.useState(null);
     return <Component
       {...props}

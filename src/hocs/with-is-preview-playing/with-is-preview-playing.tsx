@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-const withIsPreviewPlaying = ((Component) => {
-  const WithIsPreviewPlaying = (props) => {
+const withIsPreviewPlaying = ((Component: React.SFC): React.SFC => {
+  const WithIsPreviewPlaying = (props): React.SFC => {
     const [isPreviewPlaying, setIsPreviewPlaying] = React.useState(false);
     return <Component
       {...props}
