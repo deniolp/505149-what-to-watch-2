@@ -112,6 +112,7 @@ const Operation = {
     return api.get(`favorite`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
+        changeVideoUrl(preparedData);
         dispatch(ActionCreator.loadFavorites(preparedData));
       })
       .catch((_err) => {});
