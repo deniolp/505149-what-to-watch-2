@@ -1,10 +1,10 @@
-const {join} = require(`path`);
+const {join} = require('path');
 
-const path = join(__dirname, `public`);
+const path = join(__dirname, 'public');
 
-const entry = `./src/index.js`;
+const entry = './src/index.js';
 const output = {
-  filename: `bundle.js`,
+  filename: 'bundle.js',
   path,
 };
 
@@ -17,17 +17,17 @@ const historyApiFallback = true;
 const devServer = {contentBase, compress, hot, open, port, historyApiFallback};
 
 const babelizing = {
-  test: /\.(js|jsx)$/,
+  test: /\.(js|jsx|ts|tsx)$/,
   exclude: /node_modules/,
   use: {
-    loader: `babel-loader`,
+    loader: 'babel-loader',
   },
 };
 
 const rules = [babelizing];
 
 const resolve = {
-  extensions: [`.js`, `.jsx`],
+  extensions: ['.ts', '.tsx', '.js', '.jsx']
 };
 
 module.exports = {
@@ -36,5 +36,5 @@ module.exports = {
   resolve,
   devServer,
   module: {rules},
-  devtool: `source-map`,
+  devtool: 'source-map',
 };
