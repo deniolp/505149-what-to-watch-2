@@ -1,17 +1,22 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 
 import Review from '../review/review';
 
-const ReviewsList = (props) => {
+import {Review as Rev} from "../../types";
+
+interface Props {
+  reviews: Rev[];
+}
+
+const ReviewsList = (props: Props) => {
   const {reviews} = props;
 
   let reviewsFirstPart;
   let reviewsSecondPart;
   if (reviews) {
     const middle = Math.floor(reviews.length / 2);
-    const filteredReviews = reviews.slice().sort((a, b) => a.date < b.date);
+    const filteredReviews = reviews.slice().sort((a, b) => (new Date(b.date).getTime() - new Date(a.date).getTime()));
     reviewsFirstPart = filteredReviews.slice(0, middle);
     reviewsSecondPart = filteredReviews.slice(middle, reviews.length);
   }
@@ -26,22 +31,9 @@ const ReviewsList = (props) => {
   </div>;
 };
 
-ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-    date: PropTypes.string.isRequired,
-    comment: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  })),
-};
-
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   reviews: state.comments,
 });
 
 export {ReviewsList};
-export default connect(mapStateToProps, null)(memo(ReviewsList));
+export default connect(mapStateToProps, null)(React.memo(ReviewsList));
