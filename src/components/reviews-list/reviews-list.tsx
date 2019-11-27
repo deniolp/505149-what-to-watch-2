@@ -9,7 +9,7 @@ interface Props {
   reviews: Rev[];
 }
 
-const ReviewsList = (props: Props) => {
+const ReviewsList = (props: Props): React.SFC => {
   const {reviews} = props;
 
   let reviewsFirstPart;
@@ -31,7 +31,7 @@ const ReviewsList = (props: Props) => {
   </div>;
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
   reviews: state.comments,
 });
 

@@ -5,14 +5,14 @@ interface Props {
   shouldShowButton: boolean;
 }
 
-const ShowMoreButton = (props: Props) => {
+const ShowMoreButton = (props: Props): React.SFC => {
   const {onShowMoreButtonClick, shouldShowButton} = props;
 
   return shouldShowButton && <div className="catalog__more">
     <button
       className="catalog__button"
       type="button"
-      onClick={() => onShowMoreButtonClick()}
+      onClick={(): void => onShowMoreButtonClick()}
     >
       Show more
     </button>

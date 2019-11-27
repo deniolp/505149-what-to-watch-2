@@ -5,11 +5,11 @@ const withValidated = ((Component: React.SFC): React.SFC => {
     const [isRadioPressed, setIsRadioPressed] = React.useState(false);
     const [isValidated, setIsValidated] = React.useState(false);
 
-    const handleRadioClick = () => {
+    const handleRadioClick = (): void => {
       setIsRadioPressed(true);
     };
 
-    const handleTextareaChange = (evt) => {
+    const handleTextareaChange = (evt): void => {
       evt.preventDefault();
 
       if (evt.target.value.length >= 50 && evt.target.value.length <= 400) {

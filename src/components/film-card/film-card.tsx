@@ -10,26 +10,26 @@ interface Props {
   isPreviewPlaying: boolean;
 }
 
-const FilmCard = (props: Props) => {
+const FilmCard = (props: Props): React.SFC => {
   const {film, isPreviewPlaying, setIsPreviewPlaying} = props;
 
   let timerId;
-  const cardMouseEnterHandler = () => setIsPreviewPlaying(true);
-  const clearTimer = () => timerId && clearTimeout(timerId);
+  const cardMouseEnterHandler = (): void => setIsPreviewPlaying(true);
+  const clearTimer = (): void => timerId && clearTimeout(timerId);
 
   return <article
     className="small-movie-card catalog__movies-card"
-    onMouseEnter={() => {
+    onMouseEnter={(): void => {
       timerId = setTimeout(cardMouseEnterHandler, 1000);
     }}
-    onMouseLeave={() => {
+    onMouseLeave={(): void => {
       clearTimer();
       setIsPreviewPlaying(false);
     }}
   >
     <Link
       to={`/film/${film.id}`}
-      onClick={() => clearTimer()}
+      onClick={(): void => clearTimer()}
     >
       <div className="small-movie-card__image">
         <VideoPlayer
@@ -43,7 +43,7 @@ const FilmCard = (props: Props) => {
     <h3 className="small-movie-card__title">
       <Link
         to={`/film/${film.id}`}
-        onClick={() => clearTimer()}
+        onClick={(): void => clearTimer()}
         className="small-movie-card__link"
       >
         {film.name}

@@ -10,7 +10,7 @@ interface Props {
   user: User;
 }
 
-const Header = (props: Props) => {
+const Header = (props: Props): React.SFC => {
   const {user} = props;
 
   return <React.Fragment>
@@ -28,7 +28,7 @@ const Header = (props: Props) => {
   </React.Fragment>;
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
   user: state.user,
 });
 

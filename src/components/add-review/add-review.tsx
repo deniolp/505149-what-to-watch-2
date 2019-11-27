@@ -30,7 +30,7 @@ interface Props {
   };
 }
 
-const AddReview = (props: Props) => {
+const AddReview = (props: Props): React.SFC => {
   const {
     films,
     user,
@@ -46,7 +46,7 @@ const AddReview = (props: Props) => {
   } = props;
   const formRef = React.createRef();
   let id;
-  const redirect = () => history.push(`/film/${id}`);
+  const redirect = (): void => history.push(`/film/${id}`);
 
   React.useEffect(() => {
     if (didReviewSend) {
@@ -56,7 +56,7 @@ const AddReview = (props: Props) => {
     }
   }, [isReviewSending]);
 
-  const handleFormSubmit = (comment, rating, filmId: number) => {
+  const handleFormSubmit = (comment, rating, filmId: number): void => {
     const review = {
       rating,
       comment
@@ -64,7 +64,7 @@ const AddReview = (props: Props) => {
     onSubmitForm(review, filmId);
   };
 
-  const renderFilm = (film: Film) => {
+  const renderFilm = (film: Film): React.SFC => {
     return <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
@@ -104,7 +104,7 @@ const AddReview = (props: Props) => {
         <form
           action="#"
           className="add-review__form"
-          onSubmit={(evt) => {
+          onSubmit={(evt): void => {
             evt.preventDefault();
             const data = new FormData(evt.currentTarget);
             handleFormSubmit(data.get(`review-text`), data.get(`rating`), film.id);
@@ -113,25 +113,25 @@ const AddReview = (props: Props) => {
         >
           <div className="rating">
             <div className="rating__stars">
-              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onClick={() => onRadioClick()} defaultChecked/>
+              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onClick={(): void => onRadioClick()} defaultChecked/>
               <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-              <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onClick={() => onRadioClick()} />
+              <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onClick={(): void => onRadioClick()} />
               <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onClick={() => onRadioClick()} />
+              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onClick={(): void => onRadioClick()} />
               <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-              <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onClick={() => onRadioClick()} />
+              <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onClick={(): void => onRadioClick()} />
               <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-              <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onClick={() => onRadioClick()} />
+              <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onClick={(): void => onRadioClick()} />
               <label className="rating__label" htmlFor="star-5">Rating 5</label>
             </div>
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="First select rating. Then write review (not less than 50, not more than 400)." onChange={(evt) => onTextareaChange(evt)}></textarea>
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="First select rating. Then write review (not less than 50, not more than 400)." onChange={(evt): void => onTextareaChange(evt)}></textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit" disabled={isValidated && !isReviewSending ? false : true}>Post</button>
             </div>
@@ -155,18 +155,18 @@ const AddReview = (props: Props) => {
   return null;
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
   isReviewSending: state.isReviewSending,
   didReviewSend: state.isReviewSending,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmitForm: (review, id) => {
+  onSubmitForm: (review, id): void => {
     dispatch(ActionCreator.blockForm(true));
     dispatch(Operation.postReview(review, id));
   },
-  onUpdateForm: () => dispatch(ActionCreator.cleanForm(false)),
-  onLoadFilms: () => dispatch(Operation.loadFilms()),
+  onUpdateForm: (): void => dispatch(ActionCreator.cleanForm(false)),
+  onLoadFilms: (): void => dispatch(Operation.loadFilms()),
 });
 
 export {AddReview};

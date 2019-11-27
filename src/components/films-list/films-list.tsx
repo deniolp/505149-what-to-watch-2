@@ -13,7 +13,7 @@ interface Props {
 
 const FilmCardWrapped = withIsPreviewPlaying(FilmCard);
 
-const FilmsList = (props: Props) => {
+const FilmsList = (props: Props): React.SFC => {
   const {films, filmsCounter, activeGenre} = props;
   let filteredFilms;
   let moviesToShow;

@@ -6,7 +6,7 @@ interface Props {
   isPreviewPlaying: boolean;
 }
 
-const VideoPlayer = (props: Props) => {
+const VideoPlayer = (props: Props): React.SFC => {
   const {preview, poster, isPreviewPlaying} = props;
   const format = preview.match(/\w+$/);
   const videoRef = React.createRef();

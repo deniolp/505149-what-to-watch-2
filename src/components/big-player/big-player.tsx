@@ -13,7 +13,7 @@ interface Props {
   setIsLoading: (isLoading: boolean) => void;
 }
 
-const BigPlayer = (props: Props) => {
+const BigPlayer = (props: Props): React.SFC => {
   const {
     playingFilm,
     onOpenCloseVideoButtonClick,
@@ -27,18 +27,18 @@ const BigPlayer = (props: Props) => {
   const videoRef = React.useRef();
 
   React.useEffect(() => {
-    videoRef.current.oncanplaythrough = () => {
+    videoRef.current.oncanplaythrough = (): void => {
       setIsLoading(false);
     };
   }, []);
 
   React.useEffect(() => {
     if (isPlaying) {
-      videoRef.current.onended = () => {
+      videoRef.current.onended = (): void => {
         videoRef.current.load();
         setIsPlaying(false);
       };
-      videoRef.current.ontimeupdate = () => {
+      videoRef.current.ontimeupdate = (): void => {
         if (videoRef.current) {
           setProgress(videoRef.current.currentTime);
         }
@@ -55,7 +55,7 @@ const BigPlayer = (props: Props) => {
 
   const forProgressBar = progress && Math.round(progress / playingFilm.runTime * 100);
 
-  const secondsToTimeElapsed = (seconds) => {
+  const secondsToTimeElapsed = (seconds): string => {
     seconds = Math.round(seconds);
     let hours = 0;
     let minutes = 0;
@@ -82,7 +82,7 @@ const BigPlayer = (props: Props) => {
     <button
       type="button"
       className="player__exit"
-      onClick={() => onOpenCloseVideoButtonClick(false)}
+      onClick={(): void => onOpenCloseVideoButtonClick(false)}
     >
     Exit
     </button>
@@ -107,7 +107,7 @@ const BigPlayer = (props: Props) => {
         <button
           type="button"
           className="player__play"
-          onClick={() => setIsPlaying((oldState) => !oldState)}
+          onClick={(): void => setIsPlaying((oldState) => !oldState)}
           disabled={isLoading}
         >
           <svg viewBox="0 0 19 19" width="19" height="19">
@@ -120,7 +120,7 @@ const BigPlayer = (props: Props) => {
         <button
           type="button"
           className="player__full-screen"
-          onClick={() => {
+          onClick={(): void => {
             videoRef.current.requestFullscreen();
           }}
         >

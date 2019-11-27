@@ -28,7 +28,7 @@ interface Props {
 
 const TabsWrapped = withLabel(Tabs);
 
-const FilmDetails = (props: Props) => {
+const FilmDetails = (props: Props): React.SFC => {
   const {
     onOpenCloseVideoButtonClick,
     onLoadFilms,
@@ -38,7 +38,7 @@ const FilmDetails = (props: Props) => {
     history
   } = props;
 
-  const renderFilms = (film, filteredByGenreFilms) => {
+  const renderFilms = (film, filteredByGenreFilms): React.F => {
     return <React.Fragment>
       <section
         className="movie-card movie-card--full"
@@ -62,7 +62,7 @@ const FilmDetails = (props: Props) => {
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={() => onOpenCloseVideoButtonClick(film)}
+                  onClick={(): void => onOpenCloseVideoButtonClick(film)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -72,7 +72,7 @@ const FilmDetails = (props: Props) => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
-                  onClick={() => isAuthorizationRequired ? history.push(`/login`) : onPostFavorite(film.id, film.isFavorite, false)}
+                  onClick={(): void => isAuthorizationRequired ? history.push(`/login`) : onPostFavorite(film.id, film.isFavorite, false)}
                 >
                   {film.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
                     <use xlinkHref="#in-list"></use>
@@ -128,12 +128,12 @@ const FilmDetails = (props: Props) => {
   return null;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
   films: state.films,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadFilms: () => dispatch(Operation.loadFilms()),
+  onLoadFilms: (): void => dispatch(Operation.loadFilms()),
 });
 
 export {FilmDetails};

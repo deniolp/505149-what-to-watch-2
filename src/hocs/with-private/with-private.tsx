@@ -18,7 +18,7 @@ const withPrivate = ((Component: React.SFC): React.SFC => {
     }
   };
 
-  const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  const mapStateToProps = (state, ownProps): void => Object.assign({}, ownProps, {
     isAuthorizationRequired: state.isAuthorizationRequired,
   });
 

@@ -15,7 +15,7 @@ interface Props {
 
 const FilmCardWrapped = withIsPreviewPlaying(FilmCard);
 
-const Favorites = (props: Props) => {
+const Favorites = (props: Props): React.SFC => {
   const {favorites, user} = props;
 
   return <div className="user-page">
@@ -45,7 +45,7 @@ const Favorites = (props: Props) => {
   </div>;
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
   favorites: state.favorites,
 });
 

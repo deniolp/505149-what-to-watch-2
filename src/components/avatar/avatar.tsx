@@ -7,7 +7,7 @@ interface Props {
   user: User;
 }
 
-const Avatar = (props: Props) => {
+const Avatar = (props: Props): React.SFC => {
   const {user} = props;
 
   return <div className="user-block">

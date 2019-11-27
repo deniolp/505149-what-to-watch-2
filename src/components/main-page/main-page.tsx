@@ -24,7 +24,7 @@ interface Props {
   };
 }
 
-const MainPage = (props: Props) => {
+const MainPage = (props: Props): React.SFC => {
   const {
     films,
     genre,
@@ -39,7 +39,7 @@ const MainPage = (props: Props) => {
     history
   } = props;
 
-  const getFilmsLength = () => {
+  const getFilmsLength = (): number => {
     const filteredFilms = genre === `All genres` ? films : films.filter((film) => film.genre === genre);
     return filteredFilms.length;
   };
@@ -79,7 +79,7 @@ const MainPage = (props: Props) => {
               <button
                 className="btn btn--play movie-card__button"
                 type="button"
-                onClick={() => onOpenCloseVideoButtonClick(films[0])}
+                onClick={(): void => onOpenCloseVideoButtonClick(films[0])}
               >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
@@ -89,7 +89,7 @@ const MainPage = (props: Props) => {
               <button
                 className="btn btn--list movie-card__button"
                 type="button"
-                onClick={() => isAuthorizationRequired ? history.push(`/login`) : onPostFavorite(promo.id, promo.isFavorite, true)}
+                onClick={(): void => isAuthorizationRequired ? history.push(`/login`) : onPostFavorite(promo.id, promo.isFavorite, true)}
               >
                 {promo.isFavorite ? <svg viewBox="0 0 18 14" width="18" height="14">
                   <use xlinkHref="#in-list"></use>

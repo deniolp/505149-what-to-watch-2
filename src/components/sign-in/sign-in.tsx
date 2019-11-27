@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 import {Operation} from '../../reducer/reducer';
-import {Film} from "../../types";
 
 interface Props {
   submitForm: (email: string, password: string) => void;
@@ -12,9 +11,9 @@ interface Props {
   setError: (error: string) => void;
 }
 
-const SignIn = (props: Props) => {
+const SignIn = (props: Props): React.SFC => {
   const {submitForm, isAuthorizationRequired, error, setError} = props;
-  const handleFormSubmit = (email, password = null) => {
+  const handleFormSubmit = (email, password = null): void => {
     if (!password) {
       setError(`Error! What about enter password? :-)`);
     } else {
@@ -36,7 +35,7 @@ const SignIn = (props: Props) => {
     </header>
 
     <div className="sign-in user-page__content">
-      <form action="#" className="sign-in__form" onSubmit={(evt) => {
+      <form action="#" className="sign-in__form" onSubmit={(evt): void => {
         evt.preventDefault();
         const data = new FormData(evt.currentTarget);
         handleFormSubmit(data.get(`user-email`), data.get(`user-password`));
@@ -75,7 +74,7 @@ const SignIn = (props: Props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  submitForm: (email, password) => dispatch(Operation.logIn(email, password)),
+  submitForm: (email, password): void => dispatch(Operation.logIn(email, password)),
 });
 
 export {SignIn};

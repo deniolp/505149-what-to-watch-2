@@ -6,9 +6,9 @@ interface Props {
   review: Rev;
 }
 
-const Review = (props: Props) => {
+const Review = (props: Props): React.SFC => {
   const {review} = props;
-  const getDate = (data) => {
+  const getDate = (data): string => {
     const year = data.getFullYear();
     const month = data.toLocaleString(`en-us`, {month: `long`});
     const date = data.getDate();

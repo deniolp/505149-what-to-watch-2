@@ -6,7 +6,7 @@ import withError from './with-error';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const MockComponent = () => <div />;
+const MockComponent = (): void => <div />;
 const MockComponentWrapped = withError(MockComponent);
 
 describe(`HOC withError`, () => {

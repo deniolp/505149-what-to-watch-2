@@ -6,7 +6,7 @@ import withIsPreviewPlaying from './with-is-preview-playing';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const MockComponent = () => <div />;
+const MockComponent = (): void => <div />;
 const MockComponentWrapped = withIsPreviewPlaying(MockComponent);
 
 describe(`HOC withIsPreviewPlaying`, () => {

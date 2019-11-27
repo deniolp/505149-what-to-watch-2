@@ -6,7 +6,7 @@ import withLabel from './with-label';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const MockComponent = () => <div />;
+const MockComponent = (): void => <div />;
 const MockComponentWrapped = withLabel(MockComponent);
 
 describe(`HOC withLabel`, () => {

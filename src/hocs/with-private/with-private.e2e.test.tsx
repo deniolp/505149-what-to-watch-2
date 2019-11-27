@@ -10,7 +10,7 @@ import withPrivate from './with-private';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const MockComponent = () => <div />;
+const MockComponent = (): void => <div />;
 const MockComponentWrapped = withPrivate(MockComponent);
 
 describe(`HOC withPrivate`, () => {

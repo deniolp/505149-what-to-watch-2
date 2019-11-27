@@ -9,7 +9,7 @@ interface Props {
   setLabel: (label: string) => void;
 }
 
-const Tabs = (props: Props) => {
+const Tabs = (props: Props): React.SFC => {
   const {film, label, setLabel} = props;
 
   return <div className="movie-card__desc">
@@ -17,7 +17,7 @@ const Tabs = (props: Props) => {
       <ul className="movie-nav__list">
         <li className={`movie-nav__item${label === `Overview` ? ` movie-nav__item--active` : ``}`}>
           <a
-            onClick={() => setLabel(`Overview`)}
+            onClick={(): void => setLabel(`Overview`)}
             className="movie-nav__link"
             style={{
               cursor: `pointer`,
@@ -26,7 +26,7 @@ const Tabs = (props: Props) => {
         </li>
         <li className={`movie-nav__item${label === `Details` ? ` movie-nav__item--active` : ``}`}>
           <a
-            onClick={() => setLabel(`Details`)}
+            onClick={(): void => setLabel(`Details`)}
             className="movie-nav__link"
             style={{
               cursor: `pointer`,
@@ -35,7 +35,7 @@ const Tabs = (props: Props) => {
         </li>
         <li className={`movie-nav__item${label === `Reviews` ? ` movie-nav__item--active` : ``}`}>
           <a
-            onClick={() => setLabel(`Reviews`)}
+            onClick={(): void => setLabel(`Reviews`)}
             className="movie-nav__link"
             style={{
               cursor: `pointer`,

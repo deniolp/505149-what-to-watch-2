@@ -6,7 +6,7 @@ import withVideo from './with-video';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const MockComponent = () => <div />;
+const MockComponent = (): void => <div />;
 const MockComponentWrapped = withVideo(MockComponent);
 
 describe(`HOC withVideo`, () => {

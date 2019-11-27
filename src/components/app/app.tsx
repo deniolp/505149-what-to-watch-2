@@ -34,7 +34,7 @@ interface Props {
 
 const BigPlayerWrapped = withVideo(BigPlayer);
 
-const App = (props: Props) => {
+const App = (props: Props): React.SFC => {
   const {films,
     genre,
     onGenreClick,
@@ -54,7 +54,7 @@ const App = (props: Props) => {
   films.forEach((film) => genres.add(film.genre));
 
   return error ? <h1>{error}</h1> : <Switch>
-    <Route path="/" exact render={() => {
+    <Route path="/" exact render={(): React.SFC => {
       return playingFilm ? <BigPlayerWrapped
         playingFilm={playingFilm}
         onOpenCloseVideoButtonClick={onOpenCloseVideoButtonClick}
@@ -72,7 +72,7 @@ const App = (props: Props) => {
       />;
     }}
     />
-    <Route path="/film/:id" exact render={(routerProps) => {
+    <Route path="/film/:id" exact render={(routerProps): React.SFC => {
       onLoadComments(routerProps.match.params.id);
       return playingFilm ?
         <BigPlayerWrapped
@@ -86,7 +86,7 @@ const App = (props: Props) => {
         />;
     }}
     />
-    <Route path="/film/:id/review" exact render={(routerProps) => {
+    <Route path="/film/:id/review" exact render={(routerProps): React.SFC => {
       const AddReviewWrapped = withPrivate(withValidated(AddReview));
       return <AddReviewWrapped
         {...routerProps}
@@ -95,14 +95,14 @@ const App = (props: Props) => {
       />;
     }}
     />
-    <Route path="/login" exact render={() => {
+    <Route path="/login" exact render={(): React.SFC => {
       const SignInWrapped = withError(SignIn);
       return <SignInWrapped
         isAuthorizationRequired={isAuthorizationRequired}
       />;
     }}
     />
-    <Route path="/mylist" exact render={(routerProps) => {
+    <Route path="/mylist" exact render={(routerProps): React.SFC => {
       const FavoritesWrapped = withPrivate(Favorites);
       onLoadFavorites();
       return <FavoritesWrapped
@@ -116,7 +116,7 @@ const App = (props: Props) => {
   </Switch>;
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
   genre: state.genre,
   films: state.films,
   promo: state.promo,
@@ -128,15 +128,15 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreClick: (selectedGenre) => {
+  onGenreClick: (selectedGenre): void => {
     dispatch(ActionCreator.changeGenre(selectedGenre));
     dispatch(ActionCreator.resetFilmsCounter());
   },
-  onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
-  onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
-  onLoadComments: (id) => dispatch(Operation.loadComments(id)),
-  onLoadFavorites: () => dispatch(Operation.loadFavorites()),
-  onPostFavorite: (id, isFavorite, isPromo) => dispatch(Operation.postFavorite(id, isFavorite, isPromo)),
+  onShowMoreButtonClick: (): void => dispatch(ActionCreator.increaseFilmsCounter()),
+  onOpenCloseVideoButtonClick: (film): void => dispatch(ActionCreator.setPlayingFilm(film)),
+  onLoadComments: (id): void => dispatch(Operation.loadComments(id)),
+  onLoadFavorites: (): void => dispatch(Operation.loadFavorites()),
+  onPostFavorite: (id, isFavorite, isPromo): void => dispatch(Operation.postFavorite(id, isFavorite, isPromo)),
 });
 
 export {App};

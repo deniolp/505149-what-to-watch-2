@@ -6,7 +6,7 @@ import withValidated from './with-validated';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const MockComponent = () => <div />;
+const MockComponent = (): void => <div />;
 const MockComponentWrapped = withValidated(MockComponent);
 
 describe(`HOC withValidated`, () => {

@@ -8,15 +8,15 @@ interface Props {
   label: string;
 }
 
-const TabsBelowInfo = (props: Props) => {
+const TabsBelowInfo = (props: Props): React.SFC => {
   const {film, label} = props;
-  const getDuration = (duration) => {
+  const getDuration = (duration): string => {
     const hours = Math.floor(duration / 60);
     const minutes = duration - hours * 60;
     return `${hours}h ${minutes}m`;
   };
 
-  const getRatingLevel = (rating) => {
+  const getRatingLevel = (rating: number): string | null => {
     if (rating < 3) {
       return `Bad`;
     } else if (rating >= 3 && rating < 5) {
