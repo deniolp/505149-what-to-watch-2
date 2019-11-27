@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import {Review} from "../../types";
+import {Review as Rev} from "../../types";
 
 interface Props {
-  review: Review;
+  review: Rev;
 }
 
 const Review = (props: Props) => {

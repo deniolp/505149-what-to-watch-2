@@ -46,6 +46,7 @@ const AddReview = (props: Props) => {
   } = props;
   const formRef = React.createRef();
   let id;
+  const redirect = () => history.push(`/film/${id}`);
 
   React.useEffect(() => {
     if (didReviewSend) {
@@ -54,8 +55,6 @@ const AddReview = (props: Props) => {
       redirect();
     }
   }, [isReviewSending]);
-
-  const redirect = () => history.push(`/film/${id}`);
 
   const handleFormSubmit = (comment, rating, filmId: number) => {
     const review = {
