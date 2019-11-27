@@ -1,5 +1,4 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -14,10 +13,28 @@ import withPrivate from '../../hocs/with-private/with-private';
 import withValidated from '../../hocs/with-validated/with-validated';
 import withError from '../../hocs/with-error/with-error';
 import {ActionCreator, Operation} from '../../reducer/reducer';
+import {Film, User} from "../../types";
+
+interface Props {
+  films: Film[];
+  genre: string;
+  onGenreClick: (genre: string) => void;
+  filmsCounter: number;
+  onShowMoreButtonClick: () => void;
+  playingFilm: boolean | Film;
+  onOpenCloseVideoButtonClick: (film: Film) => void;
+  onLoadComments: (id: number) => void;
+  onLoadFavorites: () => void;
+  onPostFavorite: (id: number, isFavorite: boolean, isPromo: boolean) => void;
+  isAuthorizationRequired: boolean;
+  user: User;
+  promo: Film;
+  error: string;
+}
 
 const BigPlayerWrapped = withVideo(BigPlayer);
 
-const App = (props) => {
+const App = (props: Props) => {
   const {films,
     genre,
     onGenreClick,
@@ -99,85 +116,6 @@ const App = (props) => {
   </Switch>;
 };
 
-App.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  })),
-  promo: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    posterImage: PropTypes.string,
-    previewVideoLink: PropTypes.string,
-    videoLink: PropTypes.string,
-    backgroundColor: PropTypes.string,
-    backgroundImage: PropTypes.string,
-    previewImage: PropTypes.string,
-    genre: PropTypes.string,
-    released: PropTypes.number,
-    rating: PropTypes.number,
-    scoresCount: PropTypes.number,
-    runTime: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    isFavorite: PropTypes.bool,
-  }),
-  genre: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
-  onOpenCloseVideoButtonClick: PropTypes.func.isRequired,
-  onLoadComments: PropTypes.func.isRequired,
-  onLoadFavorites: PropTypes.func.isRequired,
-  onPostFavorite: PropTypes.func.isRequired,
-  filmsCounter: PropTypes.number.isRequired,
-  isAuthorizationRequired: PropTypes.bool,
-  error: PropTypes.string,
-  playingFilm: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      posterImage: PropTypes.string.isRequired,
-      previewVideoLink: PropTypes.string.isRequired,
-      videoLink: PropTypes.string.isRequired,
-      backgroundColor: PropTypes.string.isRequired,
-      backgroundImage: PropTypes.string.isRequired,
-      previewImage: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      released: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      scoresCount: PropTypes.number.isRequired,
-      runTime: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      director: PropTypes.string.isRequired,
-      starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-      isFavorite: PropTypes.bool.isRequired,
-    }),
-  ]).isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    avatarUrl: PropTypes.string,
-  }),
-};
-
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genre: state.genre,
   films: state.films,
@@ -194,17 +132,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeGenre(selectedGenre));
     dispatch(ActionCreator.resetFilmsCounter());
   },
-
   onShowMoreButtonClick: () => dispatch(ActionCreator.increaseFilmsCounter()),
-
   onOpenCloseVideoButtonClick: (film) => dispatch(ActionCreator.setPlayingFilm(film)),
-
   onLoadComments: (id) => dispatch(Operation.loadComments(id)),
-
   onLoadFavorites: () => dispatch(Operation.loadFavorites()),
-
   onPostFavorite: (id, isFavorite, isPromo) => dispatch(Operation.postFavorite(id, isFavorite, isPromo)),
 });
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(memo(App));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(App));
