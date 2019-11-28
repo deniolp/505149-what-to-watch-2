@@ -25,10 +25,12 @@ const BigPlayer = (props: Props): React.SFC => {
     setIsLoading
   } = props;
   const videoRef = React.useRef();
+  const format = playingFilm.videoLink.match(/\w+$/);
 
   React.useEffect(() => {
     videoRef.current.oncanplaythrough = (): void => {
       setIsLoading(false);
+      videoRef.current.poster= ``;
     };
   }, []);
 
@@ -71,14 +73,18 @@ const BigPlayer = (props: Props): React.SFC => {
 
   return <div className="player">
     <video
-      src={playingFilm.videoLink}
       preload = "auto"
       className="player__video"
       poster="/img/player-poster.jpg"
       ref={videoRef}
       width="100%"
       height="100%"
-    ></video>
+    >
+      <source
+      src={playingFilm.videoLink}
+      type={`video/${format}`}
+    ></source>
+    </video>
     <button
       type="button"
       className="player__exit"
