@@ -125,7 +125,7 @@ const Operation = {
         if (isPromo) {
           dispatch(ActionCreator.updatePromo(preparedData));
         }
-        return dispatch(ActionCreator.updateFilms(preparedData))
+        return dispatch(ActionCreator.updateFilms(preparedData));
       })
       .catch((_err) => {});
   },
@@ -155,7 +155,6 @@ const Operation = {
     return api.post(`comments/${id}`, review)
       .then((response) => {
         if (response.data) {
-          const preparedData = response.data.map((item) => normalizeKeys(item));
           dispatch(ActionCreator.blockForm(false));
           dispatch(ActionCreator.cleanForm(true));
         }

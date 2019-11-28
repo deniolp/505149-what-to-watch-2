@@ -73,7 +73,7 @@ const SignIn = (props: Props): React.SFC => {
   </div> : <Redirect to="/"></Redirect>;
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch): object => ({
   submitForm: (email, password): void => dispatch(Operation.logIn(email, password)),
 });
 

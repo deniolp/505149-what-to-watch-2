@@ -16,7 +16,7 @@ interface Props {
   }, id: number) => void;
   onLoadFilms: () => void;
   onRadioClick: () => void;
-  onTextareaChange: (evt: any) => void;
+  onTextareaChange: (evt: object) => void;
   isValidated: boolean;
   isReviewSending: boolean;
   onUpdateForm: () => void;
@@ -161,7 +161,7 @@ const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps,
   didReviewSend: getDidReviewSend(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch): object => ({
   onSubmitForm: (review, id): void => {
     dispatch(ActionCreator.blockForm(true));
     dispatch(Operation.postReview(review, id));

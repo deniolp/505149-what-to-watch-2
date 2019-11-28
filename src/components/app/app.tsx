@@ -128,7 +128,7 @@ const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps,
   error: getError(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch): object => ({
   onGenreClick: (selectedGenre): void => {
     dispatch(ActionCreator.changeGenre(selectedGenre));
     dispatch(ActionCreator.resetFilmsCounter());

@@ -133,7 +133,7 @@ const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps,
   films: getFilmsWithChangedUrl(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch): object => ({
   onLoadFilms: (): void => dispatch(Operation.loadFilms()),
 });
 

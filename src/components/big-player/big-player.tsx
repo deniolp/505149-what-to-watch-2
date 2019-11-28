@@ -30,7 +30,7 @@ const BigPlayer = (props: Props): React.SFC => {
   React.useEffect(() => {
     videoRef.current.oncanplaythrough = (): void => {
       setIsLoading(false);
-      videoRef.current.poster= ``;
+      videoRef.current.poster = ``;
     };
   }, []);
 
@@ -81,9 +81,9 @@ const BigPlayer = (props: Props): React.SFC => {
       height="100%"
     >
       <source
-      src={playingFilm.videoLink}
-      type={`video/${format}`}
-    ></source>
+        src={playingFilm.videoLink}
+        type={`video/${format}`}
+      ></source>
     </video>
     <button
       type="button"

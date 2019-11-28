@@ -68,7 +68,6 @@ describe(`Action creators works correctly: `, () => {
           type: `LOAD_FILMS`,
           payload: [{
             fake: true,
-            previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
           }],
         });
       });
@@ -107,15 +106,7 @@ describe(`Action creators works correctly: `, () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: `LOAD_FAVORITES`,
-          payload: [
-            {
-              fakeFilm: true,
-              previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-            },
-            {
-              fakeFilm2: true,
-              previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-            }],
+          payload: [{fakeFilm: true}, {fakeFilm2: true}],
         });
       });
   });
@@ -133,7 +124,7 @@ describe(`Action creators works correctly: `, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: `ADD_TO_FAVORITES`,
+          type: `UPDATE_FILMS`,
           payload: {fakeFilm: true, isFavorite: true},
         });
       });
@@ -152,7 +143,7 @@ describe(`Action creators works correctly: `, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: `DELETE_FROM_FAVORITES`,
+          type: `UPDATE_FILMS`,
           payload: {fakeFilm: true, isFavorite: false},
         });
       });
@@ -249,19 +240,12 @@ describe(`Action creators works correctly: `, () => {
 
     return commentPoster(dispatch, {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: `BLOCK_FORM`,
           payload: false,
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: `LOAD_COMMENTS`,
-          payload: [
-            {rating: 5, comment: `Wow!`},
-            {rating: 4, comment: `Pretty good!`}
-          ],
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: `CLEAN_FORM`,
           payload: true,
         });

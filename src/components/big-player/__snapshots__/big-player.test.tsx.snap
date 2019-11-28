@@ -9,9 +9,13 @@ exports[`BigPlayer renders correctly 1`] = `
     height="100%"
     poster="/img/player-poster.jpg"
     preload="auto"
-    src="https://media.xiph.org/mango/tears_of_steel_1080p.webm"
     width="100%"
-  />
+  >
+    <source
+      src="https://media.xiph.org/mango/tears_of_steel_1080p.webm"
+      type="video/webm"
+    />
+  </video>
   <button
     className="player__exit"
     onClick={[Function]}
