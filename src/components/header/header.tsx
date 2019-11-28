@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import Avatar from '../avatar/avatar';
 
 import {User} from "../../types";
+import {getUser} from '../../reducer/selectors';
 
 interface Props {
   user: User;
@@ -29,7 +30,7 @@ const Header = (props: Props): React.SFC => {
 };
 
 const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
-  user: state.user,
+  user: getUser(state),
 });
 
 export {Header};

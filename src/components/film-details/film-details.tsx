@@ -8,6 +8,7 @@ import withLabel from '../../hocs/with-label/with-label';
 import FilmsList from '../films-list/films-list';
 import Footer from '../footer/footer';
 import {Operation} from '../../reducer/reducer';
+import {getFilmsWithChangedUrl} from '../../reducer/selectors';
 import {Film} from "../../types";
 
 interface Props {
@@ -38,7 +39,7 @@ const FilmDetails = (props: Props): React.SFC => {
     history
   } = props;
 
-  const renderFilms = (film, filteredByGenreFilms): React.F => {
+  const renderPage = (film, filteredByGenreFilms): React.F => {
     return <React.Fragment>
       <section
         className="movie-card movie-card--full"
@@ -121,7 +122,7 @@ const FilmDetails = (props: Props): React.SFC => {
     }
     const filteredByGenreFilms = films.filter((item) => item.genre === film.genre && item.name !== film.name);
 
-    return renderFilms(film, filteredByGenreFilms);
+    return renderPage(film, filteredByGenreFilms);
   } else {
     onLoadFilms();
   }
@@ -129,7 +130,7 @@ const FilmDetails = (props: Props): React.SFC => {
 };
 
 const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
-  films: state.films,
+  films: getFilmsWithChangedUrl(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import {ActionCreator, Operation} from '../../reducer/reducer';
 import Avatar from '../avatar/avatar';
+import {getIsReviewSending, getDidReviewSend} from '../../reducer/selectors';
 import {Film, User} from "../../types";
 
 interface Props {
@@ -54,7 +55,7 @@ const AddReview = (props: Props): React.SFC => {
       onUpdateForm();
       redirect();
     }
-  }, [isReviewSending]);
+  }, [didReviewSend]);
 
   const handleFormSubmit = (comment, rating, filmId: number): void => {
     const review = {
@@ -156,8 +157,8 @@ const AddReview = (props: Props): React.SFC => {
 };
 
 const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
-  isReviewSending: state.isReviewSending,
-  didReviewSend: state.isReviewSending,
+  isReviewSending: getIsReviewSending(state),
+  didReviewSend: getDidReviewSend(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,6 +6,7 @@ import Avatar from '../avatar/avatar';
 import Footer from '../footer/footer';
 import FilmCard from '../film-card/film-card';
 import withIsPreviewPlaying from '../../hocs/with-is-preview-playing/with-is-preview-playing';
+import {getFavoritesWithChangedUrl} from '../../reducer/selectors';
 import {Film, User} from "../../types";
 
 interface Props {
@@ -46,7 +47,7 @@ const Favorites = (props: Props): React.SFC => {
 };
 
 const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
-  favorites: state.favorites,
+  favorites: getFavoritesWithChangedUrl(state),
 });
 
 export {Favorites};

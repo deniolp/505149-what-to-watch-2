@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 
 import Review from '../review/review';
-
+import {getReviews} from '../../reducer/selectors';
 import {Review as Rev} from "../../types";
 
 interface Props {
@@ -32,7 +32,7 @@ const ReviewsList = (props: Props): React.SFC => {
 };
 
 const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
-  reviews: state.comments,
+  reviews: getReviews(state),
 });
 
 export {ReviewsList};

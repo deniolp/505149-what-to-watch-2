@@ -13,6 +13,7 @@ import withPrivate from '../../hocs/with-private/with-private';
 import withValidated from '../../hocs/with-validated/with-validated';
 import withError from '../../hocs/with-error/with-error';
 import {ActionCreator, Operation} from '../../reducer/reducer';
+import {getFilmsWithChangedUrl, getGenre, getpromo, getFilmsCounter, getPlayingFilm, getIsAuthorizationRequired, getUser, getError} from '../../reducer/selectors';
 import {Film, User} from "../../types";
 
 interface Props {
@@ -117,14 +118,14 @@ const App = (props: Props): React.SFC => {
 };
 
 const mapStateToProps = (state, ownProps): object => Object.assign({}, ownProps, {
-  genre: state.genre,
-  films: state.films,
-  promo: state.promo,
-  filmsCounter: state.filmsCounter,
-  playingFilm: state.playingFilm,
-  isAuthorizationRequired: state.isAuthorizationRequired,
-  user: state.user,
-  error: state.error,
+  genre: getGenre(state),
+  films: getFilmsWithChangedUrl(state),
+  promo: getpromo(state),
+  filmsCounter: getFilmsCounter(state),
+  playingFilm: getPlayingFilm(state),
+  isAuthorizationRequired: getIsAuthorizationRequired(state),
+  user: getUser(state),
+  error: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

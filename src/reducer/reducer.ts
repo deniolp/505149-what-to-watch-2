@@ -1,4 +1,4 @@
-import {normalizeKeys, changeFilm, changeVideoUrl} from '../utils';
+import {normalizeKeys, changeFilm} from '../utils';
 import {Film, Review, User} from '../types';
 
 interface ActionType {
@@ -26,11 +26,11 @@ const ActionCreator = {
     type: `LOAD_FILMS`,
     payload: films,
   }),
-  loadPromo: (film: Film | {}): ActionType => ({
+  loadPromo: (film: Film | object): ActionType => ({
     type: `LOAD_PROMO`,
     payload: film,
   }),
-  updatePromo: (film: Film | {}): ActionType => ({
+  updatePromo: (film: Film | object): ActionType => ({
     type: `UPDATE_PROMO`,
     payload: film,
   }),
@@ -74,12 +74,8 @@ const ActionCreator = {
     type: `CLEAN_FORM`,
     payload: bool,
   }),
-  addToFavorites: (film: Film | {}): ActionType => ({
-    type: `ADD_TO_FAVORITES`,
-    payload: film,
-  }),
-  deleteFromFavorites: (film: Film | {}): ActionType => ({
-    type: `DELETE_FROM_FAVORITES`,
+  updateFilms: (film: Film): ActionType => ({
+    type: `UPDATE_FILMS`,
     payload: film,
   }),
   showError: (error: string): ActionType => ({
@@ -93,7 +89,6 @@ const Operation = {
     return api.get(`films`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
-        changeVideoUrl(preparedData);
         dispatch(ActionCreator.loadFilms(preparedData));
       })
       .catch((_err) => {});
@@ -118,7 +113,6 @@ const Operation = {
     return api.get(`favorite`)
       .then((response) => {
         const preparedData = response.data.map((item) => normalizeKeys(item));
-        changeVideoUrl(preparedData);
         dispatch(ActionCreator.loadFavorites(preparedData));
       })
       .catch((_err) => {});
@@ -131,7 +125,7 @@ const Operation = {
         if (isPromo) {
           dispatch(ActionCreator.updatePromo(preparedData));
         }
-        return status ? dispatch(ActionCreator.addToFavorites(preparedData)) : dispatch(ActionCreator.deleteFromFavorites(preparedData));
+        return dispatch(ActionCreator.updateFilms(preparedData))
       })
       .catch((_err) => {});
   },
@@ -163,7 +157,6 @@ const Operation = {
         if (response.data) {
           const preparedData = response.data.map((item) => normalizeKeys(item));
           dispatch(ActionCreator.blockForm(false));
-          dispatch(ActionCreator.loadComments(preparedData));
           dispatch(ActionCreator.cleanForm(true));
         }
       })
@@ -227,11 +220,7 @@ const reducer = (state = initialState, action: ActionType): object => {
       didReviewSend: action.payload,
     });
 
-    case `ADD_TO_FAVORITES`: return Object.assign({}, state, {
-      films: changeFilm(state.films, action.payload),
-    });
-
-    case `DELETE_FROM_FAVORITES`: return Object.assign({}, state, {
+    case `UPDATE_FILMS`: return Object.assign({}, state, {
       films: changeFilm(state.films, action.payload),
     });
 
