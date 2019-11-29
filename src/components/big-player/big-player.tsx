@@ -50,13 +50,14 @@ const BigPlayer = (props: Props): React.SFC => {
       } catch (_err) {
         throw _err;
       }
-      return () => {
+      return (): void => {
         videoRef.current.onended = null;
         videoRef.current.ontimeupdate = null;
         videoRef.current.oncanplaythrough = null;
-      }
+      };
     } else {
       videoRef.current.pause();
+      return (): void => {};
     }
   }, [isPlaying]);
 

@@ -22,11 +22,12 @@ const FilmCard = (props: Props): React.SFC => {
   React.useEffect(() => {
     if (isMouseOver) {
       timerId = setTimeout(cardMouseEnterHandler, 1000);
-      return () => {
+      return (): void => {
         clearTimer();
-      }
+      };
     } else {
       clearTimer();
+      return (): void => {};
     }
   }, [isMouseOver]);
 
