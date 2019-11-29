@@ -6,7 +6,7 @@ interface Props {
   playingFilm: Film;
   onOpenCloseVideoButtonClick: (bool: boolean) => void;
   isPlaying: boolean;
-  setIsPlaying: (isPlaying: any) => void;
+  setIsPlaying: (isPlaying: object | boolean) => void;
   progress: number;
   setProgress: (progress: number) => void;
   isLoading: boolean;
@@ -49,6 +49,11 @@ const BigPlayer = (props: Props): React.SFC => {
         videoRef.current.play();
       } catch (_err) {
         throw _err;
+      }
+      return () => {
+        videoRef.current.onended = null;
+        videoRef.current.ontimeupdate = null;
+        videoRef.current.oncanplaythrough = null;
       }
     } else {
       videoRef.current.pause();

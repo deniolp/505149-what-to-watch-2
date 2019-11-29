@@ -8,22 +8,35 @@ interface Props {
   film: Film;
   setIsPreviewPlaying: (isPreviewPlaying: boolean) => void;
   isPreviewPlaying: boolean;
+  setIsMouseOver: (isPreviewPlaying: boolean) => void;
+  isMouseOver: boolean;
 }
 
 const FilmCard = (props: Props): React.SFC => {
-  const {film, isPreviewPlaying, setIsPreviewPlaying} = props;
+  const {film, isPreviewPlaying, setIsPreviewPlaying, isMouseOver, setIsMouseOver} = props;
 
   let timerId;
   const cardMouseEnterHandler = (): void => setIsPreviewPlaying(true);
   const clearTimer = (): void => timerId && clearTimeout(timerId);
 
+  React.useEffect(() => {
+    if (isMouseOver) {
+      timerId = setTimeout(cardMouseEnterHandler, 1000);
+      return () => {
+        clearTimer();
+      }
+    } else {
+      clearTimer();
+    }
+  }, [isMouseOver]);
+
   return <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={(): void => {
-      timerId = setTimeout(cardMouseEnterHandler, 1000);
+      setIsMouseOver(true);
     }}
     onMouseLeave={(): void => {
-      clearTimer();
+      setIsMouseOver(false);
       setIsPreviewPlaying(false);
     }}
   >
