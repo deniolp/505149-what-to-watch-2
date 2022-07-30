@@ -43,7 +43,7 @@
   "dependencies": {
     "axios": "0.21.1",
     "kind-of": "^6.0.3",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "react": "16.10.2",
     "react-dom": "16.10.2",
     "react-redux": "7.1.1",
