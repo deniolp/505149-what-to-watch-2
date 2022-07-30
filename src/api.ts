@@ -5,7 +5,7 @@ import {ActionCreator} from './reducer/reducer';
 let api;
 const createAPI = (dispatch): object => {
   api = axios.create({
-    baseURL: `https://htmlacademy-react-2.appspot.com/wtw`,
+    baseURL: `https://5.react.pages.academy/wtw`,
     timeout: 5000,
     withCredentials: true,
   });
