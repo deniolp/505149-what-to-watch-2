@@ -22,7 +22,7 @@ const Avatar = (props: Props): React.SFC => {
           <p>
             Sign in
           </p> : <img
-            src={`https://htmlacademy-react-2.appspot.com${user.avatarUrl}`}
+            src={user.avatarUrl}
             alt="User avatar" width="63" height="63"
           />}
       </Link>

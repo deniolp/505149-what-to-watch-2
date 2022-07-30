@@ -20,7 +20,7 @@ exports[`Avatar renders correctly 1`] = `
       <img
         alt="User avatar"
         height="63"
-        src="https://htmlacademy-react-2.appspot.com/img/photo.jpg"
+        src="/img/photo.jpg"
         width="63"
       />
     </a>
